@@ -1,0 +1,77 @@
+#####REFERENCE#####
+#
+#  Automatic Variables:
+#  target : dependencies
+#       commands
+#
+#  $^ means all of the dependencies
+#  $@ means the target
+#  $< means the first dependency
+#
+#  patsubst
+#  $(patsubst pattern,replacement,text)
+#  Finds whitespace-separated words in text that match pattern and replaces them with replacement
+#####END REFERENCE#####
+#To run:
+#mingw32-make.exe -f pcMakefile all
+
+ CC = g++
+
+#-ggdb compiles with debug symbols
+#-mwindows compiles without terminal
+#CFLAGS = -Wall -Wextra -Wshadow -ggdb -O0 -g
+CFLAGS = -O3 -mwindows
+LINKERS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -static-libgcc -static-libstdc++
+
+SRCDIR = src
+OBJDIR = obj
+BINDIR = bin
+HDRDIR = include
+
+SRCS = $(wildcard $(SRCDIR)/*.cpp)
+
+HEADERS = $(wildcard $(HDRDIR)/*.h)
+
+OBJFILES = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
+
+SRCFILES = $(patsubst $(SRCDIR)/%,%,$(SRCS))
+HEADERFILES = $(patsubst $(HDRDIR)/%,%,$(HEADERS))
+
+EXENAME = Isolation 
+
+INCLUDES = -Iinclude                                                     \
+           -ID:/MinGWLibs/SDL2-2.0.8/i686-w64-mingw32/include/SDL2       \
+	   	   -ID:/MinGWLibs/SDL2_image-2.0.3/i686-w64-mingw32/include/SDL2 \
+		   -ID:/MinGWLibs/SDL2_mixer-2.0.4/i686-w64-mingw32/include/SDL2 \
+
+LIBS = -LD:/MinGWLibs/SDL2-2.0.8/i686-w64-mingw32/lib        \
+       -LD:/MinGWLibs/SDL2_image-2.0.3/i686-w64-mingw32/lib  \
+	   -LD:/MinGWLibs/SDL2_mixer-2.0.4/i686-w64-mingw32/lib  \
+
+#Need to put the linkers at the end of the call
+$(BINDIR)/$(EXENAME): $(OBJFILES)
+	$(CC) $(CFLAGS) $(LIBS) $^ -o $@ $(LINKERS)
+
+#Note the -c tells the compiler to create obj files
+#$(OBJDIR)/%.o: $(SRCS) $(HEADERS)
+#	$(CC) $(CFLAGS) -c $^ -o $@ $(INCLUDES)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(HDRDIR)/%.h
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+#Makes it so that if these files exist, it won't mess up Makefile
+.PHONY: clean clearScreen all
+
+clean:
+	rm -f $(OBJDIR)/*.o
+	rm -f $(BINDIR)/$(EXENAME)
+
+clearScreen:
+	clear
+
+#This target will clean, clearscreen, then make project
+all: clean clearScreen $(BINDIR)/$(EXENAME)
+
+#This target prints out variable names, just type:
+#make print-VARIABLE
+print-%  : ; @echo $* = $($*)
