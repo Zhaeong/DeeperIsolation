@@ -160,11 +160,11 @@ Module.expectedDataFileDownloads++;
   }, {
    "filename": "/res/png/manwalk.png",
    "start": 3429,
-   "end": 120093,
+   "end": 11989,
    "audio": 0
   } ],
-  "remote_package_size": 120093,
-  "package_uuid": "92180962-9a9b-4faa-9a03-b463eec0f929"
+  "remote_package_size": 11989,
+  "package_uuid": "e74cc635-ab9f-430e-bd4c-2035fc94f521"
  });
 })();
 

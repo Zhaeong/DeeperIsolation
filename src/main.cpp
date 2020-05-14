@@ -168,8 +168,8 @@ int main(int argv, char **args)
     GS.screenColor.a = 255;
 
     GS.manSheet = InitSpriteSheet(manTex,
-            200,
-            500,
+            50,
+            100,
             8); 
 
     GS.manSheet.mUpdateInterval = 200;
