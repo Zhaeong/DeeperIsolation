@@ -19,6 +19,8 @@ void gameloop()
 
     frameStart = SDL_GetTicks();  
 
+    GS.curTime = frameStart - GS.startTime;
+
     //The color at which the screen will be if alpha = 0 on all textures
     SDL_SetRenderDrawColor(GS.renderer, GS.screenColor.r, GS.screenColor.g, GS.screenColor.b, GS.screenColor.a);
 
@@ -100,7 +102,7 @@ void gameloop()
                 //cout <<  "MOUSE_UP\n";
                 SDL_GetMouseState(&mouseX, &mouseY);
                 cout << "mouseX: " << mouseX << " mouseY: " << mouseY << "\n";
-                
+
                 break;
             case SDL_QUIT:
                 exit(0);
@@ -118,6 +120,12 @@ void gameloop()
         GS.manSheet.mDstRect.x += 1;
     }
 
+
+    if(GS.curTime > GS.manSheet.mLastUpdate + GS.manSheet.mUpdateInterval)
+    {
+        GS.manSheet.mCurFrame = (GS.manSheet.mCurFrame + 1) % GS.manSheet.mNumFrames;
+        GS.manSheet.mLastUpdate = GS.curTime;
+    }
     //Render Code
     RenderSpriteSheet(GS.renderer, GS.manSheet);
 
@@ -146,15 +154,17 @@ int main(int argv, char **args)
 {
     //cout << "Starting Game\n";
 
+    GS.startTime = SDL_GetTicks();
+    GS.curTime = SDL_GetTicks();
     //Initiate SDL
     StartSDL(&(GS.window), &(GS.renderer));
     SDL_Texture *manTex = GetSDLTexture(GS.renderer, GS.window, "./res/png/manwalk.png");
     //RemoveTextureWhiteSpace(GS.man);
     GS.State = "START";
     GS.PlayerState = "IDLE";
-    GS.screenColor.r = 255;
-    GS.screenColor.g = 255;
-    GS.screenColor.b = 255;
+    GS.screenColor.r = 200;
+    GS.screenColor.g = 200;
+    GS.screenColor.b = 200;
     GS.screenColor.a = 255;
 
     GS.manSheet = InitSpriteSheet(manTex,
@@ -162,6 +172,7 @@ int main(int argv, char **args)
             500,
             8); 
 
+    GS.manSheet.mUpdateInterval = 200;
 
     /*
 

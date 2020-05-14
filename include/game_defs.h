@@ -49,6 +49,10 @@ struct SpriteSheet
     int mAlpha;
     SDL_Point *mCenter;
     SDL_RendererFlip mFlip;
+
+    //handling frame updates
+    Uint32 mLastUpdate;
+    int mUpdateInterval;
     
 
 };
@@ -80,6 +84,9 @@ struct GameState
     SpriteSheet manSheet;
 
     string PlayerState;
+    
+    Uint32 startTime;
+    Uint32 curTime;
 
 };
 

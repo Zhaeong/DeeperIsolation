@@ -153,13 +153,18 @@ Module.expectedDataFileDownloads++;
  };
  loadPackage({
   "files": [ {
-   "filename": "/res/png/manwalk.png",
+   "filename": "/res/png/Intro.png",
    "start": 0,
-   "end": 119763,
+   "end": 3429,
+   "audio": 0
+  }, {
+   "filename": "/res/png/manwalk.png",
+   "start": 3429,
+   "end": 120093,
    "audio": 0
   } ],
-  "remote_package_size": 119763,
-  "package_uuid": "b8662984-5d3e-40e4-9e81-d91d4e8a33e5"
+  "remote_package_size": 120093,
+  "package_uuid": "92180962-9a9b-4faa-9a03-b463eec0f929"
  });
 })();
 
@@ -780,7 +785,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5342624, STACK_MAX = 99744, DYNAMIC_BASE = 5342624, DYNAMICTOP_PTR = 99584;
+var STACK_BASE = 5342640, STACK_MAX = 99760, DYNAMIC_BASE = 5342640, DYNAMICTOP_PTR = 99600;
 
 assert(STACK_BASE % 16 === 0, "stack must start aligned");
 
