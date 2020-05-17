@@ -92,7 +92,7 @@ struct TextBox
     //Depends on mColumn, set when InitTextBox called
     int mRow;
 
-    Uint32 mStartTime;
+    Uint32 mLastUpdate;
 
     //if speed == -1, then Don't need to stagger render
     int mSpeed;

@@ -429,10 +429,12 @@ TextBox InitTextBox(SDL_Texture *fontTex,
     outTextBox.mY = y;
     outTextBox.mColumn = column;
     outTextBox.mSpeed = speed;
+    outTextBox.mNumRendered = 0;
+    outTextBox.mLastUpdate = 0;
     return outTextBox;
 }
 
-void RenderTextBox(SDL_Renderer *renderer, TextBox tBox)
+void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox)
 {
 
     SDL_Rect srcRect;
@@ -440,19 +442,37 @@ void RenderTextBox(SDL_Renderer *renderer, TextBox tBox)
 
     srcRect.x = 0;
     srcRect.y = 0;
-    srcRect.w = tBox.mFontW;
-    srcRect.h = tBox.mFontH;
+    srcRect.w = tBox->mFontW;
+    srcRect.h = tBox->mFontH;
 
-    dstRect.x = tBox.mX;
-    dstRect.y = tBox.mY;
-    dstRect.w = tBox.mFontW;
-    dstRect.h = tBox.mFontH;
+    dstRect.x = tBox->mX;
+    dstRect.y = tBox->mY;
+    dstRect.w = tBox->mFontW;
+    dstRect.h = tBox->mFontH;
 
     int curXPos = 0;
     int curYPos = 0;
-    for(int i = 0; i < tBox.mText.size(); i++)
+    int renderNum = tBox->mText.size();
+
+    //This is to ensure that the first char isn't rendered at start
+    if(tBox->mLastUpdate == 0)
     {
-        char curChar = tBox.mText[i];
+        tBox->mLastUpdate = curTime;
+    }
+    if(tBox->mSpeed > 0 && tBox->mNumRendered < tBox->mText.size())
+    {
+        renderNum = tBox->mNumRendered;
+
+        if(curTime > tBox->mLastUpdate + tBox->mSpeed)
+        {
+            tBox->mNumRendered += 1;
+            tBox->mLastUpdate = curTime;
+        }
+    }
+
+    for(int i = 0; i < renderNum; i++)
+    {
+        char curChar = tBox->mText[i];
         int xTextPos = 0;
         int yTextPos = 0;
         //Capitals
@@ -474,14 +494,20 @@ void RenderTextBox(SDL_Renderer *renderer, TextBox tBox)
             yTextPos = 2;
         }
 
-        srcRect.x = xTextPos * tBox.mFontW;
-        srcRect.y = yTextPos * tBox.mFontH;
+        srcRect.x = xTextPos * tBox->mFontW;
+        srcRect.y = yTextPos * tBox->mFontH;
 
-        dstRect.x = tBox.mX + tBox.mFontW * curXPos;
-        dstRect.y = tBox.mY + tBox.mFontH * curYPos;
-        SDL_RenderCopyEx(renderer, tBox.mFontTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
-
-        curXPos += 1;
-
+        dstRect.x = tBox->mX + tBox->mFontW * curXPos;
+        dstRect.y = tBox->mY + tBox->mFontH * curYPos;
+        SDL_RenderCopyEx(renderer, tBox->mFontTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
+        if(curXPos + 1 > tBox->mColumn)
+        {
+            curXPos = 0;
+            curYPos += 1;
+        }
+        else
+        {
+            curXPos += 1;
+        }
     }
 }

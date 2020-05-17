@@ -83,6 +83,8 @@ void gameloop()
                         }
                     case SDLK_3:
                         {
+                            GS.startButton.mLastUpdate = GS.curTime;
+                            GS.startButton.mNumRendered = 0;
                             break;
                         }
                     case SDLK_4:
@@ -133,7 +135,7 @@ void gameloop()
     RenderSpriteSheet(GS.renderer, GS.manSheet);
 
     //Render textBox
-    RenderTextBox(GS.renderer, GS.startButton);
+    RenderTextBox(GS.renderer, GS.curTime, &GS.startButton);
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -181,18 +183,22 @@ int main(int argv, char **args)
     GS.manSheet.mUpdateInterval = 200;
 
     GS.fontTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/mainText.png");
+    RemoveTextureWhiteSpace(GS.fontTexture);
     GS.mainBoxTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/textBox.png");
+    RemoveTextureWhiteSpace(GS.mainBoxTexture);
 
     GS.startButton = InitTextBox(GS.fontTexture,
-                                 20,
-                                 20,
-                                 GS.mainBoxTexture,
-                                 3,
-                                 "Start",
-                                 10,
-                                 10,
-                                 5,
-                                 -1);
+            20,
+            20,
+            GS.mainBoxTexture,
+            3,
+            "Start",
+            10,
+            10,
+            2,
+            200);
+
+
     /*
 
        audioDevice = SDL_OpenAudioDevice(NULL, 0, &ToddlerMus.wavSpec, NULL, 0);
