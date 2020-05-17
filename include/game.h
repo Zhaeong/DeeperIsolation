@@ -42,6 +42,15 @@ SDL_Point RotatePointByOtherPoint(int inX,
                                   int centerY,
                                   int degrees);
 
-
+TextBox InitTextBox(SDL_Texture *fontTex,
+                    int fontW,
+                    int fontH,
+                    SDL_Texture *boxTex,
+                    int boxDim,
+                    string text,
+                    int x,
+                    int y,
+                    int w,
+                    int speed);
 #endif // GAME_H
  

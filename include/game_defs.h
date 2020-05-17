@@ -71,6 +71,30 @@ struct AudioClip
     Uint8 *wavBuffer;
 };
 
+struct TextBox
+{
+    SDL_Texture *mFontTex;
+    int mFontW;
+    int mFontH;
+
+    SDL_Texture *mBoxTex;
+    int mBoxDim;
+
+    string mText;
+
+    int mX;
+    int mY;
+
+    int mW;
+    //Depends on mW, set when InitTextBox called
+    int mH;
+
+    Uint32 mStartTime;
+
+    //if speed == -1, then Don't need to stagger render
+    int mSpeed;
+    int mNumRendered;
+};
 
 
 struct GameState
@@ -88,9 +112,12 @@ struct GameState
     Uint32 startTime;
     Uint32 curTime;
 
+    SDL_Texture *fontTexture;
+    SDL_Texture *mainBoxTexture;
+
+    TextBox startButton;
+
 };
-
-
 
 
 #endif // GAMEDEFS_H

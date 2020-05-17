@@ -406,4 +406,28 @@ SDL_Point RotatePointByOtherPoint(int inX,
 
     return retPoint;
 }
-     
+
+TextBox InitTextBox(SDL_Texture *fontTex,
+                    int fontW,
+                    int fontH,
+                    SDL_Texture *boxTex,
+                    int boxDim,
+                    string text,
+                    int x,
+                    int y,
+                    int w,
+                    int speed)
+{
+    TextBox outTextBox;
+    outTextBox.mFontTex = fontTex;
+    outTextBox.mFontW = fontW;
+    outTextBox.mFontH = fontH;
+    outTextBox.mBoxTex = boxTex;
+    outTextBox.mBoxDim = boxDim;
+    outTextBox.mText = text;
+    outTextBox.mX = x;
+    outTextBox.mY = y;
+    outTextBox.mW = w;
+    outTextBox.mSpeed = speed;
+    return outTextBox;
+}
