@@ -50,7 +50,9 @@ TextBox InitTextBox(SDL_Texture *fontTex,
                     string text,
                     int x,
                     int y,
-                    int w,
+                    int column,
                     int speed);
+
+void RenderTextBox(SDL_Renderer *renderer, TextBox tBox);
 #endif // GAME_H
  

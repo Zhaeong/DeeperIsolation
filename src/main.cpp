@@ -132,6 +132,9 @@ void gameloop()
     //Render Code
     RenderSpriteSheet(GS.renderer, GS.manSheet);
 
+    //Render textBox
+    RenderTextBox(GS.renderer, GS.startButton);
+
 
     ////////////////////////////////////////////////////////////////////////
     //End of main game code

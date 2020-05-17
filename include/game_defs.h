@@ -85,9 +85,12 @@ struct TextBox
     int mX;
     int mY;
 
-    int mW;
-    //Depends on mW, set when InitTextBox called
-    int mH;
+
+    //Denotes the number of characters that should be displayed 
+    int mColumn;
+
+    //Depends on mColumn, set when InitTextBox called
+    int mRow;
 
     Uint32 mStartTime;
 

@@ -408,15 +408,15 @@ SDL_Point RotatePointByOtherPoint(int inX,
 }
 
 TextBox InitTextBox(SDL_Texture *fontTex,
-                    int fontW,
-                    int fontH,
-                    SDL_Texture *boxTex,
-                    int boxDim,
-                    string text,
-                    int x,
-                    int y,
-                    int w,
-                    int speed)
+        int fontW,
+        int fontH,
+        SDL_Texture *boxTex,
+        int boxDim,
+        string text,
+        int x,
+        int y,
+        int column,
+        int speed)
 {
     TextBox outTextBox;
     outTextBox.mFontTex = fontTex;
@@ -427,7 +427,61 @@ TextBox InitTextBox(SDL_Texture *fontTex,
     outTextBox.mText = text;
     outTextBox.mX = x;
     outTextBox.mY = y;
-    outTextBox.mW = w;
+    outTextBox.mColumn = column;
     outTextBox.mSpeed = speed;
     return outTextBox;
+}
+
+void RenderTextBox(SDL_Renderer *renderer, TextBox tBox)
+{
+
+    SDL_Rect srcRect;
+    SDL_Rect dstRect;
+
+    srcRect.x = 0;
+    srcRect.y = 0;
+    srcRect.w = tBox.mFontW;
+    srcRect.h = tBox.mFontH;
+
+    dstRect.x = tBox.mX;
+    dstRect.y = tBox.mY;
+    dstRect.w = tBox.mFontW;
+    dstRect.h = tBox.mFontH;
+
+    int curXPos = 0;
+    int curYPos = 0;
+    for(int i = 0; i < tBox.mText.size(); i++)
+    {
+        char curChar = tBox.mText[i];
+        int xTextPos = 0;
+        int yTextPos = 0;
+        //Capitals
+
+        if ((int)curChar >= 65 && (int)curChar <= 90)
+        {
+            xTextPos = (int)curChar - 65;
+        }
+        //lower case
+        else if ((int)curChar >= 97 && (int)curChar <= 122)
+        {
+            xTextPos = (int)curChar - 97;
+            yTextPos = 1;
+        }
+        //numbers
+        else if ((int)curChar >= 48 && (int)curChar <= 57)
+        {
+            xTextPos = (int)curChar - 48;
+            yTextPos = 2;
+        }
+
+        srcRect.x = xTextPos * tBox.mFontW;
+        srcRect.y = yTextPos * tBox.mFontH;
+
+        dstRect.x = tBox.mX + tBox.mFontW * curXPos;
+        dstRect.y = tBox.mY + tBox.mFontH * curYPos;
+        SDL_RenderCopyEx(renderer, tBox.mFontTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
+
+        curXPos += 1;
+
+    }
 }
