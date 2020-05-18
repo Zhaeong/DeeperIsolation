@@ -192,12 +192,12 @@ int main(int argv, char **args)
             20,
             GS.mainBoxTexture,
             3,
-            "Start",
+            "StartingIts",
             10,
             10,
-            2,
+            5,
             200);
-
+    cout << "row: " << GS.startButton.mRow << "\n";
 
     /*
 

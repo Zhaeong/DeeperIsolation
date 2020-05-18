@@ -79,6 +79,7 @@ struct TextBox
 
     SDL_Texture *mBoxTex;
     int mBoxDim;
+    int mBoxMargin;
 
     string mText;
 

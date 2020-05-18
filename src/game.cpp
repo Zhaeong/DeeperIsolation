@@ -422,15 +422,26 @@ TextBox InitTextBox(SDL_Texture *fontTex,
     outTextBox.mFontTex = fontTex;
     outTextBox.mFontW = fontW;
     outTextBox.mFontH = fontH;
+
     outTextBox.mBoxTex = boxTex;
     outTextBox.mBoxDim = boxDim;
+    outTextBox.mBoxMargin = 2;
+
     outTextBox.mText = text;
     outTextBox.mX = x;
     outTextBox.mY = y;
+
     outTextBox.mColumn = column;
+
+    //The addition of 1 or 0 will make this always take the ceiling of a division
+    //e.g. 10/5 = 2, and 11/2 = 3
+    outTextBox.mRow = text.size()/column + (text.size() % column != 0);
+
     outTextBox.mSpeed = speed;
+
     outTextBox.mNumRendered = 0;
     outTextBox.mLastUpdate = 0;
+
     return outTextBox;
 }
 
@@ -500,7 +511,7 @@ void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox)
         dstRect.x = tBox->mX + tBox->mFontW * curXPos;
         dstRect.y = tBox->mY + tBox->mFontH * curYPos;
         SDL_RenderCopyEx(renderer, tBox->mFontTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
-        if(curXPos + 1 > tBox->mColumn)
+        if(curXPos + 1 >= tBox->mColumn)
         {
             curXPos = 0;
             curYPos += 1;
