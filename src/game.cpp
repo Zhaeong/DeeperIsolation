@@ -170,7 +170,7 @@ void RemoveTextureWhiteSpace(SDL_Texture *texture)
         //Map colors
 
         Uint32 colorKeyWhite = SDL_MapRGBA(mappingFormat, 0xFF, 0xFF, 0xFF, 0xFF);
-        Uint32 colorKeyGray = SDL_MapRGBA(mappingFormat, 182, 182, 182, 0xFF);
+        Uint32 colorKeyGray = SDL_MapRGBA(mappingFormat, 153, 153, 153, 0xFF);
 
         Uint32 transparent = SDL_MapRGBA(mappingFormat, 0xFF, 0xFF, 0xFF, 0);
 
@@ -426,6 +426,7 @@ TextBox InitTextBox(SDL_Texture *fontTex,
     outTextBox.mBoxTex = boxTex;
     outTextBox.mBoxDim = boxDim;
     outTextBox.mBoxMargin = 2;
+    outTextBox.mIsActive = false;
 
     outTextBox.mText = text;
     outTextBox.mX = x;
@@ -447,10 +448,185 @@ TextBox InitTextBox(SDL_Texture *fontTex,
 
 void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox)
 {
-
     SDL_Rect srcRect;
     SDL_Rect dstRect;
 
+    //////////////////////////////
+    //First render the background
+    //////////////////////////////
+
+    //9 points represents the start locations
+    //This indicates the srcRect where it will render from
+
+    SDL_Point tl, t, tr,
+              ml, m, mr,
+              bl, b, br;
+    
+    tl.x = 0;
+    tl.y = 0;
+
+    t.x = tBox->mBoxDim * 1;
+    t.y = 0;
+
+    tr.x = tBox->mBoxDim * 2;
+    tr.y = 0;
+
+    ml.x = 0; 
+    ml.y = tBox->mBoxDim * 1;
+    
+    m.x = tBox->mBoxDim * 1;
+    m.y = tBox->mBoxDim * 1;
+
+    mr.x = tBox->mBoxDim * 2;
+    mr.y = tBox->mBoxDim * 1;
+
+    bl.x = 0;
+    bl.y = tBox->mBoxDim * 2;
+
+    b.x = tBox->mBoxDim * 1;
+    b.y = tBox->mBoxDim * 2;
+
+    br.x = tBox->mBoxDim * 2;
+    br.y = tBox->mBoxDim * 3;
+
+    //When the button is active offset by 3 * mBoxDim in y axis
+    if(tBox->mIsActive)
+    {
+        tl.y += tBox->mBoxDim * 3;
+        t.y  += tBox->mBoxDim * 3;
+        tr.y += tBox->mBoxDim * 3;
+        ml.y += tBox->mBoxDim * 3;
+        m.y  += tBox->mBoxDim * 3;
+        mr.y += tBox->mBoxDim * 3;
+        bl.y += tBox->mBoxDim * 3;
+        b.y  += tBox->mBoxDim * 3;
+        br.y += tBox->mBoxDim * 3;
+    }
+
+    //Render mid first, and others can be imposed upon
+    //m
+    srcRect.x = m.x;
+    srcRect.y = m.y;
+    srcRect.w = tBox->mBoxDim;
+    srcRect.h = tBox->mBoxDim;
+
+    dstRect.x = tBox->mX - tBox->mBoxMargin;
+    dstRect.y = tBox->mY - tBox->mBoxMargin;
+    dstRect.w = (tBox->mColumn * tBox->mFontW) + (tBox->mBoxMargin * 2);
+    dstRect.h = (tBox->mRow * tBox->mFontH) + (tBox->mBoxMargin * 2);
+
+    SDL_RenderCopyEx(renderer, tBox->mBoxTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
+
+    //tl
+    srcRect.x = tl.x;
+    srcRect.y = tl.y;
+    srcRect.w = tBox->mBoxDim;
+    srcRect.h = tBox->mBoxDim;
+
+    dstRect.x = tBox->mX - tBox->mBoxMargin - tBox->mBoxDim;
+    dstRect.y = tBox->mY - tBox->mBoxMargin - tBox->mBoxDim;
+    dstRect.w = tBox->mBoxDim;
+    dstRect.h = tBox->mBoxDim;
+
+    SDL_RenderCopyEx(renderer, tBox->mBoxTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
+
+    //t
+    srcRect.x = t.x;
+    srcRect.y = t.y;
+    srcRect.w = tBox->mBoxDim;
+    srcRect.h = tBox->mBoxDim;
+
+    dstRect.x = tBox->mX - tBox->mBoxMargin;
+    dstRect.y = tBox->mY - tBox->mBoxMargin - tBox->mBoxDim;
+    dstRect.w = (tBox->mColumn * tBox->mFontW) + (tBox->mBoxMargin * 2);
+    dstRect.h = tBox->mBoxDim;
+
+    SDL_RenderCopyEx(renderer, tBox->mBoxTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
+
+    //tr
+    srcRect.x = tr.x;
+    srcRect.y = tr.y;
+    srcRect.w = tBox->mBoxDim;
+    srcRect.h = tBox->mBoxDim;
+
+    dstRect.x = tBox->mX + (tBox->mColumn * tBox->mFontW) + tBox->mBoxMargin;
+    dstRect.y = tBox->mY - tBox->mBoxMargin - tBox->mBoxDim;
+    dstRect.w = tBox->mBoxDim;
+    dstRect.h = tBox->mBoxDim;
+
+    SDL_RenderCopyEx(renderer, tBox->mBoxTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
+
+
+    //ml
+    srcRect.x = ml.x;
+    srcRect.y = ml.y;
+    srcRect.w = tBox->mBoxDim;
+    srcRect.h = tBox->mBoxDim;
+
+    dstRect.x = tBox->mX - tBox->mBoxMargin - tBox->mBoxDim;
+    dstRect.y = tBox->mY - tBox->mBoxMargin;
+    dstRect.w = tBox->mBoxDim;
+    dstRect.h = (tBox->mRow * tBox->mFontH) + (tBox->mBoxMargin * 2);
+
+    SDL_RenderCopyEx(renderer, tBox->mBoxTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
+
+    //mr
+    srcRect.x = mr.x;
+    srcRect.y = mr.y;
+    srcRect.w = tBox->mBoxDim;
+    srcRect.h = tBox->mBoxDim;
+
+    dstRect.x = tBox->mX + (tBox->mColumn * tBox->mFontW) + tBox->mBoxMargin;
+    dstRect.y = tBox->mY - tBox->mBoxMargin;
+    dstRect.w = tBox->mBoxDim;
+    dstRect.h = (tBox->mRow * tBox->mFontH) + (tBox->mBoxMargin * 2);
+
+    SDL_RenderCopyEx(renderer, tBox->mBoxTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
+
+    //bl
+    srcRect.x = bl.x;
+    srcRect.y = bl.y;
+    srcRect.w = tBox->mBoxDim;
+    srcRect.h = tBox->mBoxDim;
+
+    dstRect.x = tBox->mX - tBox->mBoxMargin - tBox->mBoxDim;    
+    dstRect.y = tBox->mY + (tBox->mRow * tBox->mFontH) + tBox->mBoxMargin;
+    dstRect.w = tBox->mBoxDim;
+    dstRect.h = tBox->mBoxDim;
+
+    SDL_RenderCopyEx(renderer, tBox->mBoxTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
+
+    //b
+    srcRect.x = b.x;
+    srcRect.y = b.y;
+    srcRect.w = tBox->mBoxDim;
+    srcRect.h = tBox->mBoxDim;
+
+    dstRect.x = tBox->mX - tBox->mBoxMargin;    
+    dstRect.y = tBox->mY + (tBox->mRow * tBox->mFontH) + tBox->mBoxMargin;
+    dstRect.w = (tBox->mColumn * tBox->mFontW) + (tBox->mBoxMargin * 2);
+    dstRect.h = tBox->mBoxDim;
+
+    SDL_RenderCopyEx(renderer, tBox->mBoxTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
+
+    //br
+    srcRect.x = br.x;
+    srcRect.y = br.y;
+    srcRect.w = tBox->mBoxDim;
+    srcRect.h = tBox->mBoxDim;
+
+    dstRect.x = tBox->mX + (tBox->mColumn * tBox->mFontW) + tBox->mBoxMargin;
+    dstRect.y = tBox->mY + (tBox->mRow * tBox->mFontH) + tBox->mBoxMargin;
+    dstRect.w = tBox->mBoxDim;
+    dstRect.h = tBox->mBoxDim;
+
+    SDL_RenderCopyEx(renderer, tBox->mBoxTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
+
+
+
+    //////////////////////
+    //Rendering Text
+    //////////////////////
     srcRect.x = 0;
     srcRect.y = 0;
     srcRect.w = tBox->mFontW;

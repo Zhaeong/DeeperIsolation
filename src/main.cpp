@@ -77,8 +77,7 @@ void gameloop()
                         }
                     case SDLK_2:
                         {
-
-                            GS.manSheet.mUpdateInterval -= 10;
+                            GS.startButton.mIsActive = !GS.startButton.mIsActive;
                             break;
                         }
                     case SDLK_3:

@@ -80,6 +80,7 @@ struct TextBox
     SDL_Texture *mBoxTex;
     int mBoxDim;
     int mBoxMargin;
+    bool mIsActive;
 
     string mText;
 

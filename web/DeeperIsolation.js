@@ -170,11 +170,11 @@ Module.expectedDataFileDownloads++;
   }, {
    "filename": "/res/png/textBox.png",
    "start": 15112,
-   "end": 16430,
+   "end": 16431,
    "audio": 0
   } ],
-  "remote_package_size": 16430,
-  "package_uuid": "29b3d607-ed06-49ea-aed2-c2940369d82a"
+  "remote_package_size": 16431,
+  "package_uuid": "77ebf16b-a993-4416-90f4-894703121ab2"
  });
 })();
 
