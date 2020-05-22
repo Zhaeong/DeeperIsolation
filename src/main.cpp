@@ -55,13 +55,11 @@ void gameloop()
                         }
                     case SDLK_d:
                         {
-                            cout << "dd\n"; 
                             GS.PlayerState = "RIGHT";
                             break;
                         }
                     case SDLK_a:
                         {
-                            cout << "aa\n"; 
                             GS.PlayerState = "LEFT";
                             break;
                         }
@@ -117,23 +115,24 @@ void gameloop()
 
     if(GS.PlayerState == "LEFT")
     {
-        GS.manSheet.mDstRect.x -= 1;
+        GS.ssArray[0].mDstRect.x -= 1;
     }
     else if(GS.PlayerState == "RIGHT")
     {
-        GS.manSheet.mDstRect.x += 1;
+        GS.ssArray[0].mDstRect.x += 1;
     }
 
     LightenTexture(&GS.blackTex, GS.curTime);
-    //cout << "a: " << GS.blackTex.mAlpha << "\n";
 
-    if(GS.curTime > GS.manSheet.mLastUpdate + GS.manSheet.mUpdateInterval)
+    if(GS.curTime > GS.ssArray[0].mLastUpdate + GS.ssArray[0].mUpdateInterval)
     {
-        GS.manSheet.mCurFrame = (GS.manSheet.mCurFrame + 1) % GS.manSheet.mNumFrames;
-        GS.manSheet.mLastUpdate = GS.curTime;
+        GS.ssArray[0].mCurFrame = (GS.ssArray[0].mCurFrame + 1) % GS.ssArray[0].mNumFrames;
+        GS.ssArray[0].mLastUpdate = GS.curTime;
     }
-    //Render Code
-    RenderSpriteSheet(GS.renderer, GS.manSheet);
+    //
+    //Render Area
+    //
+    RenderSpriteSheet(GS.renderer, GS.ssArray[0]);
 
     //Render textBox
     RenderTextBox(GS.renderer, GS.curTime, &GS.startButton);
@@ -170,19 +169,22 @@ int main(int argv, char **args)
     StartSDL(&(GS.window), &(GS.renderer));
     SDL_Texture *manTex = GetSDLTexture(GS.renderer, GS.window, "./res/png/manwalk.png");
     //RemoveTextureWhiteSpace(GS.man);
-    GS.State = "START";
+    GS.State = "MENU";
     GS.PlayerState = "IDLE";
     GS.screenColor.r = 200;
     GS.screenColor.g = 200;
     GS.screenColor.b = 200;
     GS.screenColor.a = 255;
 
-    GS.manSheet = InitSpriteSheet(manTex,
+    SpriteSheet manSheet = InitSpriteSheet(manTex,
             50,
             100,
             8); 
 
-    GS.manSheet.mUpdateInterval = 200;
+    manSheet.mUpdateInterval = 200;
+    
+    GS.ssArray[0] = manSheet;
+
 
     GS.fontTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/mainText.png");
     RemoveTextureWhiteSpace(GS.fontTexture);

@@ -217,7 +217,7 @@ SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
 
     sSheet.mTexture = sdlTexture;
 
-    sSheet.mDstRect.x = 0;
+    sSheet.mDstRect.x = 4;
     sSheet.mDstRect.y = 0;
 
     sSheet.mDstRect.w = w;
@@ -271,6 +271,7 @@ void RenderTexture(SDL_Renderer *renderer, Texture tex)
 
 void RenderSpriteSheet(SDL_Renderer *renderer, SpriteSheet sSheet)
 {
+
     //Don't render if the alpha is 0
     if(sSheet.mAlpha > 0)
     {

@@ -18,6 +18,9 @@ using namespace std;
 
 const Uint32 TEXTUREFORMAT = SDL_PIXELFORMAT_RGBA8888;
 
+const int NUM_SPRITESHEET = 5;
+const int NUM_TEXTURE = 5;
+
 //Declared as extern so that it's shared between files
 extern bool ShowDebug;
 
@@ -112,7 +115,9 @@ struct GameState
     SDL_Renderer *renderer;
     SDL_AudioDeviceID audioDevice;
 
-    SpriteSheet manSheet;
+    //SpriteSheet manSheet;
+
+    SpriteSheet ssArray[NUM_SPRITESHEET];
 
     string PlayerState;
     
