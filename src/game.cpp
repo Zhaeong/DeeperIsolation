@@ -204,6 +204,7 @@ Texture InitTexture(SDL_Texture *sdlTexture, int x, int y)
     outTex.mTexture = sdlTexture;
     outTex.mCenter = NULL;
     outTex.mFlip = SDL_FLIP_NONE;
+    outTex.mLastUpdate = 0;
     return outTex;
 }
 
@@ -461,7 +462,7 @@ void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox)
     SDL_Point tl, t, tr,
               ml, m, mr,
               bl, b, br;
-    
+
     tl.x = 0;
     tl.y = 0;
 
@@ -473,7 +474,7 @@ void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox)
 
     ml.x = 0; 
     ml.y = tBox->mBoxDim * 1;
-    
+
     m.x = tBox->mBoxDim * 1;
     m.y = tBox->mBoxDim * 1;
 
@@ -487,7 +488,7 @@ void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox)
     b.y = tBox->mBoxDim * 2;
 
     br.x = tBox->mBoxDim * 2;
-    br.y = tBox->mBoxDim * 3;
+    br.y = tBox->mBoxDim * 2;
 
     //When the button is active offset by 3 * mBoxDim in y axis
     if(tBox->mIsActive)
@@ -697,4 +698,45 @@ void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox)
             curXPos += 1;
         }
     }
+}
+
+
+bool DarkenTexture(Texture *tex, Uint32 curTime)
+{
+    int updateIncrement = 5;
+    if(tex->mLastUpdate + 10 < curTime && tex->mAlpha < 255)
+    {
+        if(tex->mAlpha + updateIncrement >= 255)
+        {
+            tex->mAlpha = 255;
+            return true;
+        }
+        else
+        {
+            tex->mAlpha += updateIncrement;
+            tex->mLastUpdate = curTime;
+            return false;
+        }
+    }
+    return true;
+}
+
+bool LightenTexture(Texture *tex, Uint32 curTime)
+{
+    int updateIncrement = 5;
+    if(tex->mLastUpdate + 10 < curTime && tex->mAlpha > 0)
+    {
+        if(tex->mAlpha - updateIncrement <= 0)
+        {
+            tex->mAlpha = 0;
+            return true;
+        }
+        else
+        {
+            tex->mAlpha -= updateIncrement;
+            tex->mLastUpdate = curTime;
+            return false;
+        }
+    }
+    return true;
 }

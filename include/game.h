@@ -54,5 +54,10 @@ TextBox InitTextBox(SDL_Texture *fontTex,
                     int speed);
 
 void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox);
+
+bool DarkenTexture(Texture *tex, Uint32 curTime);
+
+bool LightenTexture(Texture *tex, Uint32 curTime);
+
 #endif // GAME_H
  

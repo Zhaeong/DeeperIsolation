@@ -32,6 +32,8 @@ struct Texture
     SDL_Texture *mTexture;
     SDL_Point *mCenter;
     SDL_RendererFlip mFlip;
+
+    Uint32 mLastUpdate;
 };
 
 struct SpriteSheet 
@@ -114,12 +116,16 @@ struct GameState
 
     string PlayerState;
     
+    //Time controls
     Uint32 startTime;
     Uint32 curTime;
 
+    //SDL Textures
     SDL_Texture *fontTexture;
     SDL_Texture *mainBoxTexture;
 
+    //Textures
+    Texture blackTex;
     TextBox startButton;
 
 };

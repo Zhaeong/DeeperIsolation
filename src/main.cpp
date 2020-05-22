@@ -72,7 +72,7 @@ void gameloop()
                         }
                     case SDLK_1:
                         {
-                            GS.manSheet.mUpdateInterval += 10;
+                            GS.blackTex.mAlpha += 1;
                             break;
                         }
                     case SDLK_2:
@@ -124,6 +124,8 @@ void gameloop()
         GS.manSheet.mDstRect.x += 1;
     }
 
+    LightenTexture(&GS.blackTex, GS.curTime);
+    //cout << "a: " << GS.blackTex.mAlpha << "\n";
 
     if(GS.curTime > GS.manSheet.mLastUpdate + GS.manSheet.mUpdateInterval)
     {
@@ -136,7 +138,8 @@ void gameloop()
     //Render textBox
     RenderTextBox(GS.renderer, GS.curTime, &GS.startButton);
 
-
+    //Render the fadeout textures
+    RenderTexture(GS.renderer, GS.blackTex);
     ////////////////////////////////////////////////////////////////////////
     //End of main game code
     ////////////////////////////////////////////////////////////////////////
@@ -196,8 +199,11 @@ int main(int argv, char **args)
             10,
             5,
             200);
-    cout << "row: " << GS.startButton.mRow << "\n";
 
+    GS.blackTex = InitTexture(GetSDLTexture(GS.renderer, GS.window, "./res/png/black.png"), 0 ,0);
+    GS.blackTex.mW = GAMEWIDTH;
+    GS.blackTex.mH = GAMEHEIGHT;
+    //GS.blackTex.mAlpha = 0;
     /*
 
        audioDevice = SDL_OpenAudioDevice(NULL, 0, &ToddlerMus.wavSpec, NULL, 0);
