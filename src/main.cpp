@@ -124,11 +124,7 @@ void gameloop()
 
     LightenTexture(&GS.blackTex, GS.curTime);
 
-    if(GS.curTime > GS.ssArray[0].mLastUpdate + GS.ssArray[0].mUpdateInterval)
-    {
-        GS.ssArray[0].mCurFrame = (GS.ssArray[0].mCurFrame + 1) % GS.ssArray[0].mNumFrames;
-        GS.ssArray[0].mLastUpdate = GS.curTime;
-    }
+    UpdateSpriteSheet(GS.ssArray, GS.curTime);
     //
     //Render Area
     //
@@ -179,6 +175,11 @@ int main(int argv, char **args)
     GS.screenColor.b = 200;
     GS.screenColor.a = 255;
 
+    for(int i = 0; i < NUM_SPRITESHEET; i++)
+    {
+        GS.ssArray[i].mActive = false;
+    }
+
 
     SDL_Texture *titleTex = GetSDLTexture(GS.renderer, GS.window, "./res/png/title.png");
     SpriteSheet titleSheet = InitSpriteSheet(titleTex,
@@ -190,7 +191,6 @@ int main(int argv, char **args)
     titleSheet.mUpdateInterval = 200;
 
     GS.ssArray[0] = titleSheet;
-
 
     SDL_Texture *manTex = GetSDLTexture(GS.renderer, GS.window, "./res/png/manwalk.png");
     SpriteSheet manSheet = InitSpriteSheet(manTex,

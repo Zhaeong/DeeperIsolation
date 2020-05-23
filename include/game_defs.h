@@ -41,6 +41,7 @@ struct Texture
 
 struct SpriteSheet 
 {
+    bool mActive;
     SDL_Texture *mTexture;
 
     //Where to render the SpriteSheet

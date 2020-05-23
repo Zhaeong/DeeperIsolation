@@ -208,36 +208,6 @@ Texture InitTexture(SDL_Texture *sdlTexture, int x, int y)
     return outTex;
 }
 
-SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
-        int w,
-        int h,
-        int numFrames)
-{
-    SpriteSheet sSheet;
-
-    sSheet.mTexture = sdlTexture;
-
-    sSheet.mDstRect.x = 4;
-    sSheet.mDstRect.y = 0;
-
-    sSheet.mDstRect.w = w;
-    sSheet.mDstRect.h = h;
-    sSheet.mNumFrames = numFrames;
-
-    sSheet.mCurFrame = 0;
-
-    sSheet.mRotation = 0;
-    sSheet.mAlpha = 255;
-
-    sSheet.mCenter = NULL;
-
-    sSheet.mFlip = SDL_FLIP_NONE;
-
-
-    return sSheet;
-}
-
-
 void RenderTexture(SDL_Renderer *renderer, Texture tex)
 {
     //Don't render if the alpha is 0
@@ -267,13 +237,57 @@ void RenderTexture(SDL_Renderer *renderer, Texture tex)
     }
 }
 
+SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
+        int w,
+        int h,
+        int numFrames)
+{
+    SpriteSheet sSheet;
 
+    sSheet.mActive = true;
+
+    sSheet.mTexture = sdlTexture;
+
+    sSheet.mDstRect.x = 4;
+    sSheet.mDstRect.y = 0;
+
+    sSheet.mDstRect.w = w;
+    sSheet.mDstRect.h = h;
+    sSheet.mNumFrames = numFrames;
+
+    sSheet.mCurFrame = 0;
+
+    sSheet.mRotation = 0;
+    sSheet.mAlpha = 255;
+
+    sSheet.mCenter = NULL;
+
+    sSheet.mFlip = SDL_FLIP_NONE;
+
+
+    return sSheet;
+}
+
+void UpdateSpriteSheet(SpriteSheet *ssArray, Uint32 curTime)
+{
+    for(int i = 0; i < NUM_SPRITESHEET; i++)
+    {
+        if(ssArray[i].mActive)
+        {
+            if(curTime > ssArray[i].mLastUpdate + ssArray[i].mUpdateInterval)
+            {
+                ssArray[i].mCurFrame = (ssArray[i].mCurFrame + 1) % ssArray[i].mNumFrames;
+                ssArray[i].mLastUpdate = curTime;
+            }
+        }
+    }
+}
 
 void RenderSpriteSheet(SDL_Renderer *renderer, SpriteSheet sSheet)
 {
 
     //Don't render if the alpha is 0
-    if(sSheet.mAlpha > 0)
+    if(sSheet.mActive)
     {
         //SDL_SetTextureBlendMode(sSheet.mTexture, SDL_BLENDMODE_BLEND);
 

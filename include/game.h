@@ -21,14 +21,14 @@ int StartSDL(SDL_Window **window, SDL_Renderer **renderer);
 SDL_Texture* GetSDLTexture(SDL_Renderer *renderer, SDL_Window *window, string textureLocation);
 
 Texture InitTexture(SDL_Texture *sdlTexture, int x, int y);
+void RenderTexture(SDL_Renderer *renderer, Texture tex);
 
 SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
         int w,
         int h,
         int numFrames);
 
-void RenderTexture(SDL_Renderer *renderer, Texture tex);
-
+void UpdateSpriteSheet(SpriteSheet *ssArray, Uint32 curTime);
 void RenderSpriteSheet(SDL_Renderer *renderer, SpriteSheet sSheet);
 void RemoveTextureWhiteSpace(SDL_Texture *texture);
 
