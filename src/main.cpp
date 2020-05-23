@@ -132,7 +132,10 @@ void gameloop()
     //
     //Render Area
     //
-    RenderSpriteSheet(GS.renderer, GS.ssArray[0]);
+    for(int i = 0; i < NUM_SPRITESHEET; i++)
+    {
+        RenderSpriteSheet(GS.renderer, GS.ssArray[i]);
+    }
 
     //Render textBox
     RenderTextBox(GS.renderer, GS.curTime, &GS.startButton);
@@ -167,7 +170,7 @@ int main(int argv, char **args)
     GS.curTime = SDL_GetTicks();
     //Initiate SDL
     StartSDL(&(GS.window), &(GS.renderer));
-    SDL_Texture *manTex = GetSDLTexture(GS.renderer, GS.window, "./res/png/manwalk.png");
+
     //RemoveTextureWhiteSpace(GS.man);
     GS.State = "MENU";
     GS.PlayerState = "IDLE";
@@ -176,14 +179,28 @@ int main(int argv, char **args)
     GS.screenColor.b = 200;
     GS.screenColor.a = 255;
 
+
+    SDL_Texture *titleTex = GetSDLTexture(GS.renderer, GS.window, "./res/png/title.png");
+    SpriteSheet titleSheet = InitSpriteSheet(titleTex,
+            GAMEWIDTH,
+            GAMEHEIGHT,
+            7); 
+
+
+    titleSheet.mUpdateInterval = 200;
+
+    GS.ssArray[0] = titleSheet;
+
+
+    SDL_Texture *manTex = GetSDLTexture(GS.renderer, GS.window, "./res/png/manwalk.png");
     SpriteSheet manSheet = InitSpriteSheet(manTex,
             50,
             100,
             8); 
 
     manSheet.mUpdateInterval = 200;
-    
-    GS.ssArray[0] = manSheet;
+
+    GS.ssArray[1] = manSheet;
 
 
     GS.fontTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/mainText.png");
