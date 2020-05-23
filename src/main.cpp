@@ -175,6 +175,7 @@ int main(int argv, char **args)
     GS.screenColor.b = 200;
     GS.screenColor.a = 255;
 
+    //So unused array members are not worked upon
     for(int i = 0; i < NUM_SPRITESHEET; i++)
     {
         GS.ssArray[i].mActive = false;
