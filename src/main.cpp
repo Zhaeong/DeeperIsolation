@@ -33,6 +33,8 @@ void gameloop()
     ////////////////////////////////////////////////////////////////////////
     int mouseX = 0;
     int mouseY = 0;
+    SDL_GetMouseState(&mouseX, &mouseY);
+
     SDL_Event event;
     while (SDL_PollEvent(&event)) 
     {
@@ -75,13 +77,13 @@ void gameloop()
                         }
                     case SDLK_2:
                         {
-                            GS.startButton.mIsActive = !GS.startButton.mIsActive;
+                            GS.tbArray[0].mIsActive = !GS.tbArray[0].mIsActive;
                             break;
                         }
                     case SDLK_3:
                         {
-                            GS.startButton.mLastUpdate = GS.curTime;
-                            GS.startButton.mNumRendered = 0;
+                            GS.tbArray[0].mLastUpdate = GS.curTime;
+                            GS.tbArray[0].mNumRendered = 0;
                             break;
                         }
                     case SDLK_4:
@@ -102,7 +104,7 @@ void gameloop()
                 break;
             case SDL_MOUSEBUTTONUP:
                 //cout <<  "MOUSE_UP\n";
-                SDL_GetMouseState(&mouseX, &mouseY);
+
                 cout << "mouseX: " << mouseX << " mouseY: " << mouseY << "\n";
 
                 break;
@@ -111,7 +113,14 @@ void gameloop()
                 break;
         }
     }
-
+    if(MouseTextBoxCol(mouseX, mouseY, GS.tbArray[0]))
+    {
+        GS.tbArray[0].mIsActive = true;
+    }
+    else
+    {
+        GS.tbArray[0].mIsActive = false; 
+    }
 
     if(GS.PlayerState == "LEFT")
     {
@@ -134,7 +143,7 @@ void gameloop()
     }
 
     //Render textBox
-    RenderTextBox(GS.renderer, GS.curTime, &GS.startButton);
+    RenderTextBox(GS.renderer, GS.curTime, &GS.tbArray[0]);
 
     //Render the fadeout textures
     RenderTexture(GS.renderer, GS.blackTex);
@@ -209,12 +218,12 @@ int main(int argv, char **args)
     GS.mainBoxTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/textBox.png");
     RemoveTextureWhiteSpace(GS.mainBoxTexture);
 
-    GS.startButton = InitTextBox(GS.fontTexture,
+    GS.tbArray[0] = InitTextBox(GS.fontTexture,
             20,
             20,
             GS.mainBoxTexture,
             3,
-            "StartingIts",
+            "Start",
             10,
             10,
             5,

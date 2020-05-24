@@ -755,3 +755,28 @@ bool LightenTexture(Texture *tex, Uint32 curTime)
     }
     return true;
 }
+
+bool MouseTextBoxCol(int mouseX, int mouseY, TextBox tb)
+{
+    bool xCol = false;
+    bool yCol = false;
+    if(mouseX >= tb.mX &&
+            mouseX <= tb.mX + (tb.mColumn * tb.mFontW))
+    {
+        xCol = true;
+    }
+    if(mouseY >= tb.mY &&
+            mouseY <= tb.mY + (tb.mRow* tb.mFontH))
+    {
+        yCol = true;
+    }
+
+    if(xCol && yCol)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}

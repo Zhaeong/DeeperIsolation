@@ -19,6 +19,7 @@ using namespace std;
 const Uint32 TEXTUREFORMAT = SDL_PIXELFORMAT_RGBA8888;
 
 const int NUM_SPRITESHEET = 5;
+const int NUM_TEXTBOX = 5;
 const int NUM_TEXTURE = 5;
 
 //Declared as extern so that it's shared between files
@@ -118,7 +119,6 @@ struct GameState
 
     //SpriteSheet manSheet;
 
-    SpriteSheet ssArray[NUM_SPRITESHEET];
 
     string PlayerState;
     
@@ -130,9 +130,12 @@ struct GameState
     SDL_Texture *fontTexture;
     SDL_Texture *mainBoxTexture;
 
-    //Textures
+    //Level specific content
     Texture blackTex;
-    TextBox startButton;
+
+    SpriteSheet ssArray[NUM_SPRITESHEET];
+    TextBox tbArray[NUM_TEXTBOX];
+    Texture tArray[NUM_TEXTURE];
 
 };
 

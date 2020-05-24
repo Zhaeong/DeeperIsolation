@@ -59,5 +59,13 @@ bool DarkenTexture(Texture *tex, Uint32 curTime);
 
 bool LightenTexture(Texture *tex, Uint32 curTime);
 
+bool MouseTextBoxCol(int mouseX, int mouseY, TextBox tb);
+
+
+
+
+
+
+
 #endif // GAME_H
  
