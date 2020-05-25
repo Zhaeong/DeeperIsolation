@@ -780,3 +780,17 @@ bool MouseTextBoxCol(int mouseX, int mouseY, TextBox tb)
         return false;
     }
 }
+
+
+void LoadStartScene(GameState *GS)
+{
+    SDL_Texture *manTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/manwalk.png");
+    SpriteSheet manSheet = InitSpriteSheet(manTex,
+            50,
+            100,
+            8); 
+
+    manSheet.mUpdateInterval = 200;
+
+    GS->ssArray[0] = manSheet;
+}

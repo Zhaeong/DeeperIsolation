@@ -61,7 +61,7 @@ bool LightenTexture(Texture *tex, Uint32 curTime);
 
 bool MouseTextBoxCol(int mouseX, int mouseY, TextBox tb);
 
-
+void LoadStartScene(GameState *GS);
 
 
 

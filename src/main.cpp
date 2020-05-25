@@ -72,7 +72,7 @@ void gameloop()
                         }
                     case SDLK_1:
                         {
-                            GS.blackTex.mAlpha += 1;
+                            LoadStartScene(&GS); 
                             break;
                         }
                     case SDLK_2:
@@ -202,6 +202,7 @@ int main(int argv, char **args)
 
     GS.ssArray[0] = titleSheet;
 
+/*
     SDL_Texture *manTex = GetSDLTexture(GS.renderer, GS.window, "./res/png/manwalk.png");
     SpriteSheet manSheet = InitSpriteSheet(manTex,
             50,
@@ -212,6 +213,7 @@ int main(int argv, char **args)
 
     GS.ssArray[1] = manSheet;
 
+*/
 
     GS.fontTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/mainText.png");
     RemoveTextureWhiteSpace(GS.fontTexture);
