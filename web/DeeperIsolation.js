@@ -175,16 +175,16 @@ Module.expectedDataFileDownloads++;
   }, {
    "filename": "/res/png/textBox.png",
    "start": 16335,
-   "end": 17654,
+   "end": 17720,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 17654,
-   "end": 483692,
+   "start": 17720,
+   "end": 483758,
    "audio": 0
   } ],
-  "remote_package_size": 483692,
-  "package_uuid": "f0ff43cd-84e2-496e-a955-9784fcfc125e"
+  "remote_package_size": 483758,
+  "package_uuid": "f073396c-b887-440e-a3b6-97ac3147fcf6"
  });
 })();
 
@@ -585,8 +585,8 @@ function setValue(ptr, value, type, noSafe) {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 981,
- "maximum": 981 + 0,
+ "initial": 987,
+ "maximum": 987 + 0,
  "element": "anyfunc"
 });
 
@@ -805,7 +805,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5343632, STACK_MAX = 100752, DYNAMIC_BASE = 5343632, DYNAMICTOP_PTR = 100592;
+var STACK_BASE = 5343760, STACK_MAX = 100880, DYNAMIC_BASE = 5343760, DYNAMICTOP_PTR = 100720;
 
 assert(STACK_BASE % 16 === 0, "stack must start aligned");
 

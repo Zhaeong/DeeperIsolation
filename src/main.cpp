@@ -35,6 +35,22 @@ void gameloop()
     int mouseY = 0;
     SDL_GetMouseState(&mouseX, &mouseY);
 
+    //Depending on where mouse is, first handle the render states of buttons
+    if(MouseTextBoxCol(mouseX, mouseY, GS.tbArray[0]))
+    {
+        if(GS.tbArray[0].mState == 0)
+        {
+            GS.tbArray[0].mState = 1;
+        }
+    }
+    else
+    {
+        if(GS.tbArray[0].mState == 1)
+        {
+            GS.tbArray[0].mState = 0;
+        }
+    }
+
     SDL_Event event;
     while (SDL_PollEvent(&event)) 
     {
@@ -77,7 +93,7 @@ void gameloop()
                         }
                     case SDLK_2:
                         {
-                            GS.tbArray[0].mIsActive = !GS.tbArray[0].mIsActive;
+                            //GS.tbArray[0].mIsActive = !GS.tbArray[0].mIsActive;
                             break;
                         }
                     case SDLK_3:
@@ -99,13 +115,25 @@ void gameloop()
                     break;
                 }
             case SDL_MOUSEBUTTONDOWN:
-                //cout << "MOUSE_DOWN \n";
-
+                if(GS.tbArray[0].mState == 1)
+                {
+                    GS.tbArray[0].mState = 2; 
+                    cout << "down\n";
+                }
                 break;
             case SDL_MOUSEBUTTONUP:
                 //cout <<  "MOUSE_UP\n";
 
-                cout << "mouseX: " << mouseX << " mouseY: " << mouseY << "\n";
+                if(GS.State == STATE_MENU)
+                {
+                    if(GS.tbArray[0].mState == 2)
+                    {
+                        GS.State = STATE_TRAN;
+                        GS.StateNext = STATE_PLAY;
+                        cout << "changestate\n";
+                        GS.tbArray[0].mState = 1;
+                    }
+                }
 
                 break;
             case SDL_QUIT:
@@ -113,13 +141,20 @@ void gameloop()
                 break;
         }
     }
-    if(MouseTextBoxCol(mouseX, mouseY, GS.tbArray[0]))
+
+
+    if(GS.State == STATE_TRAN)
     {
-        GS.tbArray[0].mIsActive = true;
+        if(DarkenTexture(&GS.blackTex, GS.curTime))
+        {
+            LoadStartScene(&GS); 
+            GS.State = GS.StateNext;
+        }
     }
     else
     {
-        GS.tbArray[0].mIsActive = false; 
+        //At the start of every state except transition state it will lighten the window
+        LightenTexture(&GS.blackTex, GS.curTime);
     }
 
     if(GS.PlayerState == "LEFT")
@@ -131,7 +166,7 @@ void gameloop()
         GS.ssArray[0].mDstRect.x += 1;
     }
 
-    LightenTexture(&GS.blackTex, GS.curTime);
+
 
     UpdateSpriteSheet(GS.ssArray, GS.curTime);
     //
@@ -177,18 +212,19 @@ int main(int argv, char **args)
     StartSDL(&(GS.window), &(GS.renderer));
 
     //RemoveTextureWhiteSpace(GS.man);
-    GS.State = "MENU";
+    GS.State = STATE_MENU; 
+    GS.StateNext = STATE_MENU; 
     GS.PlayerState = "IDLE";
     GS.screenColor.r = 200;
     GS.screenColor.g = 200;
     GS.screenColor.b = 200;
     GS.screenColor.a = 255;
 
+
+    //Initial state variables
+
     //So unused array members are not worked upon
-    for(int i = 0; i < NUM_SPRITESHEET; i++)
-    {
-        GS.ssArray[i].mActive = false;
-    }
+    RefreshState(&GS);
 
 
     SDL_Texture *titleTex = GetSDLTexture(GS.renderer, GS.window, "./res/png/title.png");
@@ -202,18 +238,6 @@ int main(int argv, char **args)
 
     GS.ssArray[0] = titleSheet;
 
-/*
-    SDL_Texture *manTex = GetSDLTexture(GS.renderer, GS.window, "./res/png/manwalk.png");
-    SpriteSheet manSheet = InitSpriteSheet(manTex,
-            50,
-            100,
-            8); 
-
-    manSheet.mUpdateInterval = 200;
-
-    GS.ssArray[1] = manSheet;
-
-*/
 
     GS.fontTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/mainText.png");
     RemoveTextureWhiteSpace(GS.fontTexture);

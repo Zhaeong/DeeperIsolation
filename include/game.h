@@ -63,7 +63,7 @@ bool MouseTextBoxCol(int mouseX, int mouseY, TextBox tb);
 
 void LoadStartScene(GameState *GS);
 
-
+void RefreshState(GameState *GS);
 
 
 

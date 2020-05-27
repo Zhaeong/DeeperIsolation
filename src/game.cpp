@@ -196,6 +196,7 @@ void RemoveTextureWhiteSpace(SDL_Texture *texture)
 Texture InitTexture(SDL_Texture *sdlTexture, int x, int y)
 {
     Texture outTex;
+    outTex.mActive = true;
     outTex.mX = x;
     outTex.mY = y;
     SDL_QueryTexture(sdlTexture, NULL, NULL, &outTex.mW, &outTex.mH);
@@ -435,6 +436,8 @@ TextBox InitTextBox(SDL_Texture *fontTex,
         int speed)
 {
     TextBox outTextBox;
+
+    outTextBox.mActive = true;
     outTextBox.mFontTex = fontTex;
     outTextBox.mFontW = fontW;
     outTextBox.mFontH = fontH;
@@ -442,7 +445,7 @@ TextBox InitTextBox(SDL_Texture *fontTex,
     outTextBox.mBoxTex = boxTex;
     outTextBox.mBoxDim = boxDim;
     outTextBox.mBoxMargin = 2;
-    outTextBox.mIsActive = false;
+    outTextBox.mState = 0;
 
     outTextBox.mText = text;
     outTextBox.mX = x;
@@ -464,6 +467,11 @@ TextBox InitTextBox(SDL_Texture *fontTex,
 
 void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox)
 {
+
+    if(!tBox->mActive)
+    {
+        return;
+    }
     SDL_Rect srcRect;
     SDL_Rect dstRect;
 
@@ -506,18 +514,17 @@ void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox)
     br.y = tBox->mBoxDim * 2;
 
     //When the button is active offset by 3 * mBoxDim in y axis
-    if(tBox->mIsActive)
-    {
-        tl.y += tBox->mBoxDim * 3;
-        t.y  += tBox->mBoxDim * 3;
-        tr.y += tBox->mBoxDim * 3;
-        ml.y += tBox->mBoxDim * 3;
-        m.y  += tBox->mBoxDim * 3;
-        mr.y += tBox->mBoxDim * 3;
-        bl.y += tBox->mBoxDim * 3;
-        b.y  += tBox->mBoxDim * 3;
-        br.y += tBox->mBoxDim * 3;
-    }
+
+    tl.y += tBox->mBoxDim * (3 * tBox->mState);
+    t.y  += tBox->mBoxDim * (3 * tBox->mState);
+    tr.y += tBox->mBoxDim * (3 * tBox->mState);
+    ml.y += tBox->mBoxDim * (3 * tBox->mState);
+    m.y  += tBox->mBoxDim * (3 * tBox->mState);
+    mr.y += tBox->mBoxDim * (3 * tBox->mState);
+    bl.y += tBox->mBoxDim * (3 * tBox->mState);
+    b.y  += tBox->mBoxDim * (3 * tBox->mState);
+    br.y += tBox->mBoxDim * (3 * tBox->mState);
+
 
     //Render mid first, and others can be imposed upon
     //m
@@ -758,6 +765,11 @@ bool LightenTexture(Texture *tex, Uint32 curTime)
 
 bool MouseTextBoxCol(int mouseX, int mouseY, TextBox tb)
 {
+    if(!tb.mActive)
+    {
+        return false;
+    }
+
     bool xCol = false;
     bool yCol = false;
     if(mouseX >= tb.mX &&
@@ -782,8 +794,27 @@ bool MouseTextBoxCol(int mouseX, int mouseY, TextBox tb)
 }
 
 
+void RefreshState(GameState *GS)
+{
+    for(int i = 0; i < NUM_SPRITESHEET; i++)
+    {
+        GS->ssArray[i].mActive = false;
+    }
+
+    for(int i = 0; i < NUM_TEXTBOX; i++)
+    {
+        GS->tbArray[i].mActive = false;
+    }
+
+    for(int i = 0; i < NUM_TEXTURE; i++)
+    {
+        GS->tArray[i].mActive = false;
+    }
+}
+
 void LoadStartScene(GameState *GS)
 {
+    RefreshState(GS);
     SDL_Texture *manTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/manwalk.png");
     SpriteSheet manSheet = InitSpriteSheet(manTex,
             50,
@@ -794,3 +825,5 @@ void LoadStartScene(GameState *GS)
 
     GS->ssArray[0] = manSheet;
 }
+
+

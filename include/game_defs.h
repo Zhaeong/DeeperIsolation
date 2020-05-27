@@ -22,11 +22,19 @@ const int NUM_SPRITESHEET = 5;
 const int NUM_TEXTBOX = 5;
 const int NUM_TEXTURE = 5;
 
+
+//GameStates
+const string STATE_MENU = "MENU";
+const string STATE_TRAN = "TRAN";
+const string STATE_PLAY = "PLAY";
+
+
 //Declared as extern so that it's shared between files
 extern bool ShowDebug;
 
 struct Texture
 {
+    bool mActive;
     int mX;
     int mY;
     int mW;
@@ -80,6 +88,7 @@ struct AudioClip
 
 struct TextBox
 {
+    bool mActive;
     SDL_Texture *mFontTex;
     int mFontW;
     int mFontH;
@@ -87,7 +96,11 @@ struct TextBox
     SDL_Texture *mBoxTex;
     int mBoxDim;
     int mBoxMargin;
-    bool mIsActive;
+
+    //0 for inactive
+    //1 for hovered over
+    //2 for pressed
+    int mState;
 
     string mText;
 
@@ -112,6 +125,7 @@ struct TextBox
 struct GameState
 {
     string State;
+    string StateNext;
     SDL_Color screenColor;
     SDL_Window *window;
     SDL_Renderer *renderer;
