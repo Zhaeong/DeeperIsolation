@@ -158,33 +158,28 @@ Module.expectedDataFileDownloads++;
    "end": 1223,
    "audio": 0
   }, {
-   "filename": "/res/png/Intro.png",
-   "start": 1223,
-   "end": 4652,
-   "audio": 0
-  }, {
    "filename": "/res/png/mainText.png",
-   "start": 4652,
-   "end": 7775,
+   "start": 1223,
+   "end": 4346,
    "audio": 0
   }, {
    "filename": "/res/png/manwalk.png",
-   "start": 7775,
-   "end": 16335,
+   "start": 4346,
+   "end": 12906,
    "audio": 0
   }, {
    "filename": "/res/png/textBox.png",
-   "start": 16335,
-   "end": 17720,
+   "start": 12906,
+   "end": 14291,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 17720,
-   "end": 483758,
+   "start": 14291,
+   "end": 450272,
    "audio": 0
   } ],
-  "remote_package_size": 483758,
-  "package_uuid": "f073396c-b887-440e-a3b6-97ac3147fcf6"
+  "remote_package_size": 450272,
+  "package_uuid": "d208ac45-3f79-430f-9037-601d02ba87e3"
  });
 })();
 

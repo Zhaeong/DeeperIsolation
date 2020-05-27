@@ -824,6 +824,28 @@ void LoadStartScene(GameState *GS)
     manSheet.mUpdateInterval = 200;
 
     GS->ssArray[0] = manSheet;
+
+    GS->tbArray[0] = InitTextBox(GS->fontTexture,
+            20,
+            20,
+            GS->mainBoxTexture,
+            3,
+            "Left",
+            10,
+            10,
+            5,
+            200);
+
+    GS->tbArray[1] = InitTextBox(GS->fontTexture,
+            20,
+            20,
+            GS->mainBoxTexture,
+            3,
+            "Right",
+            200,
+            10,
+            5,
+            200);
 }
 
 

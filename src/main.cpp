@@ -36,18 +36,21 @@ void gameloop()
     SDL_GetMouseState(&mouseX, &mouseY);
 
     //Depending on where mouse is, first handle the render states of buttons
-    if(MouseTextBoxCol(mouseX, mouseY, GS.tbArray[0]))
+    for(int i = 0; i < NUM_TEXTBOX; i++)
     {
-        if(GS.tbArray[0].mState == 0)
+        if(MouseTextBoxCol(mouseX, mouseY, GS.tbArray[i]))
         {
-            GS.tbArray[0].mState = 1;
+            if(GS.tbArray[i].mState == 0)
+            {
+                GS.tbArray[i].mState = 1;
+            }
         }
-    }
-    else
-    {
-        if(GS.tbArray[0].mState == 1)
+        else
         {
-            GS.tbArray[0].mState = 0;
+            if(GS.tbArray[i].mState == 1)
+            {
+                GS.tbArray[i].mState = 0;
+            }
         }
     }
 
@@ -115,10 +118,12 @@ void gameloop()
                     break;
                 }
             case SDL_MOUSEBUTTONDOWN:
-                if(GS.tbArray[0].mState == 1)
+                for(int i = 0; i < NUM_TEXTBOX; i++)
                 {
-                    GS.tbArray[0].mState = 2; 
-                    cout << "down\n";
+                    if(GS.tbArray[i].mState == 1)
+                    {
+                        GS.tbArray[i].mState = 2; 
+                    }
                 }
                 break;
             case SDL_MOUSEBUTTONUP:
@@ -131,10 +136,17 @@ void gameloop()
                         GS.State = STATE_TRAN;
                         GS.StateNext = STATE_PLAY;
                         cout << "changestate\n";
-                        GS.tbArray[0].mState = 1;
                     }
                 }
 
+                //Default behavior after state specific proccesses is to revert the textbox state back to 1
+                for(int i = 0; i < NUM_TEXTBOX; i++)
+                {
+                    if(GS.tbArray[i].mState == 2)
+                    {
+                        GS.tbArray[i].mState = 1; 
+                    }
+                }
                 break;
             case SDL_QUIT:
                 exit(0);
@@ -178,8 +190,10 @@ void gameloop()
     }
 
     //Render textBox
-    RenderTextBox(GS.renderer, GS.curTime, &GS.tbArray[0]);
-
+    for(int i = 0; i < NUM_TEXTBOX; i++)
+    {
+        RenderTextBox(GS.renderer, GS.curTime, &GS.tbArray[i]);
+    }
     //Render the fadeout textures
     RenderTexture(GS.renderer, GS.blackTex);
     ////////////////////////////////////////////////////////////////////////
