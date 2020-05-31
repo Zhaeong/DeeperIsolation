@@ -181,9 +181,15 @@ void gameloop()
 
 
     UpdateSpriteSheet(GS.ssArray, GS.curTime);
+
+
+
     //
     //Render Area
     //
+
+    RenderTexture(GS.renderer, GS.lInfo.mLevelTex);
+
     for(int i = 0; i < NUM_SPRITESHEET; i++)
     {
         RenderSpriteSheet(GS.renderer, GS.ssArray[i]);
@@ -236,42 +242,18 @@ int main(int argv, char **args)
 
 
     //Initial state variables
-
-    //So unused array members are not worked upon
-    RefreshState(&GS);
-
-
-    SDL_Texture *titleTex = GetSDLTexture(GS.renderer, GS.window, "./res/png/title.png");
-    SpriteSheet titleSheet = InitSpriteSheet(titleTex,
-            GAMEWIDTH,
-            GAMEHEIGHT,
-            7); 
-
-
-    titleSheet.mUpdateInterval = 200;
-
-    GS.ssArray[0] = titleSheet;
-
-
-    GS.fontTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/mainText.png");
-    RemoveTextureWhiteSpace(GS.fontTexture);
-    GS.mainBoxTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/textBox.png");
-    RemoveTextureWhiteSpace(GS.mainBoxTexture);
-
-    GS.tbArray[0] = InitTextBox(GS.fontTexture,
-            20,
-            20,
-            GS.mainBoxTexture,
-            3,
-            "Start",
-            10,
-            10,
-            5,
-            200);
-
     GS.blackTex = InitTexture(GetSDLTexture(GS.renderer, GS.window, "./res/png/black.png"), 0 ,0);
     GS.blackTex.mW = GAMEWIDTH;
     GS.blackTex.mH = GAMEHEIGHT;
+
+    GS.fontTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/mainText.png");
+    RemoveTextureWhiteSpace(GS.fontTexture);
+
+    GS.mainBoxTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/textBox.png");
+    RemoveTextureWhiteSpace(GS.mainBoxTexture);
+
+    LoadIntroScene(&GS);
+
     //GS.blackTex.mAlpha = 0;
     /*
 

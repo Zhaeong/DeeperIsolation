@@ -249,7 +249,7 @@ SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
 
     sSheet.mTexture = sdlTexture;
 
-    sSheet.mDstRect.x = 4;
+    sSheet.mDstRect.x = 0;
     sSheet.mDstRect.y = 0;
 
     sSheet.mDstRect.w = w;
@@ -286,7 +286,6 @@ void UpdateSpriteSheet(SpriteSheet *ssArray, Uint32 curTime)
 
 void RenderSpriteSheet(SDL_Renderer *renderer, SpriteSheet sSheet)
 {
-
     //Don't render if the alpha is 0
     if(sSheet.mActive)
     {
@@ -793,6 +792,17 @@ bool MouseTextBoxCol(int mouseX, int mouseY, TextBox tb)
     }
 }
 
+LevelInfo InitLevelInfo(GameState *GS, string texturePath)
+{
+    LevelInfo outLevel;
+    outLevel.mActive = true;
+    SDL_Texture *levelSDLTex = GetSDLTexture(GS->renderer, GS->window, texturePath);
+    outLevel.mLevelTex = InitTexture(levelSDLTex, 0, 0);
+    outLevel.mLevelTex.mX = GAMEWIDTH/2 - (outLevel.mLevelTex.mW/2);
+    outLevel.mLevelTex.mY = GAMEHEIGHT/2 - (outLevel.mLevelTex.mH/2);
+    return outLevel;
+}
+
 
 void RefreshState(GameState *GS)
 {
@@ -812,17 +822,53 @@ void RefreshState(GameState *GS)
     }
 }
 
+void LoadIntroScene(GameState *GS)
+{
+    //So unused array members are not worked upon
+    RefreshState(GS);
+
+    SDL_Texture *titleTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/title.png");
+    SpriteSheet titleSheet = InitSpriteSheet(titleTex,
+            GAMEWIDTH,
+            GAMEHEIGHT,
+            7); 
+
+    titleSheet.mUpdateInterval = 200;
+
+    GS->ssArray[0] = titleSheet;
+
+    GS->tbArray[0] = InitTextBox(GS->fontTexture,
+            20,
+            20,
+            GS->mainBoxTexture,
+            3,
+            "Start",
+            10,
+            10,
+            5,
+            200);
+
+}
 void LoadStartScene(GameState *GS)
 {
     RefreshState(GS);
+
+    GS->lInfo = InitLevelInfo(GS, "./res/png/bedroom.png");
+    
+    
+    GS->lInfo.mInitPlayerPos.x = 400;
+    GS->lInfo.mInitPlayerPos.y = 300;
+
     SDL_Texture *manTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/manwalk.png");
+    RemoveTextureWhiteSpace(manTex);
     SpriteSheet manSheet = InitSpriteSheet(manTex,
             50,
             100,
             8); 
 
     manSheet.mUpdateInterval = 200;
-
+    manSheet.mDstRect.x = GS->lInfo.mInitPlayerPos.x;
+    manSheet.mDstRect.y = GS->lInfo.mInitPlayerPos.y;
     GS->ssArray[0] = manSheet;
 
     GS->tbArray[0] = InitTextBox(GS->fontTexture,
@@ -846,6 +892,8 @@ void LoadStartScene(GameState *GS)
             10,
             5,
             200);
+
+
 }
 
 

@@ -69,7 +69,6 @@ struct SpriteSheet
     Uint32 mLastUpdate;
     int mUpdateInterval;
     
-
 };
 
 struct vect2
@@ -121,6 +120,15 @@ struct TextBox
     int mNumRendered;
 };
 
+struct LevelInfo
+{
+    bool mActive;
+    Texture mLevelTex;
+
+    SDL_Point mInitPlayerPos;
+
+};
+
 
 struct GameState
 {
@@ -146,6 +154,7 @@ struct GameState
 
     //Level specific content
     Texture blackTex;
+    LevelInfo lInfo;
 
     SpriteSheet ssArray[NUM_SPRITESHEET];
     TextBox tbArray[NUM_TEXTBOX];
