@@ -91,7 +91,7 @@ void gameloop()
                         }
                     case SDLK_1:
                         {
-                            LoadStartScene(&GS); 
+                            LoadScene(&GS, SCENE_START); 
                             break;
                         }
                     case SDLK_2:
@@ -129,12 +129,12 @@ void gameloop()
             case SDL_MOUSEBUTTONUP:
                 //cout <<  "MOUSE_UP\n";
 
-                if(GS.State == STATE_MENU)
+                if(GS.SceneCurrent == SCENE_INTRO)
                 {
                     if(GS.tbArray[0].mState == 2)
                     {
-                        GS.State = STATE_TRAN;
-                        GS.StateNext = STATE_PLAY;
+                        GS.SceneCurrent = SCENE_TRAN;
+                        GS.SceneNext = SCENE_START;
                         cout << "changestate\n";
                     }
                 }
@@ -155,12 +155,12 @@ void gameloop()
     }
 
 
-    if(GS.State == STATE_TRAN)
+    if(GS.SceneCurrent == SCENE_TRAN)
     {
         if(DarkenTexture(&GS.blackTex, GS.curTime))
         {
-            LoadStartScene(&GS); 
-            GS.State = GS.StateNext;
+            LoadScene(&GS, GS.SceneNext); 
+            GS.SceneCurrent = GS.SceneNext;
         }
     }
     else
@@ -232,8 +232,8 @@ int main(int argv, char **args)
     StartSDL(&(GS.window), &(GS.renderer));
 
     //RemoveTextureWhiteSpace(GS.man);
-    GS.State = STATE_MENU; 
-    GS.StateNext = STATE_MENU; 
+    GS.SceneCurrent = SCENE_INTRO; 
+    GS.SceneNext = SCENE_INTRO; 
     GS.PlayerState = "IDLE";
     GS.screenColor.r = 200;
     GS.screenColor.g = 200;
@@ -252,7 +252,7 @@ int main(int argv, char **args)
     GS.mainBoxTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/textBox.png");
     RemoveTextureWhiteSpace(GS.mainBoxTexture);
 
-    LoadIntroScene(&GS);
+    LoadScene(&GS, SCENE_INTRO);
 
     //GS.blackTex.mAlpha = 0;
     /*

@@ -65,8 +65,8 @@ LevelInfo InitLevelInfo(GameState *GS, string texturePath);
 
 
 void RefreshState(GameState *GS);
-void LoadIntroScene(GameState *GS);
-void LoadStartScene(GameState *GS);
+
+void LoadScene(GameState *GS, string sceneName);
 
 
 

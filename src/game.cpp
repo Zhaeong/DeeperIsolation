@@ -822,78 +822,78 @@ void RefreshState(GameState *GS)
     }
 }
 
-void LoadIntroScene(GameState *GS)
+void LoadScene(GameState *GS, string sceneName)
 {
-    //So unused array members are not worked upon
+
     RefreshState(GS);
 
-    SDL_Texture *titleTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/title.png");
-    SpriteSheet titleSheet = InitSpriteSheet(titleTex,
-            GAMEWIDTH,
-            GAMEHEIGHT,
-            7); 
+    if(sceneName == SCENE_INTRO)
+    {
+        //So unused array members are not worked upon
+        SDL_Texture *titleTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/title.png");
+        SpriteSheet titleSheet = InitSpriteSheet(titleTex,
+                GAMEWIDTH,
+                GAMEHEIGHT,
+                7); 
 
-    titleSheet.mUpdateInterval = 200;
+        titleSheet.mUpdateInterval = 200;
 
-    GS->ssArray[0] = titleSheet;
+        GS->ssArray[0] = titleSheet;
 
-    GS->tbArray[0] = InitTextBox(GS->fontTexture,
-            20,
-            20,
-            GS->mainBoxTexture,
-            3,
-            "Start",
-            10,
-            10,
-            5,
-            200);
+        GS->tbArray[0] = InitTextBox(GS->fontTexture,
+                20,
+                20,
+                GS->mainBoxTexture,
+                3,
+                "Start",
+                10,
+                10,
+                5,
+                200);
+    }
+    else if(sceneName == SCENE_START)
+    {
+        GS->lInfo = InitLevelInfo(GS, SCENE_START);
+
+
+        GS->lInfo.mInitPlayerPos.x = 400;
+        GS->lInfo.mInitPlayerPos.y = 300;
+
+        SDL_Texture *manTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/manwalk.png");
+        RemoveTextureWhiteSpace(manTex);
+        SpriteSheet manSheet = InitSpriteSheet(manTex,
+                50,
+                100,
+                8); 
+
+        manSheet.mUpdateInterval = 200;
+        manSheet.mDstRect.x = GS->lInfo.mInitPlayerPos.x;
+        manSheet.mDstRect.y = GS->lInfo.mInitPlayerPos.y;
+        GS->ssArray[0] = manSheet;
+
+        GS->tbArray[0] = InitTextBox(GS->fontTexture,
+                20,
+                20,
+                GS->mainBoxTexture,
+                3,
+                "Left",
+                10,
+                10,
+                5,
+                200);
+
+        GS->tbArray[1] = InitTextBox(GS->fontTexture,
+                20,
+                20,
+                GS->mainBoxTexture,
+                3,
+                "Right",
+                200,
+                10,
+                5,
+                200);
+
+    }
 
 }
-void LoadStartScene(GameState *GS)
-{
-    RefreshState(GS);
-
-    GS->lInfo = InitLevelInfo(GS, "./res/png/bedroom.png");
-    
-    
-    GS->lInfo.mInitPlayerPos.x = 400;
-    GS->lInfo.mInitPlayerPos.y = 300;
-
-    SDL_Texture *manTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/manwalk.png");
-    RemoveTextureWhiteSpace(manTex);
-    SpriteSheet manSheet = InitSpriteSheet(manTex,
-            50,
-            100,
-            8); 
-
-    manSheet.mUpdateInterval = 200;
-    manSheet.mDstRect.x = GS->lInfo.mInitPlayerPos.x;
-    manSheet.mDstRect.y = GS->lInfo.mInitPlayerPos.y;
-    GS->ssArray[0] = manSheet;
-
-    GS->tbArray[0] = InitTextBox(GS->fontTexture,
-            20,
-            20,
-            GS->mainBoxTexture,
-            3,
-            "Left",
-            10,
-            10,
-            5,
-            200);
-
-    GS->tbArray[1] = InitTextBox(GS->fontTexture,
-            20,
-            20,
-            GS->mainBoxTexture,
-            3,
-            "Right",
-            200,
-            10,
-            5,
-            200);
-
-
-}
-
 

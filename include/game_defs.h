@@ -23,11 +23,10 @@ const int NUM_TEXTBOX = 5;
 const int NUM_TEXTURE = 5;
 
 
-//GameStates
-const string STATE_MENU = "MENU";
-const string STATE_TRAN = "TRAN";
-const string STATE_PLAY = "PLAY";
-
+//Game Scenes
+const string SCENE_INTRO = "INTRO";
+const string SCENE_TRAN  = "TRAN";
+const string SCENE_START = "./res/png/bedroom.png";
 
 //Declared as extern so that it's shared between files
 extern bool ShowDebug;
@@ -132,8 +131,8 @@ struct LevelInfo
 
 struct GameState
 {
-    string State;
-    string StateNext;
+    string SceneCurrent;
+    string SceneNext;
     SDL_Color screenColor;
     SDL_Window *window;
     SDL_Renderer *renderer;
