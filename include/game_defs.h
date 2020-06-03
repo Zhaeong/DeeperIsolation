@@ -27,6 +27,11 @@ const int NUM_TEXTURE = 5;
 const string SCENE_INTRO = "INTRO";
 const string SCENE_TRAN  = "TRAN";
 const string SCENE_START = "./res/png/bedroom.png";
+const string SCENE_LIVINGROOM = "./res/png/livingroom.png";
+
+//Texture Types
+const string TTYPE_NORMAL = "NORM";
+const string TTYPE_TRANSIT = "TRANSIT";
 
 //Declared as extern so that it's shared between files
 extern bool ShowDebug;
@@ -43,6 +48,9 @@ struct Texture
     SDL_Texture *mTexture;
     SDL_Point *mCenter;
     SDL_RendererFlip mFlip;
+
+    string mType;
+    string mName;
 
     Uint32 mLastUpdate;
 };
@@ -119,11 +127,12 @@ struct TextBox
     int mNumRendered;
 };
 
+
+
 struct LevelInfo
 {
     bool mActive;
     Texture mLevelTex;
-
     SDL_Point mInitPlayerPos;
 
 };

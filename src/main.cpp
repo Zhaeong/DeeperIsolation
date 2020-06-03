@@ -125,6 +125,8 @@ void gameloop()
                         GS.tbArray[i].mState = 2; 
                     }
                 }
+
+                cout << "X: " << mouseX << " Y: " << mouseY << "\n";
                 break;
             case SDL_MOUSEBUTTONUP:
                 //cout <<  "MOUSE_UP\n";
@@ -193,6 +195,11 @@ void gameloop()
     for(int i = 0; i < NUM_SPRITESHEET; i++)
     {
         RenderSpriteSheet(GS.renderer, GS.ssArray[i]);
+    }
+
+    for(int i = 0; i < NUM_TEXTURE; i++)
+    {
+        RenderTexture(GS.renderer, GS.tArray[i]);
     }
 
     //Render textBox

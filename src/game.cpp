@@ -206,6 +206,11 @@ Texture InitTexture(SDL_Texture *sdlTexture, int x, int y)
     outTex.mCenter = NULL;
     outTex.mFlip = SDL_FLIP_NONE;
     outTex.mLastUpdate = 0;
+
+    outTex.mType = TTYPE_NORMAL;
+    outTex.mName = "";
+    
+
     return outTex;
 }
 
@@ -892,6 +897,33 @@ void LoadScene(GameState *GS, string sceneName)
                 5,
                 200);
 
+        SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/door.png");
+
+        Texture door = InitTexture(doorTex, 240, 280);
+
+        door.mType = TTYPE_TRANSIT;
+        door.mName = SCENE_LIVINGROOM;
+        GS->tArray[0] = door;
+    }
+    else if(sceneName == SCENE_LIVINGROOM)
+    {
+        GS->lInfo = InitLevelInfo(GS, SCENE_LIVINGROOM);
+
+
+        GS->lInfo.mInitPlayerPos.x = 400;
+        GS->lInfo.mInitPlayerPos.y = 300;
+
+        SDL_Texture *manTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/manwalk.png");
+        RemoveTextureWhiteSpace(manTex);
+        SpriteSheet manSheet = InitSpriteSheet(manTex,
+                50,
+                100,
+                8); 
+
+        manSheet.mUpdateInterval = 200;
+        manSheet.mDstRect.x = GS->lInfo.mInitPlayerPos.x;
+        manSheet.mDstRect.y = GS->lInfo.mInitPlayerPos.y;
+        GS->ssArray[0] = manSheet;
     }
 
 }

@@ -194,7 +194,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 455619,
-  "package_uuid": "771ac88a-75ea-40e7-8752-faae20161694"
+  "package_uuid": "c3fb3262-dcb6-479f-96bf-58391c39a98c"
  });
 })();
 
@@ -595,8 +595,8 @@ function setValue(ptr, value, type, noSafe) {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 987,
- "maximum": 987 + 0,
+ "initial": 991,
+ "maximum": 991 + 0,
  "element": "anyfunc"
 });
 
@@ -815,7 +815,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5343872, STACK_MAX = 100992, DYNAMIC_BASE = 5343872, DYNAMICTOP_PTR = 100832;
+var STACK_BASE = 5344160, STACK_MAX = 101280, DYNAMIC_BASE = 5344160, DYNAMICTOP_PTR = 101120;
 
 assert(STACK_BASE % 16 === 0, "stack must start aligned");
 
@@ -1180,7 +1180,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 34724: function($0, $1, $2) {
+ 34804: function($0, $1, $2) {
   var w = $0;
   var h = $1;
   var pixels = $2;
@@ -1251,7 +1251,7 @@ var ASM_CONSTS = {
   SDL2.ctx.putImageData(SDL2.image, 0, 0);
   return 0;
  },
- 36179: function($0, $1, $2, $3, $4) {
+ 36259: function($0, $1, $2, $3, $4) {
   var w = $0;
   var h = $1;
   var hot_x = $2;
@@ -1288,30 +1288,30 @@ var ASM_CONSTS = {
   stringToUTF8(url, urlBuf, url.length + 1);
   return urlBuf;
  },
- 37168: function($0) {
+ 37248: function($0) {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = UTF8ToString($0);
   }
   return 0;
  },
- 37261: function() {
+ 37341: function() {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = "none";
   }
  },
- 38486: function() {
+ 38566: function() {
   return screen.width;
  },
- 38513: function() {
+ 38593: function() {
   return screen.height;
  },
- 38586: function($0) {
+ 38666: function($0) {
   if (typeof Module["setWindowTitle"] !== "undefined") {
    Module["setWindowTitle"](UTF8ToString($0));
   }
   return 0;
  },
- 38740: function() {
+ 38820: function() {
   if (typeof AudioContext !== "undefined") {
    return 1;
   } else if (typeof webkitAudioContext !== "undefined") {
@@ -1319,7 +1319,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 38906: function() {
+ 38986: function() {
   if (typeof navigator.mediaDevices !== "undefined" && typeof navigator.mediaDevices.getUserMedia !== "undefined") {
    return 1;
   } else if (typeof navigator.webkitGetUserMedia !== "undefined") {
@@ -1327,7 +1327,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 39132: function($0) {
+ 39212: function($0) {
   if (typeof Module["SDL2"] === "undefined") {
    Module["SDL2"] = {};
   }
@@ -1346,11 +1346,11 @@ var ASM_CONSTS = {
   }
   return SDL2.audioContext === undefined ? -1 : 0;
  },
- 39615: function() {
+ 39695: function() {
   var SDL2 = Module["SDL2"];
   return SDL2.audioContext.sampleRate;
  },
- 39685: function($0, $1, $2, $3) {
+ 39765: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   var have_microphone = function(stream) {
    if (SDL2.capture.silenceTimer !== undefined) {
@@ -1391,7 +1391,7 @@ var ASM_CONSTS = {
    }, have_microphone, no_microphone);
   }
  },
- 41337: function($0, $1, $2, $3) {
+ 41417: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
   SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -1403,7 +1403,7 @@ var ASM_CONSTS = {
   };
   SDL2.audio.scriptProcessorNode["connect"](SDL2.audioContext["destination"]);
  },
- 41747: function($0, $1) {
+ 41827: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
   for (var c = 0; c < numChannels; ++c) {
@@ -1422,7 +1422,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 42352: function($0, $1) {
+ 42432: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
   for (var c = 0; c < numChannels; ++c) {
@@ -1435,7 +1435,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 42832: function($0) {
+ 42912: function($0) {
   var SDL2 = Module["SDL2"];
   if ($0) {
    if (SDL2.capture.silenceTimer !== undefined) {
