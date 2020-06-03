@@ -43,15 +43,14 @@ SDL_Point RotatePointByOtherPoint(int inX,
                                   int degrees);
 
 TextBox InitTextBox(SDL_Texture *fontTex,
-                    int fontW,
-                    int fontH,
-                    SDL_Texture *boxTex,
-                    int boxDim,
-                    string text,
-                    int x,
-                    int y,
-                    int column,
-                    int speed);
+        int fontW,
+        int fontH,
+        SDL_Texture *boxTex,
+        string text,
+        int x,
+        int y,
+        int column,
+        int speed);
 
 void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox);
 

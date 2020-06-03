@@ -427,7 +427,6 @@ TextBox InitTextBox(SDL_Texture *fontTex,
         int fontW,
         int fontH,
         SDL_Texture *boxTex,
-        int boxDim,
         string text,
         int x,
         int y,
@@ -442,7 +441,10 @@ TextBox InitTextBox(SDL_Texture *fontTex,
     outTextBox.mFontH = fontH;
 
     outTextBox.mBoxTex = boxTex;
-    outTextBox.mBoxDim = boxDim;
+
+    int boxW, boxH;
+    SDL_QueryTexture(boxTex, NULL, NULL, &boxW, &boxH);
+    outTextBox.mBoxDim = boxW/3;
     outTextBox.mBoxMargin = 2;
     outTextBox.mState = 0;
 
@@ -844,7 +846,6 @@ void LoadScene(GameState *GS, string sceneName)
                 20,
                 20,
                 GS->mainBoxTexture,
-                3,
                 "Start",
                 10,
                 10,
@@ -875,7 +876,6 @@ void LoadScene(GameState *GS, string sceneName)
                 20,
                 20,
                 GS->mainBoxTexture,
-                3,
                 "Left",
                 10,
                 10,
@@ -886,7 +886,6 @@ void LoadScene(GameState *GS, string sceneName)
                 20,
                 20,
                 GS->mainBoxTexture,
-                3,
                 "Right",
                 200,
                 10,
