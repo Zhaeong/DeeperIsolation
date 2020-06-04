@@ -218,7 +218,7 @@ Texture InitTexture(SDL_Texture *sdlTexture, int x, int y)
 void RenderTexture(SDL_Renderer *renderer, Texture tex)
 {
     //Don't render if the alpha is 0
-    if(tex.mAlpha > 0)
+    if(tex.mActive)
     {
         SDL_SetTextureBlendMode(tex.mTexture, SDL_BLENDMODE_BLEND);
 
@@ -864,9 +864,9 @@ void LoadScene(GameState *GS, string sceneName)
                 5,
                 200);
     }
-    else if(sceneName == SCENE_START)
+    else if(sceneName == SCENE_BEDROOM)
     {
-        GS->lInfo = InitLevelInfo(GS, SCENE_START);
+        GS->lInfo = InitLevelInfo(GS, SCENE_BEDROOM);
 
 
         GS->lInfo.mInitPlayerPos.x = 400;
@@ -910,13 +910,12 @@ void LoadScene(GameState *GS, string sceneName)
 
         door.mType = TTYPE_TRANSIT;
         door.mName = SCENE_LIVINGROOM;
-        door.mButtonText = "Go in Living room";
+        door.mButtonText = "Enter Living room";
         GS->tArray[0] = door;
     }
     else if(sceneName == SCENE_LIVINGROOM)
     {
         GS->lInfo = InitLevelInfo(GS, SCENE_LIVINGROOM);
-
 
         GS->lInfo.mInitPlayerPos.x = 400;
         GS->lInfo.mInitPlayerPos.y = 300;
@@ -932,6 +931,16 @@ void LoadScene(GameState *GS, string sceneName)
         manSheet.mDstRect.x = GS->lInfo.mInitPlayerPos.x;
         manSheet.mDstRect.y = GS->lInfo.mInitPlayerPos.y;
         GS->ssArray[0] = manSheet;
+
+
+        SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/door.png");
+
+        Texture door = InitTexture(doorTex,GS->lInfo.mInitPlayerPos.x , GS->lInfo.mInitPlayerPos.y);
+
+        door.mType = TTYPE_TRANSIT;
+        door.mName = SCENE_BEDROOM;
+        door.mButtonText = "Enter Bedroom";
+        GS->tArray[0] = door;
     }
 
 }

@@ -26,7 +26,7 @@ const int NUM_TEXTURE = 5;
 //Game Scenes
 const string SCENE_INTRO = "INTRO";
 const string SCENE_TRAN  = "TRAN";
-const string SCENE_START = "./res/png/bedroom.png";
+const string SCENE_BEDROOM = "./res/png/bedroom.png";
 const string SCENE_LIVINGROOM = "./res/png/livingroom.png";
 
 //Texture Types

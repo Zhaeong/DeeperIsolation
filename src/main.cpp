@@ -33,31 +33,31 @@ void gameloop()
     ////////////////////////////////////////////////////////////////////////
 
     //Update game state
-    bool textureCol = false;
+    int textureCol = -1;
     for(int i = 0; i < NUM_TEXTURE; i++)
     {
         if(SpriteTextureCollision(GS.ssArray[0], GS.tArray[i]))
         {
-            textureCol = true;
+            textureCol = i;
             if(GS.tArray[i].mType == TTYPE_TRANSIT)
             {
                 if(!GS.tbArray[4].mActive)
                 {
-                GS.tbArray[4] = InitTextBox(GS.fontTexture,
-                        20,
-                        20,
-                        GS.mainBoxTexture,
-                        GS.tArray[i].mButtonText, 
-                        400,
-                        10,
-                        5,
-                        200);           
-                        }
+                    GS.tbArray[4] = InitTextBox(GS.fontTexture,
+                            20,
+                            20,
+                            GS.mainBoxTexture,
+                            GS.tArray[i].mButtonText, 
+                            400,
+                            10,
+                            5,
+                            200);           
+                }
             }
         }
 
     }
-    if(!textureCol)
+    if(textureCol == -1)
     {
         GS.tbArray[4].mActive = false;
     }
@@ -124,7 +124,7 @@ void gameloop()
                         }
                     case SDLK_1:
                         {
-                            LoadScene(&GS, SCENE_START); 
+                            LoadScene(&GS, SCENE_BEDROOM); 
                             break;
                         }
                     case SDLK_2:
@@ -156,6 +156,7 @@ void gameloop()
                     if(GS.tbArray[i].mState == 1)
                     {
                         GS.tbArray[i].mState = 2; 
+
                     }
                 }
 
@@ -169,9 +170,24 @@ void gameloop()
                     if(GS.tbArray[0].mState == 2)
                     {
                         GS.SceneCurrent = SCENE_TRAN;
-                        GS.SceneNext = SCENE_START;
+                        GS.SceneNext = SCENE_BEDROOM;
                         cout << "changestate\n";
                     }
+                }
+                else
+                {
+                    if(textureCol != - 1 && GS.tbArray[4].mState == 2)
+                    {
+
+                        if(GS.tArray[textureCol].mType == TTYPE_TRANSIT)
+                        {
+                            cout << "loading: " << GS.tArray[textureCol].mName << "\n";
+                            GS.SceneCurrent = SCENE_TRAN;
+                            GS.SceneNext = GS.tArray[textureCol].mName;
+
+                        }
+                    }
+
                 }
 
                 //Default behavior after state specific proccesses is to revert the textbox state back to 1
@@ -225,21 +241,23 @@ void gameloop()
 
     RenderTexture(GS.renderer, GS.lInfo.mLevelTex);
 
-    for(int i = 0; i < NUM_SPRITESHEET; i++)
-    {
-        RenderSpriteSheet(GS.renderer, GS.ssArray[i]);
-    }
+
 
     for(int i = 0; i < NUM_TEXTURE; i++)
     {
         RenderTexture(GS.renderer, GS.tArray[i]);
     }
 
-    //Render textBox
+    for(int i = 0; i < NUM_SPRITESHEET; i++)
+    {
+        RenderSpriteSheet(GS.renderer, GS.ssArray[i]);
+    }
+
     for(int i = 0; i < NUM_TEXTBOX; i++)
     {
         RenderTextBox(GS.renderer, GS.curTime, &GS.tbArray[i]);
     }
+
     //Render the fadeout textures
     RenderTexture(GS.renderer, GS.blackTex);
     ////////////////////////////////////////////////////////////////////////
