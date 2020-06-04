@@ -209,7 +209,8 @@ Texture InitTexture(SDL_Texture *sdlTexture, int x, int y)
 
     outTex.mType = TTYPE_NORMAL;
     outTex.mName = "";
-    
+    outTex.mButtonText = "";
+
 
     return outTex;
 }
@@ -703,6 +704,12 @@ void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox)
             xTextPos = (int)curChar - 97;
             yTextPos = 1;
         }
+        //space
+        else if((int)curChar == 32)
+        {
+            xTextPos = 3;
+            yTextPos = 25;
+        }
         //numbers
         else if ((int)curChar >= 48 && (int)curChar <= 57)
         {
@@ -903,6 +910,7 @@ void LoadScene(GameState *GS, string sceneName)
 
         door.mType = TTYPE_TRANSIT;
         door.mName = SCENE_LIVINGROOM;
+        door.mButtonText = "Go in Living room";
         GS->tArray[0] = door;
     }
     else if(sceneName == SCENE_LIVINGROOM)
@@ -925,6 +933,33 @@ void LoadScene(GameState *GS, string sceneName)
         manSheet.mDstRect.y = GS->lInfo.mInitPlayerPos.y;
         GS->ssArray[0] = manSheet;
     }
+
+}
+
+
+bool SpriteTextureCollision(SpriteSheet ss, Texture tex)
+{
+    //if either is inactive, return false;
+    if(!ss.mActive || !tex.mActive)
+    {
+        return false; 
+    }
+    bool horizCol = false;
+    bool vertCol = false;
+
+    if(ss.mDstRect.x + ss.mDstRect.w >= tex.mX 
+            && ss.mDstRect.x <= tex.mX + tex.mW)
+    {
+        horizCol = true;
+    }
+
+    if(ss.mDstRect.y + ss.mDstRect.h >= tex.mY
+            && ss.mDstRect.y <= tex.mY + tex.mH)
+    {
+        vertCol = true;
+    }
+
+    return horizCol && vertCol;
 
 }
 

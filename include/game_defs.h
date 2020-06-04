@@ -51,6 +51,7 @@ struct Texture
 
     string mType;
     string mName;
+    string mButtonText;
 
     Uint32 mLastUpdate;
 };

@@ -62,12 +62,11 @@ bool MouseTextBoxCol(int mouseX, int mouseY, TextBox tb);
 
 LevelInfo InitLevelInfo(GameState *GS, string texturePath);
 
-
 void RefreshState(GameState *GS);
 
 void LoadScene(GameState *GS, string sceneName);
 
-
+bool SpriteTextureCollision(SpriteSheet ss, Texture tex);
 
 
 

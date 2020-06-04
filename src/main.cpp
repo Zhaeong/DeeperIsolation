@@ -31,6 +31,39 @@ void gameloop()
     ////////////////////////////////////////////////////////////////////////
     //Main Game Code
     ////////////////////////////////////////////////////////////////////////
+
+    //Update game state
+    bool textureCol = false;
+    for(int i = 0; i < NUM_TEXTURE; i++)
+    {
+        if(SpriteTextureCollision(GS.ssArray[0], GS.tArray[i]))
+        {
+            textureCol = true;
+            if(GS.tArray[i].mType == TTYPE_TRANSIT)
+            {
+                if(!GS.tbArray[4].mActive)
+                {
+                GS.tbArray[4] = InitTextBox(GS.fontTexture,
+                        20,
+                        20,
+                        GS.mainBoxTexture,
+                        GS.tArray[i].mButtonText, 
+                        400,
+                        10,
+                        5,
+                        200);           
+                        }
+            }
+        }
+
+    }
+    if(!textureCol)
+    {
+        GS.tbArray[4].mActive = false;
+    }
+
+
+    //Handle user input
     int mouseX = 0;
     int mouseY = 0;
     SDL_GetMouseState(&mouseX, &mouseY);
