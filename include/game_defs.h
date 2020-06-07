@@ -19,7 +19,27 @@ using namespace std;
 const Uint32 TEXTUREFORMAT = SDL_PIXELFORMAT_RGBA8888;
 
 const int NUM_SPRITESHEET = 5;
+const int SS_PLAYER = 0;
+const int SS_PLAYER_ACTION = 1;
+
+//Actions in the form of sprite sheets
+const string PLAYER_WALK = "./res/png/manwalk.png";
+
+const string PLAYER_WAKE = "./res/png/manwake.png";
+
+//player char states
+const string STATE_ACTION = "ACTION";
+const string STATE_IDLE = "IDLE";
+const string STATE_LEFT = "LEFT";
+const string STATE_RIGHT = "RIGHT";
+
+const int SS_ACTION = 1;
+
+
+
 const int NUM_TEXTBOX = 5;
+
+
 const int NUM_TEXTURE = 5;
 
 
@@ -169,6 +189,7 @@ struct GameState
     TextBox tbArray[NUM_TEXTBOX];
     Texture tArray[NUM_TEXTURE];
 
+    int NarrativeCounter;
 };
 
 

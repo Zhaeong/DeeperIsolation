@@ -817,6 +817,29 @@ LevelInfo InitLevelInfo(GameState *GS, string texturePath)
     return outLevel;
 }
 
+void LoadAction(GameState *GS, string action)
+{
+    GS->PlayerState = STATE_ACTION;
+
+    SDL_Texture *actionTex = GetSDLTexture(GS->renderer, GS->window, action);
+    RemoveTextureWhiteSpace(actionTex);
+
+    GS->ssArray[SS_PLAYER].mActive = false;
+    GS->ssArray[SS_PLAYER_ACTION].mActive = true;
+
+    if(action == PLAYER_WAKE)
+    {
+        SpriteSheet actionSheet = InitSpriteSheet(actionTex,
+                100,
+                100,
+                6); 
+
+        actionSheet.mUpdateInterval = 200;
+        actionSheet.mDstRect.x = GS->ssArray[SS_PLAYER].mDstRect.x;
+        actionSheet.mDstRect.y = GS->ssArray[SS_PLAYER].mDstRect.y;
+        GS->ssArray[SS_PLAYER_ACTION] = actionSheet; 
+    }
+}
 
 void RefreshState(GameState *GS)
 {
@@ -869,8 +892,10 @@ void LoadScene(GameState *GS, string sceneName)
         GS->lInfo = InitLevelInfo(GS, SCENE_BEDROOM);
 
 
-        GS->lInfo.mInitPlayerPos.x = 400;
-        GS->lInfo.mInitPlayerPos.y = 300;
+        GS->lInfo.mInitPlayerPos.x = 240;
+        GS->lInfo.mInitPlayerPos.y = 280;
+
+
 
         SDL_Texture *manTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/manwalk.png");
         RemoveTextureWhiteSpace(manTex);
@@ -882,7 +907,7 @@ void LoadScene(GameState *GS, string sceneName)
         manSheet.mUpdateInterval = 200;
         manSheet.mDstRect.x = GS->lInfo.mInitPlayerPos.x;
         manSheet.mDstRect.y = GS->lInfo.mInitPlayerPos.y;
-        GS->ssArray[0] = manSheet;
+        GS->ssArray[SS_PLAYER] = manSheet;
 
         GS->tbArray[0] = InitTextBox(GS->fontTexture,
                 20,
@@ -912,6 +937,15 @@ void LoadScene(GameState *GS, string sceneName)
         door.mName = SCENE_LIVINGROOM;
         door.mButtonText = "Enter Living room";
         GS->tArray[0] = door;
+        //Special case for start spawn of the level where the player is in bed instead of door.
+        if(GS->NarrativeCounter == 0)
+        {
+            GS->ssArray[SS_PLAYER].mDstRect.x = 400;
+            GS->ssArray[SS_PLAYER].mDstRect.x = 300;
+            GS->NarrativeCounter = 1;
+            LoadAction(GS, PLAYER_WAKE);
+        }
+
     }
     else if(sceneName == SCENE_LIVINGROOM)
     {
@@ -920,7 +954,7 @@ void LoadScene(GameState *GS, string sceneName)
         GS->lInfo.mInitPlayerPos.x = 400;
         GS->lInfo.mInitPlayerPos.y = 300;
 
-        SDL_Texture *manTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/manwalk.png");
+        SDL_Texture *manTex = GetSDLTexture(GS->renderer, GS->window, PLAYER_WALK);
         RemoveTextureWhiteSpace(manTex);
         SpriteSheet manSheet = InitSpriteSheet(manTex,
                 50,

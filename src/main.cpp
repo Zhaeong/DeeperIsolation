@@ -109,12 +109,18 @@ void gameloop()
                         }
                     case SDLK_d:
                         {
-                            GS.PlayerState = "RIGHT";
+                            if(GS.PlayerState != STATE_ACTION)
+                            {
+                                GS.PlayerState = STATE_RIGHT;
+                            }
                             break;
                         }
                     case SDLK_a:
                         {
-                            GS.PlayerState = "LEFT";
+                            if(GS.PlayerState != STATE_ACTION)
+                            {
+                                GS.PlayerState = STATE_LEFT;
+                            }
                             break;
                         }
                         //Debug keysym
@@ -147,7 +153,7 @@ void gameloop()
             case SDL_KEYUP:
                 //cout << "pressed\n"; 
                 {
-                    GS.PlayerState = "IDLE";
+                    GS.PlayerState = STATE_IDLE;
                     break;
                 }
             case SDL_MOUSEBUTTONDOWN:
@@ -220,20 +226,25 @@ void gameloop()
         LightenTexture(&GS.blackTex, GS.curTime);
     }
 
-    if(GS.PlayerState == "LEFT")
+    if(GS.PlayerState == STATE_LEFT)
     {
-        GS.ssArray[0].mDstRect.x -= 1;
+        GS.ssArray[SS_PLAYER].mDstRect.x -= 1;
     }
-    else if(GS.PlayerState == "RIGHT")
+    else if(GS.PlayerState == STATE_RIGHT)
     {
-        GS.ssArray[0].mDstRect.x += 1;
+        GS.ssArray[SS_PLAYER].mDstRect.x += 1;
     }
 
-
-
+    if(GS.PlayerState == STATE_ACTION)
+    {
+        if(GS.ssArray[SS_PLAYER_ACTION].mCurFrame == (GS.ssArray[SS_PLAYER_ACTION].mNumFrames - 1))
+        {
+           GS.ssArray[SS_PLAYER].mActive = true;
+           GS.ssArray[SS_PLAYER_ACTION].mActive = false;
+           GS.PlayerState = STATE_IDLE;
+        }
+    }
     UpdateSpriteSheet(GS.ssArray, GS.curTime);
-
-
 
     //
     //Render Area
@@ -288,6 +299,8 @@ int main(int argv, char **args)
     GS.curTime = SDL_GetTicks();
     //Initiate SDL
     StartSDL(&(GS.window), &(GS.renderer));
+
+    GS.NarrativeCounter = 0;
 
     //RemoveTextureWhiteSpace(GS.man);
     GS.SceneCurrent = SCENE_INTRO; 
