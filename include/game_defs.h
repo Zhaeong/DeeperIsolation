@@ -28,17 +28,16 @@ const string PLAYER_WALK = "./res/png/manwalk.png";
 const string PLAYER_WAKE = "./res/png/manwake.png";
 
 //player char states
+//some textboxes use state strings as text display as well as state changes
+//might be an issue with data coupling
 const string STATE_ACTION = "ACTION";
 const string STATE_IDLE = "IDLE";
-const string STATE_LEFT = "LEFT";
-const string STATE_RIGHT = "RIGHT";
+const string STATE_LEFT = "Left";
+const string STATE_RIGHT = "Right";
 
 const int SS_ACTION = 1;
 
-
-
 const int NUM_TEXTBOX = 5;
-
 
 const int NUM_TEXTURE = 5;
 
@@ -52,6 +51,12 @@ const string SCENE_LIVINGROOM = "./res/png/livingroom.png";
 //Texture Types
 const string TTYPE_NORMAL = "NORM";
 const string TTYPE_TRANSIT = "TRANSIT";
+
+
+//TextBox types
+const string TBTYPE_NORM = "NORM";
+const string TBTYPE_INPUT = "INPUT";
+
 
 //Declared as extern so that it's shared between files
 extern bool ShowDebug;
@@ -116,6 +121,7 @@ struct AudioClip
 struct TextBox
 {
     bool mActive;
+    string mType;
     SDL_Texture *mFontTex;
     int mFontW;
     int mFontH;

@@ -442,6 +442,7 @@ TextBox InitTextBox(SDL_Texture *fontTex,
     TextBox outTextBox;
 
     outTextBox.mActive = true;
+    outTextBox.mType = TBTYPE_NORM;
     outTextBox.mFontTex = fontTex;
     outTextBox.mFontW = fontW;
     outTextBox.mFontH = fontH;
@@ -882,8 +883,8 @@ void LoadScene(GameState *GS, string sceneName)
                 20,
                 GS->mainBoxTexture,
                 "Start",
-                10,
-                10,
+                300,
+                400,
                 5,
                 200);
     }
@@ -894,8 +895,6 @@ void LoadScene(GameState *GS, string sceneName)
 
         GS->lInfo.mInitPlayerPos.x = 240;
         GS->lInfo.mInitPlayerPos.y = 280;
-
-
 
         SDL_Texture *manTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/manwalk.png");
         RemoveTextureWhiteSpace(manTex);
@@ -913,21 +912,25 @@ void LoadScene(GameState *GS, string sceneName)
                 20,
                 20,
                 GS->mainBoxTexture,
-                "Left",
+                STATE_LEFT,
                 10,
                 10,
                 5,
                 200);
 
+        GS->tbArray[0].mType = TBTYPE_INPUT;
+
         GS->tbArray[1] = InitTextBox(GS->fontTexture,
                 20,
                 20,
                 GS->mainBoxTexture,
-                "Right",
+                STATE_RIGHT,
                 200,
                 10,
                 5,
                 200);
+
+        GS->tbArray[1].mType = TBTYPE_INPUT;
 
         SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/door.png");
 

@@ -199,7 +199,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 465385,
-  "package_uuid": "5cac5e42-f1da-4b0e-9a97-cbc413a4976d"
+  "package_uuid": "21f5088b-9788-4e05-92d4-867398d31fe8"
  });
 })();
 
@@ -600,8 +600,8 @@ function setValue(ptr, value, type, noSafe) {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 1005,
- "maximum": 1005 + 0,
+ "initial": 1009,
+ "maximum": 1009 + 0,
  "element": "anyfunc"
 });
 
@@ -820,7 +820,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5344560, STACK_MAX = 101680, DYNAMIC_BASE = 5344560, DYNAMICTOP_PTR = 101520;
+var STACK_BASE = 5344656, STACK_MAX = 101776, DYNAMIC_BASE = 5344656, DYNAMICTOP_PTR = 101616;
 
 assert(STACK_BASE % 16 === 0, "stack must start aligned");
 

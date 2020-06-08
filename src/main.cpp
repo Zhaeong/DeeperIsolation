@@ -163,6 +163,13 @@ void gameloop()
                     {
                         GS.tbArray[i].mState = 2; 
 
+                        if(GS.tbArray[i].mType == TBTYPE_INPUT)
+                        {
+                            if(GS.PlayerState != STATE_ACTION)
+                            {
+                                GS.PlayerState = GS.tbArray[i].mText;
+                            }
+                        }
                     }
                 }
 
@@ -182,6 +189,10 @@ void gameloop()
                 }
                 else
                 {
+                    if(GS.PlayerState != STATE_ACTION)
+                    {
+                        GS.PlayerState = STATE_IDLE;
+                    }
                     if(textureCol != - 1 && GS.tbArray[4].mState == 2)
                     {
 
@@ -190,7 +201,6 @@ void gameloop()
                             cout << "loading: " << GS.tArray[textureCol].mName << "\n";
                             GS.SceneCurrent = SCENE_TRAN;
                             GS.SceneNext = GS.tArray[textureCol].mName;
-
                         }
                     }
 
@@ -239,9 +249,9 @@ void gameloop()
     {
         if(GS.ssArray[SS_PLAYER_ACTION].mCurFrame == (GS.ssArray[SS_PLAYER_ACTION].mNumFrames - 1))
         {
-           GS.ssArray[SS_PLAYER].mActive = true;
-           GS.ssArray[SS_PLAYER_ACTION].mActive = false;
-           GS.PlayerState = STATE_IDLE;
+            GS.ssArray[SS_PLAYER].mActive = true;
+            GS.ssArray[SS_PLAYER_ACTION].mActive = false;
+            GS.PlayerState = STATE_IDLE;
         }
     }
     UpdateSpriteSheet(GS.ssArray, GS.curTime);
