@@ -467,6 +467,9 @@ TextBox InitTextBox(SDL_Texture *fontTex,
 
     outTextBox.mSpeed = speed;
 
+    outTextBox.mDuration = 0;
+    outTextBox.mStartTime = 0;
+
     outTextBox.mNumRendered = 0;
     outTextBox.mLastUpdate = 0;
 
@@ -478,6 +481,17 @@ void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox)
 
     if(!tBox->mActive)
     {
+        return;
+    }
+
+    if(tBox->mStartTime == 0)
+    {
+        tBox->mStartTime = curTime;
+    }
+
+    if(tBox->mDuration != 0 && curTime - tBox->mStartTime > tBox->mDuration)
+    {
+        tBox->mActive = false;
         return;
     }
     SDL_Rect srcRect;
@@ -943,6 +957,19 @@ void LoadScene(GameState *GS, string sceneName)
         //Special case for start spawn of the level where the player is in bed instead of door.
         if(GS->NarrativeCounter == 0)
         {
+
+            GS->tbArray[2] = InitTextBox(GS->fontTexture,
+                    20,
+                    20,
+                    GS->mainBoxTexture,
+                    "A man wakes up",
+                    200,
+                    200,
+                    14,
+                    200);
+
+            GS->tbArray[2].mDuration = 4000;
+
             GS->ssArray[SS_PLAYER].mDstRect.x = 400;
             GS->ssArray[SS_PLAYER].mDstRect.x = 300;
             GS->NarrativeCounter = 1;
