@@ -238,11 +238,11 @@ void gameloop()
 
     if(GS.PlayerState == STATE_LEFT)
     {
-        GS.ssArray[SS_PLAYER].mDstRect.x -= 1;
+        GS.ssArray[SS_PLAYER].mDstRect.x -= 0.5;
     }
     else if(GS.PlayerState == STATE_RIGHT)
     {
-        GS.ssArray[SS_PLAYER].mDstRect.x += 1;
+        GS.ssArray[SS_PLAYER].mDstRect.x += 0.5;
     }
 
     if(GS.PlayerState == STATE_ACTION)
