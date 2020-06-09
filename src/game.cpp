@@ -913,9 +913,9 @@ void LoadScene(GameState *GS, string sceneName)
         SDL_Texture *manTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/manwalk.png");
         RemoveTextureWhiteSpace(manTex);
         SpriteSheet manSheet = InitSpriteSheet(manTex,
-                50,
                 100,
-                8); 
+                100,
+                18); 
 
         manSheet.mUpdateInterval = 200;
         manSheet.mDstRect.x = GS->lInfo.mInitPlayerPos.x;

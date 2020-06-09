@@ -185,21 +185,21 @@ Module.expectedDataFileDownloads++;
   }, {
    "filename": "/res/png/manwalk.png",
    "start": 19459,
-   "end": 28019,
+   "end": 65076,
    "audio": 0
   }, {
    "filename": "/res/png/textBox.png",
-   "start": 28019,
-   "end": 29404,
+   "start": 65076,
+   "end": 66461,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 29404,
-   "end": 465385,
+   "start": 66461,
+   "end": 502442,
    "audio": 0
   } ],
-  "remote_package_size": 465385,
-  "package_uuid": "061740b5-573c-41d0-af82-f91c4b20578e"
+  "remote_package_size": 502442,
+  "package_uuid": "fa32dff2-59d9-43b3-9f91-7cc1f0de1be4"
  });
 })();
 
