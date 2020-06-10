@@ -64,6 +64,8 @@ LevelInfo InitLevelInfo(GameState *GS, string texturePath);
 
 void RefreshState(GameState *GS);
 
+void SpawnPlayer(GameState *GS, float x, float y);
+
 void LoadScene(GameState *GS, string sceneName);
 
 bool SpriteTextureCollision(SpriteSheet ss, Texture tex);

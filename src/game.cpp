@@ -855,8 +855,8 @@ void LoadAction(GameState *GS, string action)
                 6); 
 
         actionSheet.mUpdateInterval = 200;
-        actionSheet.mDstRect.x = GS->ssArray[SS_PLAYER].mDstRect.x;
-        actionSheet.mDstRect.y = GS->ssArray[SS_PLAYER].mDstRect.y;
+        actionSheet.mX = GS->ssArray[SS_PLAYER].mX;
+        actionSheet.mY = GS->ssArray[SS_PLAYER].mY;
         GS->ssArray[SS_PLAYER_ACTION] = actionSheet; 
     }
 }
@@ -877,6 +877,22 @@ void RefreshState(GameState *GS)
     {
         GS->tArray[i].mActive = false;
     }
+}
+
+
+void SpawnPlayer(GameState *GS, float x, float y)
+{
+    SDL_Texture *manTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/manwalk.png");
+    RemoveTextureWhiteSpace(manTex);
+    SpriteSheet manSheet = InitSpriteSheet(manTex,
+            100,
+            100,
+            18); 
+
+    manSheet.mUpdateInterval = 200;
+    manSheet.mX = x;
+    manSheet.mY = y;
+    GS->ssArray[SS_PLAYER] = manSheet;
 }
 
 void LoadScene(GameState *GS, string sceneName)
@@ -915,17 +931,7 @@ void LoadScene(GameState *GS, string sceneName)
         GS->lInfo.mInitPlayerPos.x = 240;
         GS->lInfo.mInitPlayerPos.y = 280;
 
-        SDL_Texture *manTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/manwalk.png");
-        RemoveTextureWhiteSpace(manTex);
-        SpriteSheet manSheet = InitSpriteSheet(manTex,
-                100,
-                100,
-                18); 
-
-        manSheet.mUpdateInterval = 200;
-        manSheet.mDstRect.x = GS->lInfo.mInitPlayerPos.x;
-        manSheet.mDstRect.y = GS->lInfo.mInitPlayerPos.y;
-        GS->ssArray[SS_PLAYER] = manSheet;
+        SpawnPlayer(GS, GS->lInfo.mInitPlayerPos.x, GS->lInfo.mInitPlayerPos.y);
 
         GS->tbArray[0] = InitTextBox(GS->fontTexture,
                 20,
@@ -975,11 +981,13 @@ void LoadScene(GameState *GS, string sceneName)
 
             GS->tbArray[2].mDuration = 4000;
 
-            GS->ssArray[SS_PLAYER].mDstRect.x = 400;
-            GS->ssArray[SS_PLAYER].mDstRect.x = 300;
+
+            GS->ssArray[SS_PLAYER].mX = 400;
+            GS->ssArray[SS_PLAYER].mY = 300;
             GS->NarrativeCounter = 1;
             LoadAction(GS, PLAYER_WAKE);
         }
+
 
     }
     else if(sceneName == SCENE_LIVINGROOM)
@@ -988,19 +996,7 @@ void LoadScene(GameState *GS, string sceneName)
 
         GS->lInfo.mInitPlayerPos.x = 400;
         GS->lInfo.mInitPlayerPos.y = 300;
-
-        SDL_Texture *manTex = GetSDLTexture(GS->renderer, GS->window, PLAYER_WALK);
-        RemoveTextureWhiteSpace(manTex);
-        SpriteSheet manSheet = InitSpriteSheet(manTex,
-                50,
-                100,
-                8); 
-
-        manSheet.mUpdateInterval = 200;
-        manSheet.mDstRect.x = GS->lInfo.mInitPlayerPos.x;
-        manSheet.mDstRect.y = GS->lInfo.mInitPlayerPos.y;
-        GS->ssArray[0] = manSheet;
-
+        SpawnPlayer(GS, GS->lInfo.mInitPlayerPos.x, GS->lInfo.mInitPlayerPos.y);
 
         SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/door.png");
 
@@ -1025,14 +1021,14 @@ bool SpriteTextureCollision(SpriteSheet ss, Texture tex)
     bool horizCol = false;
     bool vertCol = false;
 
-    if(ss.mDstRect.x + ss.mDstRect.w >= tex.mX 
-            && ss.mDstRect.x <= tex.mX + tex.mW)
+    if(ss.mX + ss.mDstRect.w >= tex.mX 
+            && ss.mX <= tex.mX + tex.mW)
     {
         horizCol = true;
     }
 
-    if(ss.mDstRect.y + ss.mDstRect.h >= tex.mY
-            && ss.mDstRect.y <= tex.mY + tex.mH)
+    if(ss.mY + ss.mDstRect.h >= tex.mY
+            && ss.mY <= tex.mY + tex.mH)
     {
         vertCol = true;
     }
