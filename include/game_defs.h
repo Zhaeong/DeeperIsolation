@@ -89,6 +89,8 @@ struct SpriteSheet
     //Where to render the SpriteSheet
     //The w, and h
     SDL_Rect mDstRect;
+    float mX;
+    float mY;
     
     int mNumFrames;
     int mCurFrame;

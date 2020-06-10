@@ -255,6 +255,8 @@ SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
 
     sSheet.mTexture = sdlTexture;
 
+    sSheet.mX = 0;
+    sSheet.mY = 0;
     sSheet.mDstRect.x = 0;
     sSheet.mDstRect.y = 0;
 
@@ -304,6 +306,9 @@ void RenderSpriteSheet(SDL_Renderer *renderer, SpriteSheet sSheet)
         srcRect.y = 0;
         srcRect.w = sSheet.mDstRect.w;
         srcRect.h = sSheet.mDstRect.h;
+
+        sSheet.mDstRect.x = sSheet.mX;
+        sSheet.mDstRect.y = sSheet.mY;
 
         SDL_RenderCopyEx(renderer, sSheet.mTexture, &srcRect, &sSheet.mDstRect, sSheet.mRotation, sSheet.mCenter, sSheet.mFlip);
 #ifdef DEBUG 
