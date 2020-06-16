@@ -65,6 +65,7 @@ LevelInfo InitLevelInfo(GameState *GS, string texturePath);
 void RefreshState(GameState *GS);
 
 void SpawnPlayer(GameState *GS, float x, float y);
+void SpawnControls(GameState *GS);
 
 void LoadScene(GameState *GS, string sceneName);
 

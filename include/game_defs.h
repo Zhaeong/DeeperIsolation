@@ -91,6 +91,9 @@ struct SpriteSheet
     SDL_Rect mDstRect;
     float mX;
     float mY;
+
+    int mXOffset;
+    int mWoffset;
     
     int mNumFrames;
     int mCurFrame;

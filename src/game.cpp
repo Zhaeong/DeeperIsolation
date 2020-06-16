@@ -260,6 +260,9 @@ SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
     sSheet.mDstRect.x = 0;
     sSheet.mDstRect.y = 0;
 
+    sSheet.mXOffset = 0;
+    sSheet.mWoffset = 0;
+
     sSheet.mDstRect.w = w;
     sSheet.mDstRect.h = h;
     sSheet.mNumFrames = numFrames;
@@ -895,6 +898,33 @@ void SpawnPlayer(GameState *GS, float x, float y)
     GS->ssArray[SS_PLAYER] = manSheet;
 }
 
+void SpawnControls(GameState *GS)
+{
+    GS->tbArray[0] = InitTextBox(GS->fontTexture,
+            20,
+            20,
+            GS->mainBoxTexture,
+            STATE_LEFT,
+            10,
+            10,
+            5,
+            200);
+
+    GS->tbArray[0].mType = TBTYPE_INPUT;
+
+    GS->tbArray[1] = InitTextBox(GS->fontTexture,
+            20,
+            20,
+            GS->mainBoxTexture,
+            STATE_RIGHT,
+            200,
+            10,
+            5,
+            200);
+
+    GS->tbArray[1].mType = TBTYPE_INPUT;
+}
+
 void LoadScene(GameState *GS, string sceneName)
 {
 
@@ -933,30 +963,7 @@ void LoadScene(GameState *GS, string sceneName)
 
         SpawnPlayer(GS, GS->lInfo.mInitPlayerPos.x, GS->lInfo.mInitPlayerPos.y);
 
-        GS->tbArray[0] = InitTextBox(GS->fontTexture,
-                20,
-                20,
-                GS->mainBoxTexture,
-                STATE_LEFT,
-                10,
-                10,
-                5,
-                200);
-
-        GS->tbArray[0].mType = TBTYPE_INPUT;
-
-        GS->tbArray[1] = InitTextBox(GS->fontTexture,
-                20,
-                20,
-                GS->mainBoxTexture,
-                STATE_RIGHT,
-                200,
-                10,
-                5,
-                200);
-
-        GS->tbArray[1].mType = TBTYPE_INPUT;
-
+        SpawnControls(GS);
         SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/door.png");
 
         Texture door = InitTexture(doorTex, 240, 280);
@@ -997,7 +1004,7 @@ void LoadScene(GameState *GS, string sceneName)
         GS->lInfo.mInitPlayerPos.x = 400;
         GS->lInfo.mInitPlayerPos.y = 300;
         SpawnPlayer(GS, GS->lInfo.mInitPlayerPos.x, GS->lInfo.mInitPlayerPos.y);
-
+        SpawnControls(GS);
         SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/door.png");
 
         Texture door = InitTexture(doorTex,GS->lInfo.mInitPlayerPos.x , GS->lInfo.mInitPlayerPos.y);
