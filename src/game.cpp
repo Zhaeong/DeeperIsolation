@@ -855,7 +855,8 @@ void LoadAction(GameState *GS, string action)
         SpriteSheet actionSheet = InitSpriteSheet(actionTex,
                 100,
                 100,
-                6); 
+                15); 
+
 
         actionSheet.mUpdateInterval = 200;
         actionSheet.mX = GS->ssArray[SS_PLAYER].mX;
