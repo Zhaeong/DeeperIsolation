@@ -252,6 +252,7 @@ SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
     SpriteSheet sSheet;
 
     sSheet.mActive = true;
+    sSheet.mUpdate = true;
 
     sSheet.mTexture = sdlTexture;
 
@@ -284,7 +285,7 @@ void UpdateSpriteSheet(SpriteSheet *ssArray, Uint32 curTime)
 {
     for(int i = 0; i < NUM_SPRITESHEET; i++)
     {
-        if(ssArray[i].mActive)
+        if(ssArray[i].mActive && ssArray[i].mUpdate)
         {
             if(curTime > ssArray[i].mLastUpdate + ssArray[i].mUpdateInterval)
             {
@@ -897,6 +898,8 @@ void SpawnPlayer(GameState *GS, float x, float y)
     manSheet.mX = x;
     manSheet.mY = y;
     GS->ssArray[SS_PLAYER] = manSheet;
+    GS->ssArray[SS_PLAYER].mCurFrame = PLAYER_IDLE_FRAME;
+    GS->ssArray[SS_PLAYER].mUpdate = false;
 }
 
 void SpawnControls(GameState *GS)
@@ -942,7 +945,7 @@ void LoadScene(GameState *GS, string sceneName)
 
         titleSheet.mUpdateInterval = 200;
 
-        GS->ssArray[0] = titleSheet;
+        GS->ssArray[1] = titleSheet;
 
         GS->tbArray[0] = InitTextBox(GS->fontTexture,
                 20,
@@ -992,6 +995,7 @@ void LoadScene(GameState *GS, string sceneName)
 
             GS->ssArray[SS_PLAYER].mX = 400;
             GS->ssArray[SS_PLAYER].mY = 300;
+
             GS->NarrativeCounter = 1;
             LoadAction(GS, PLAYER_WAKE);
         }

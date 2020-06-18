@@ -239,10 +239,19 @@ void gameloop()
     if(GS.PlayerState == STATE_LEFT)
     {
         GS.ssArray[SS_PLAYER].mX -= 0.5;
+        GS.ssArray[SS_PLAYER].mUpdate = true;
+        GS.ssArray[SS_PLAYER].mFlip = SDL_FLIP_HORIZONTAL;
     }
     else if(GS.PlayerState == STATE_RIGHT)
     {
         GS.ssArray[SS_PLAYER].mX += 0.5;
+        GS.ssArray[SS_PLAYER].mUpdate = true;
+        GS.ssArray[SS_PLAYER].mFlip = SDL_FLIP_NONE;
+    }
+    else if(GS.PlayerState == STATE_IDLE)
+    {
+        GS.ssArray[SS_PLAYER].mCurFrame = PLAYER_IDLE_FRAME; 
+        GS.ssArray[SS_PLAYER].mUpdate = false;
     }
 
     if(GS.PlayerState == STATE_ACTION)

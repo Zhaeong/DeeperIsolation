@@ -27,6 +27,8 @@ const string PLAYER_WALK = "./res/png/manwalk.png";
 
 const string PLAYER_WAKE = "./res/png/manwake.png";
 
+const int PLAYER_IDLE_FRAME = 18;
+
 //player char states
 //some textboxes use state strings as text display as well as state changes
 //might be an issue with data coupling
@@ -34,6 +36,7 @@ const string STATE_ACTION = "ACTION";
 const string STATE_IDLE = "IDLE";
 const string STATE_LEFT = "Left";
 const string STATE_RIGHT = "Right";
+
 
 const int SS_ACTION = 1;
 
@@ -84,6 +87,7 @@ struct Texture
 struct SpriteSheet 
 {
     bool mActive;
+    bool mUpdate;
     SDL_Texture *mTexture;
 
     //Where to render the SpriteSheet
@@ -189,6 +193,7 @@ struct GameState
 
 
     string PlayerState;
+
     
     //Time controls
     Uint32 startTime;
