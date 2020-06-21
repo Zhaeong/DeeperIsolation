@@ -165,41 +165,41 @@ Module.expectedDataFileDownloads++;
   }, {
    "filename": "/res/png/door.png",
    "start": 3152,
-   "end": 4691,
+   "end": 4607,
    "audio": 0
   }, {
    "filename": "/res/png/livingroom.png",
-   "start": 4691,
-   "end": 6794,
+   "start": 4607,
+   "end": 6710,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png",
-   "start": 6794,
-   "end": 9917,
+   "start": 6710,
+   "end": 9833,
    "audio": 0
   }, {
    "filename": "/res/png/manwake.png",
-   "start": 9917,
-   "end": 42563,
+   "start": 9833,
+   "end": 42479,
    "audio": 0
   }, {
    "filename": "/res/png/manwalk.png",
-   "start": 42563,
-   "end": 88436,
+   "start": 42479,
+   "end": 88352,
    "audio": 0
   }, {
    "filename": "/res/png/textBox.png",
-   "start": 88436,
-   "end": 89821,
+   "start": 88352,
+   "end": 89737,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 89821,
-   "end": 525802,
+   "start": 89737,
+   "end": 525718,
    "audio": 0
   } ],
-  "remote_package_size": 525802,
-  "package_uuid": "bc8ca54f-a7c2-4a96-ba3d-3a92f408d0cd"
+  "remote_package_size": 525718,
+  "package_uuid": "8d0c11e4-de19-4ebe-a3c2-80ff5f842c05"
  });
 })();
 
