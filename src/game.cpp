@@ -318,7 +318,8 @@ void RenderSpriteSheet(SDL_Renderer *renderer, SpriteSheet sSheet)
 #ifdef DEBUG 
         if(ShowDebug)
         {
-
+            SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
+            SDL_RenderDrawRect(renderer, &sSheet.mDstRect);
         }
 
 #endif
@@ -858,7 +859,6 @@ void LoadAction(GameState *GS, string action)
                 100,
                 15); 
 
-
         actionSheet.mUpdateInterval = 200;
         actionSheet.mX = GS->ssArray[SS_PLAYER].mX;
         actionSheet.mY = GS->ssArray[SS_PLAYER].mY;
@@ -896,7 +896,10 @@ void SpawnPlayer(GameState *GS, float x, float y)
 
     manSheet.mUpdateInterval = 200;
     manSheet.mX = x;
-    manSheet.mY = y;
+
+    manSheet.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - manSheet.mDstRect.h;
+
+    cout << "spawnY: " << manSheet.mY << "\n";
     GS->ssArray[SS_PLAYER] = manSheet;
     GS->ssArray[SS_PLAYER].mCurFrame = PLAYER_IDLE_FRAME;
     GS->ssArray[SS_PLAYER].mUpdate = false;
@@ -970,7 +973,9 @@ void LoadScene(GameState *GS, string sceneName)
         SpawnControls(GS);
         SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/door.png");
 
-        Texture door = InitTexture(doorTex, 240, 280);
+        Texture door = InitTexture(doorTex, 
+                                   240, 
+                                   GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110);
 
         door.mType = TTYPE_TRANSIT;
         door.mName = SCENE_LIVINGROOM;
@@ -994,7 +999,6 @@ void LoadScene(GameState *GS, string sceneName)
 
 
             GS->ssArray[SS_PLAYER].mX = 400;
-            GS->ssArray[SS_PLAYER].mY = 300;
 
             GS->NarrativeCounter = 1;
             LoadAction(GS, PLAYER_WAKE);
@@ -1012,7 +1016,8 @@ void LoadScene(GameState *GS, string sceneName)
         SpawnControls(GS);
         SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/door.png");
 
-        Texture door = InitTexture(doorTex,GS->lInfo.mInitPlayerPos.x , GS->lInfo.mInitPlayerPos.y);
+        Texture door = InitTexture(doorTex,GS->lInfo.mInitPlayerPos.x, 
+                                   GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110);
 
         door.mType = TTYPE_TRANSIT;
         door.mName = SCENE_BEDROOM;
