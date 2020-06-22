@@ -866,6 +866,35 @@ void LoadAction(GameState *GS, string action)
     }
 }
 
+void ChangePlayerState(GameState *GS, string newState)
+{
+    bool stateChange = true;
+
+    if(GS->PlayerState == STATE_ACTION)
+    {
+        return;
+    }
+    if(newState == STATE_IDLE)
+    {
+        if(GS->PlayerState != STATE_ACTION)
+        {
+            GS->PlayerState = newState;
+        }
+        else
+        {
+            stateChange = false;
+        }
+    }
+    else
+    {
+        GS->PlayerState = newState;
+    }
+
+    if(!stateChange)
+    {
+        cout << "ERROR, PlayerState Change from: " << GS->PlayerState << "  to: " << newState << "\n";
+    }
+}
 void RefreshState(GameState *GS)
 {
     for(int i = 0; i < NUM_SPRITESHEET; i++)

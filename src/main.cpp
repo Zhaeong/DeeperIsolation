@@ -109,18 +109,12 @@ void gameloop()
                         }
                     case SDLK_d:
                         {
-                            if(GS.PlayerState != STATE_ACTION)
-                            {
-                                GS.PlayerState = STATE_RIGHT;
-                            }
+                            ChangePlayerState(&GS, STATE_RIGHT);
                             break;
                         }
                     case SDLK_a:
                         {
-                            if(GS.PlayerState != STATE_ACTION)
-                            {
-                                GS.PlayerState = STATE_LEFT;
-                            }
+                            ChangePlayerState(&GS, STATE_LEFT);
                             break;
                         }
                         //Debug keysym
@@ -153,7 +147,7 @@ void gameloop()
             case SDL_KEYUP:
                 //cout << "pressed\n"; 
                 {
-                    GS.PlayerState = STATE_IDLE;
+                    ChangePlayerState(&GS, STATE_IDLE);
                     break;
                 }
             case SDL_MOUSEBUTTONDOWN:
@@ -165,10 +159,7 @@ void gameloop()
 
                         if(GS.tbArray[i].mType == TBTYPE_INPUT)
                         {
-                            if(GS.PlayerState != STATE_ACTION)
-                            {
-                                GS.PlayerState = GS.tbArray[i].mText;
-                            }
+                            ChangePlayerState(&GS, GS.tbArray[i].mText);
                         }
                     }
                 }
@@ -189,10 +180,7 @@ void gameloop()
                 }
                 else
                 {
-                    if(GS.PlayerState != STATE_ACTION)
-                    {
-                        GS.PlayerState = STATE_IDLE;
-                    }
+                    ChangePlayerState(&GS, STATE_IDLE);
                     if(textureCol != - 1 && GS.tbArray[4].mState == 2)
                     {
 
@@ -260,6 +248,8 @@ void gameloop()
         {
             GS.ssArray[SS_PLAYER].mActive = true;
             GS.ssArray[SS_PLAYER_ACTION].mActive = false;
+            //Not using function Change Player state here because when its state action only 
+            //this part can change it back to idle
             GS.PlayerState = STATE_IDLE;
         }
     }
@@ -324,7 +314,7 @@ int main(int argv, char **args)
     //RemoveTextureWhiteSpace(GS.man);
     GS.SceneCurrent = SCENE_INTRO; 
     GS.SceneNext = SCENE_INTRO; 
-    GS.PlayerState = "IDLE";
+    GS.PlayerState = STATE_IDLE;
     GS.screenColor.r = 200;
     GS.screenColor.g = 200;
     GS.screenColor.b = 200;
