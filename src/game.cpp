@@ -876,14 +876,7 @@ void ChangePlayerState(GameState *GS, string newState)
     }
     if(newState == STATE_IDLE)
     {
-        if(GS->PlayerState != STATE_ACTION)
-        {
-            GS->PlayerState = newState;
-        }
-        else
-        {
-            stateChange = false;
-        }
+        GS->PlayerState = newState;
     }
     else
     {
@@ -1003,8 +996,8 @@ void LoadScene(GameState *GS, string sceneName)
         SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/door.png");
 
         Texture door = InitTexture(doorTex, 
-                                   240, 
-                                   GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110);
+                240, 
+                GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110);
 
         door.mType = TTYPE_TRANSIT;
         door.mName = SCENE_LIVINGROOM;
@@ -1046,7 +1039,7 @@ void LoadScene(GameState *GS, string sceneName)
         SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/door.png");
 
         Texture door = InitTexture(doorTex,GS->lInfo.mInitPlayerPos.x, 
-                                   GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110);
+                GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110);
 
         door.mType = TTYPE_TRANSIT;
         door.mName = SCENE_BEDROOM;
