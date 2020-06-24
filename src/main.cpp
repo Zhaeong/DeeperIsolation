@@ -54,6 +54,21 @@ void gameloop()
                             200);           
                 }
             }
+            else if(GS.tArray[i].mType == TTYPE_ACTION)
+            {
+                if(!GS.tbArray[4].mActive)
+                {
+                    GS.tbArray[4] = InitTextBox(GS.fontTexture,
+                            20,
+                            20,
+                            GS.mainBoxTexture,
+                            GS.tArray[i].mButtonText, 
+                            400,
+                            10,
+                            5,
+                            200);           
+                }
+            }
         }
 
     }
@@ -161,6 +176,8 @@ void gameloop()
                         {
                             ChangePlayerState(&GS, GS.tbArray[i].mText);
                         }
+
+
                     }
                 }
 
@@ -190,6 +207,11 @@ void gameloop()
                             GS.SceneCurrent = SCENE_TRAN;
                             GS.SceneNext = GS.tArray[textureCol].mName;
                         }
+                        else if(GS.tArray[textureCol].mType == TTYPE_ACTION)
+                        {
+                            cout << "action: " << GS.tArray[textureCol].mName << "\n";
+                        }
+
                     }
 
                 }

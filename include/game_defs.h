@@ -54,7 +54,10 @@ const string SCENE_LIVINGROOM = "./res/png/livingroom.png";
 //Texture Types
 const string TTYPE_NORMAL = "NORM";
 const string TTYPE_TRANSIT = "TRANSIT";
+const string TTYPE_ACTION = "ACTION";
 
+//Texture Actions
+const string TACTION_END = "END";
 
 //TextBox types
 const string TBTYPE_NORM = "NORM";

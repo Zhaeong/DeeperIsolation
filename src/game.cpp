@@ -1045,6 +1045,17 @@ void LoadScene(GameState *GS, string sceneName)
         door.mName = SCENE_BEDROOM;
         door.mButtonText = "Enter Bedroom";
         GS->tArray[0] = door;
+
+
+        Texture endDoor = InitTexture(doorTex, GS->lInfo.mLevelTex.mX, 
+                GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110);
+
+        endDoor.mType = TTYPE_ACTION;
+        endDoor.mName = TACTION_END;
+        endDoor.mButtonText = "Go to Work";
+        GS->tArray[1] = endDoor;
+
+
     }
 
 }
