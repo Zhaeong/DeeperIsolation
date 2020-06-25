@@ -954,6 +954,12 @@ void SpawnControls(GameState *GS)
     GS->tbArray[1].mType = TBTYPE_INPUT;
 }
 
+void AddStoryLine(GameState *GS, string line)
+{
+    GS->sStory[GS->curStory] = line;
+    GS->curStory += 1;
+}
+
 void LoadScene(GameState *GS, string sceneName)
 {
 
@@ -981,6 +987,12 @@ void LoadScene(GameState *GS, string sceneName)
                 400,
                 5,
                 200);
+
+        GS->curStory = 0;
+        for(int i = 0; i < NUM_LINES; i++)
+        {
+            GS->sStory[i] = "";
+        }
     }
     else if(sceneName == SCENE_BEDROOM)
     {
@@ -1011,7 +1023,7 @@ void LoadScene(GameState *GS, string sceneName)
                     20,
                     20,
                     GS->mainBoxTexture,
-                    "A man wakes up",
+                    "A man wakes up for work",
                     200,
                     200,
                     14,
@@ -1019,6 +1031,7 @@ void LoadScene(GameState *GS, string sceneName)
 
             GS->tbArray[2].mDuration = 4000;
 
+            AddStoryLine(GS, "A man wakes up for work");
 
             GS->ssArray[SS_PLAYER].mX = 400;
 
@@ -1050,12 +1063,21 @@ void LoadScene(GameState *GS, string sceneName)
         Texture endDoor = InitTexture(doorTex, GS->lInfo.mLevelTex.mX, 
                 GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110);
 
-        endDoor.mType = TTYPE_ACTION;
-        endDoor.mName = TACTION_END;
+        endDoor.mType = TTYPE_TRANSIT;
+        endDoor.mName = SCENE_ENDDOOR;
         endDoor.mButtonText = "Go to Work";
         GS->tArray[1] = endDoor;
 
 
+    }
+    else if(sceneName == SCENE_ENDDOOR)
+    {
+        GS->lInfo = InitLevelInfo(GS, SCENE_BEDROOM);
+        AddStoryLine(GS, "He leaves for work, his child wakes in an empty home.");
+        for(int i = 0; i < GS->curStory; i++)
+        {
+            cout << GS->sStory[i] << "\n";
+        }
     }
 
 }

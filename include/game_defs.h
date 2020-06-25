@@ -16,6 +16,19 @@ using namespace std;
 
 #define PI 3.14159265
 
+
+/*
+A man wakes up for work
+His child still sleeps 
+It is necessary to be presentable
+Breakfast is the most important part of the day
+The weather is nice outside
+
+He goes back to check on his child, work can wait for now.
+
+He leaves for work, his child wakes in an empty home.
+
+*/
 const Uint32 TEXTUREFORMAT = SDL_PIXELFORMAT_RGBA8888;
 
 const int NUM_SPRITESHEET = 5;
@@ -43,13 +56,15 @@ const int SS_ACTION = 1;
 const int NUM_TEXTBOX = 5;
 
 const int NUM_TEXTURE = 5;
-
+const int NUM_LINES = 10;
 
 //Game Scenes
 const string SCENE_INTRO = "INTRO";
 const string SCENE_TRAN  = "TRAN";
 const string SCENE_BEDROOM = "./res/png/bedroom.png";
 const string SCENE_LIVINGROOM = "./res/png/livingroom.png";
+const string SCENE_ENDDOOR = "./res/png/enddoor.png";
+
 
 //Texture Types
 const string TTYPE_NORMAL = "NORM";
@@ -215,6 +230,9 @@ struct GameState
     Texture tArray[NUM_TEXTURE];
 
     int NarrativeCounter;
+
+    int curStory;
+    string sStory[NUM_LINES];
 };
 
 

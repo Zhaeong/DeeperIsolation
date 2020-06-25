@@ -70,6 +70,8 @@ void SpawnPlayer(GameState *GS, float x, float y);
 
 void SpawnControls(GameState *GS);
 
+void AddStoryLine(GameState *GS, string line);
+
 void LoadScene(GameState *GS, string sceneName);
 
 bool SpriteTextureCollision(SpriteSheet ss, Texture tex);
