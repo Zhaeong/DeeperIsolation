@@ -864,6 +864,18 @@ void LoadAction(GameState *GS, string action)
         actionSheet.mY = GS->ssArray[SS_PLAYER].mY;
         GS->ssArray[SS_PLAYER_ACTION] = actionSheet; 
     }
+    else if(action == PLAYER_WASH)
+    {
+        SpriteSheet actionSheet = InitSpriteSheet(actionTex,
+                100,
+                100,
+                32); 
+
+        actionSheet.mUpdateInterval = 200;
+        actionSheet.mX = GS->ssArray[SS_PLAYER].mX;
+        actionSheet.mY = GS->ssArray[SS_PLAYER].mY;
+        GS->ssArray[SS_PLAYER_ACTION] = actionSheet; 
+    }
 }
 
 void ChangePlayerState(GameState *GS, string newState)
@@ -1005,7 +1017,7 @@ void LoadScene(GameState *GS, string sceneName)
         SpawnPlayer(GS, GS->lInfo.mInitPlayerPos.x, GS->lInfo.mInitPlayerPos.y);
 
         SpawnControls(GS);
-        SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/door.png");
+        SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, TEX_DOOR);
 
         Texture door = InitTexture(doorTex, 
                 240, 
@@ -1015,6 +1027,18 @@ void LoadScene(GameState *GS, string sceneName)
         door.mName = SCENE_LIVINGROOM;
         door.mButtonText = "Enter Living room";
         GS->tArray[0] = door;
+
+        SDL_Texture *sinkTex = GetSDLTexture(GS->renderer, GS->window, TEX_SINK);
+
+        Texture sink = InitTexture(sinkTex,
+                                 450,
+                                GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110);
+
+        sink.mType = TTYPE_ACTION;
+        sink.mName = PLAYER_WASH; 
+        sink.mButtonText = "Wash";
+        GS->tArray[1] = sink;
+
         //Special case for start spawn of the level where the player is in bed instead of door.
         if(GS->NarrativeCounter == 0)
         {
@@ -1049,7 +1073,7 @@ void LoadScene(GameState *GS, string sceneName)
         GS->lInfo.mInitPlayerPos.y = 300;
         SpawnPlayer(GS, GS->lInfo.mInitPlayerPos.x, GS->lInfo.mInitPlayerPos.y);
         SpawnControls(GS);
-        SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/door.png");
+        SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, TEX_DOOR);
 
         Texture door = InitTexture(doorTex,GS->lInfo.mInitPlayerPos.x, 
                 GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110);

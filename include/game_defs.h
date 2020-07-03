@@ -40,6 +40,8 @@ const string PLAYER_WALK = "./res/png/manwalk.png";
 
 const string PLAYER_WAKE = "./res/png/manwake.png";
 
+const string PLAYER_WASH = "./res/png/manwash.png";
+
 const int PLAYER_IDLE_FRAME = 18;
 
 //player char states
@@ -64,6 +66,11 @@ const string SCENE_TRAN  = "TRAN";
 const string SCENE_BEDROOM = "./res/png/bedroom.png";
 const string SCENE_LIVINGROOM = "./res/png/livingroom.png";
 const string SCENE_ENDDOOR = "./res/png/enddoor.png";
+
+
+//Textures
+const string TEX_DOOR = "./res/png/door.png";
+const string TEX_SINK = "./res/png/sink.png";
 
 
 //Texture Types

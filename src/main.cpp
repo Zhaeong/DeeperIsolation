@@ -210,6 +210,7 @@ void gameloop()
                         else if(GS.tArray[textureCol].mType == TTYPE_ACTION)
                         {
                             cout << "action: " << GS.tArray[textureCol].mName << "\n";
+                            LoadAction(&GS, GS.tArray[textureCol].mName);
                         }
 
                     }

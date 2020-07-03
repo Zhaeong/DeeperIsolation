@@ -62,6 +62,8 @@ bool MouseTextBoxCol(int mouseX, int mouseY, TextBox tb);
 
 LevelInfo InitLevelInfo(GameState *GS, string texturePath);
 
+void LoadAction(GameState *GS, string action);
+
 void ChangePlayerState(GameState *GS, string newState);
 
 void RefreshState(GameState *GS);
