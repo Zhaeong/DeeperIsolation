@@ -842,7 +842,7 @@ LevelInfo InitLevelInfo(GameState *GS, string texturePath)
     return outLevel;
 }
 
-void LoadAction(GameState *GS, string action)
+void LoadAction(GameState *GS, string action, int textureCol)
 {
     GS->PlayerState = STATE_ACTION;
 
@@ -852,30 +852,43 @@ void LoadAction(GameState *GS, string action)
     GS->ssArray[SS_PLAYER].mActive = false;
     GS->ssArray[SS_PLAYER_ACTION].mActive = true;
 
+    SpriteSheet actionSheet;
     if(action == PLAYER_WAKE)
     {
-        SpriteSheet actionSheet = InitSpriteSheet(actionTex,
+        actionSheet = InitSpriteSheet(actionTex,
                 100,
                 100,
                 15); 
 
         actionSheet.mUpdateInterval = 200;
-        actionSheet.mX = GS->ssArray[SS_PLAYER].mX;
-        actionSheet.mY = GS->ssArray[SS_PLAYER].mY;
-        GS->ssArray[SS_PLAYER_ACTION] = actionSheet; 
     }
     else if(action == PLAYER_WASH)
     {
-        SpriteSheet actionSheet = InitSpriteSheet(actionTex,
+        actionSheet = InitSpriteSheet(actionTex,
                 100,
                 100,
                 32); 
 
         actionSheet.mUpdateInterval = 200;
+    }
+
+    if(textureCol != -1)
+    {
+        GS->ssArray[SS_PLAYER].mX = GS->tArray[textureCol].mX;
+
+        GS->ssArray[SS_PLAYER].mY = GS->tArray[textureCol].mY;
+
+        actionSheet.mX = GS->tArray[textureCol].mX;
+        actionSheet.mY = GS->tArray[textureCol].mY;
+    }
+    else
+    {
         actionSheet.mX = GS->ssArray[SS_PLAYER].mX;
         actionSheet.mY = GS->ssArray[SS_PLAYER].mY;
-        GS->ssArray[SS_PLAYER_ACTION] = actionSheet; 
+
     }
+    GS->ssArray[SS_PLAYER_ACTION] = actionSheet; 
+
 }
 
 void ChangePlayerState(GameState *GS, string newState)
@@ -1031,8 +1044,8 @@ void LoadScene(GameState *GS, string sceneName)
         SDL_Texture *sinkTex = GetSDLTexture(GS->renderer, GS->window, TEX_SINK);
 
         Texture sink = InitTexture(sinkTex,
-                                 450,
-                                GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110);
+                450,
+                GS->ssArray[SS_PLAYER].mY); //action same height player
 
         sink.mType = TTYPE_ACTION;
         sink.mName = PLAYER_WASH; 
@@ -1060,7 +1073,7 @@ void LoadScene(GameState *GS, string sceneName)
             GS->ssArray[SS_PLAYER].mX = 400;
 
             GS->NarrativeCounter = 1;
-            LoadAction(GS, PLAYER_WAKE);
+            LoadAction(GS, PLAYER_WAKE, -1);
         }
 
 
