@@ -1103,8 +1103,8 @@ void LoadScene(GameState *GS, string sceneName)
         sink.mName = PLAYER_WASH; 
         sink.mButtonText = "Wash";
 
-        sink.mColBoxOffset.x = 20;
-        sink.mColBoxOffset.w = 20;
+        sink.mColBoxOffset.x = 60;
+        sink.mColBoxOffset.w = 40;
         GS->tArray[1] = sink;
 
         //Special case for start spawn of the level where the player is in bed instead of door.
