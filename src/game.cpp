@@ -211,6 +211,14 @@ Texture InitTexture(SDL_Texture *sdlTexture, int x, int y)
     outTex.mName = "";
     outTex.mButtonText = "";
 
+    SDL_Rect colOffset;
+    colOffset.x = 0;
+    colOffset.y = 0;
+    colOffset.w = outTex.mW;
+    colOffset.h = outTex.mH;
+
+    outTex.mColBoxOffset = colOffset;
+
 
     return outTex;
 }
@@ -241,6 +249,28 @@ void RenderTexture(SDL_Renderer *renderer, Texture tex)
         dstRect.w = tex.mW;
 
         SDL_RenderCopyEx(renderer, tex.mTexture, &srcRect, &dstRect, tex.mRotation, tex.mCenter, tex.mFlip);
+
+#ifdef DEBUG 
+        if(ShowDebug)
+        {
+            SDL_SetRenderDrawColor(renderer, 0, 255, 255, SDL_ALPHA_OPAQUE);
+            SDL_RenderDrawRect(renderer, &dstRect);
+
+            //Coloffset
+            SDL_SetRenderDrawColor(renderer, 255, 165, 0, SDL_ALPHA_OPAQUE);
+
+            SDL_Rect offSetRect;
+
+            offSetRect.x = dstRect.x + tex.mColBoxOffset.x;
+            offSetRect.y = dstRect.y + tex.mColBoxOffset.y;
+            offSetRect.w = tex.mColBoxOffset.w;
+            offSetRect.h = tex.mColBoxOffset.h;
+            SDL_RenderDrawRect(renderer, &offSetRect);
+
+
+        }
+
+#endif
     }
 }
 
@@ -276,6 +306,14 @@ SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
     sSheet.mCenter = NULL;
 
     sSheet.mFlip = SDL_FLIP_NONE;
+
+    SDL_Rect colOffset;
+    colOffset.x = 0;
+    colOffset.y = 0;
+    colOffset.w = w;
+    colOffset.h = h;
+
+    sSheet.mColBoxOffset = colOffset;
 
 
     return sSheet;
@@ -320,6 +358,17 @@ void RenderSpriteSheet(SDL_Renderer *renderer, SpriteSheet sSheet)
         {
             SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
             SDL_RenderDrawRect(renderer, &sSheet.mDstRect);
+
+            //Coloffset
+            SDL_SetRenderDrawColor(renderer, 255, 165, 0, SDL_ALPHA_OPAQUE);
+
+            SDL_Rect offSetRect;
+
+            offSetRect.x = sSheet.mDstRect.x + sSheet.mColBoxOffset.x;
+            offSetRect.y = sSheet.mDstRect.y + sSheet.mColBoxOffset.y;
+            offSetRect.w = sSheet.mColBoxOffset.w;
+            offSetRect.h = sSheet.mColBoxOffset.h;
+            SDL_RenderDrawRect(renderer, &offSetRect);
         }
 
 #endif
@@ -946,6 +995,9 @@ void SpawnPlayer(GameState *GS, float x, float y)
 
     manSheet.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - manSheet.mDstRect.h;
 
+    manSheet.mColBoxOffset.x = 30;
+    manSheet.mColBoxOffset.w = 40;
+
     cout << "spawnY: " << manSheet.mY << "\n";
     GS->ssArray[SS_PLAYER] = manSheet;
     GS->ssArray[SS_PLAYER].mCurFrame = PLAYER_IDLE_FRAME;
@@ -1050,6 +1102,9 @@ void LoadScene(GameState *GS, string sceneName)
         sink.mType = TTYPE_ACTION;
         sink.mName = PLAYER_WASH; 
         sink.mButtonText = "Wash";
+
+        sink.mColBoxOffset.x = 20;
+        sink.mColBoxOffset.w = 20;
         GS->tArray[1] = sink;
 
         //Special case for start spawn of the level where the player is in bed instead of door.
@@ -1130,6 +1185,7 @@ bool SpriteTextureCollision(SpriteSheet ss, Texture tex)
     bool horizCol = false;
     bool vertCol = false;
 
+/*native texture col
     if(ss.mX + ss.mDstRect.w >= tex.mX 
             && ss.mX <= tex.mX + tex.mW)
     {
@@ -1141,8 +1197,23 @@ bool SpriteTextureCollision(SpriteSheet ss, Texture tex)
     {
         vertCol = true;
     }
+*/
+
+    //new texture col
+    if(ss.mX + ss.mColBoxOffset.x + ss.mColBoxOffset.w >= tex.mX + tex.mColBoxOffset.x 
+            && ss.mX + ss.mColBoxOffset.x <= tex.mX + tex.mColBoxOffset.x + tex.mColBoxOffset.w)
+    {
+        horizCol = true;
+    }
+
+    if(ss.mY + ss.mColBoxOffset.y + ss.mColBoxOffset.h >= tex.mY + tex.mColBoxOffset.y
+            && ss.mY + ss.mColBoxOffset.y <= tex.mY + ss.mColBoxOffset.y + tex.mColBoxOffset.h)
+    {
+        vertCol = true;
+    }
 
     return horizCol && vertCol;
+
 
 }
 

@@ -102,6 +102,8 @@ struct Texture
     SDL_Point *mCenter;
     SDL_RendererFlip mFlip;
 
+    SDL_Rect mColBoxOffset;
+
     string mType;
     string mName;
     string mButtonText;
@@ -118,6 +120,8 @@ struct SpriteSheet
     //Where to render the SpriteSheet
     //The w, and h
     SDL_Rect mDstRect;
+
+    SDL_Rect mColBoxOffset;
     float mX;
     float mY;
 
