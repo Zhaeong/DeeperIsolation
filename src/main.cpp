@@ -36,7 +36,7 @@ void gameloop()
     int textureCol = -1;
     for(int i = 0; i < NUM_TEXTURE; i++)
     {
-        if(SpriteTextureCollision(GS.ssArray[0], GS.tArray[i]))
+        if(GS.tArray[i].mInteract && SpriteTextureCollision(GS.ssArray[0], GS.tArray[i]))
         {
             textureCol = i;
             if(GS.tArray[i].mType == TTYPE_TRANSIT)

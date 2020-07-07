@@ -110,6 +110,7 @@ struct Texture
     string mNarration;
 
     Uint32 mLastUpdate;
+    bool mInteract;
 };
 
 struct SpriteSheet 

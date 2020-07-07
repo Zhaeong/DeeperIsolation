@@ -212,6 +212,7 @@ Texture InitTexture(SDL_Texture *sdlTexture, int x, int y)
     outTex.mButtonText = "";
     outTex.mNarration = "";
 
+    outTex.mInteract = true;
     SDL_Rect colOffset;
     colOffset.x = 0;
     colOffset.y = 0;
@@ -894,6 +895,11 @@ LevelInfo InitLevelInfo(GameState *GS, string texturePath)
 
 void LoadAction(GameState *GS, string action, int textureCol)
 {
+    if(textureCol != -1 && !GS->tArray[textureCol].mInteract)
+    {
+        return;
+    }
+
     GS->PlayerState = STATE_ACTION;
 
     SDL_Texture *actionTex = GetSDLTexture(GS->renderer, GS->window, action);
@@ -939,7 +945,7 @@ void LoadAction(GameState *GS, string action, int textureCol)
     }
     GS->ssArray[SS_PLAYER_ACTION] = actionSheet; 
 
-    if(GS->tArray[textureCol].mNarration != "")
+    if(GS->tArray[textureCol].mNarration != "" && GS->tArray[textureCol].mNarration != "NONE")
     {
         GS->tbArray[2] = InitTextBox(GS->fontTexture,
                 20,
@@ -952,6 +958,10 @@ void LoadAction(GameState *GS, string action, int textureCol)
                 200);
 
         GS->tbArray[2].mDuration = GS->tArray[textureCol].mNarration.length() * 200;
+
+        AddStoryLine(GS, GS->tArray[textureCol].mNarration);
+
+        GS->tArray[textureCol].mInteract = false;
     }
 
 }
