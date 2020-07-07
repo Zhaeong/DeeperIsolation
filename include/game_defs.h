@@ -107,6 +107,7 @@ struct Texture
     string mType;
     string mName;
     string mButtonText;
+    string mNarration;
 
     Uint32 mLastUpdate;
 };

@@ -210,6 +210,7 @@ Texture InitTexture(SDL_Texture *sdlTexture, int x, int y)
     outTex.mType = TTYPE_NORMAL;
     outTex.mName = "";
     outTex.mButtonText = "";
+    outTex.mNarration = "";
 
     SDL_Rect colOffset;
     colOffset.x = 0;
@@ -938,6 +939,21 @@ void LoadAction(GameState *GS, string action, int textureCol)
     }
     GS->ssArray[SS_PLAYER_ACTION] = actionSheet; 
 
+    if(GS->tArray[textureCol].mNarration != "")
+    {
+        GS->tbArray[2] = InitTextBox(GS->fontTexture,
+                20,
+                20,
+                GS->mainBoxTexture,
+                GS->tArray[textureCol].mNarration,
+                200,
+                200,
+                14,
+                200);
+
+        GS->tbArray[2].mDuration = GS->tArray[textureCol].mNarration.length() * 200;
+    }
+
 }
 
 void ChangePlayerState(GameState *GS, string newState)
@@ -1102,7 +1118,7 @@ void LoadScene(GameState *GS, string sceneName)
         sink.mType = TTYPE_ACTION;
         sink.mName = PLAYER_WASH; 
         sink.mButtonText = "Wash";
-
+        sink.mNarration = "It is necessary to be presentable";
         sink.mColBoxOffset.x = 60;
         sink.mColBoxOffset.w = 40;
         GS->tArray[1] = sink;
@@ -1185,19 +1201,19 @@ bool SpriteTextureCollision(SpriteSheet ss, Texture tex)
     bool horizCol = false;
     bool vertCol = false;
 
-/*native texture col
-    if(ss.mX + ss.mDstRect.w >= tex.mX 
-            && ss.mX <= tex.mX + tex.mW)
-    {
-        horizCol = true;
-    }
+    /*native texture col
+      if(ss.mX + ss.mDstRect.w >= tex.mX 
+      && ss.mX <= tex.mX + tex.mW)
+      {
+      horizCol = true;
+      }
 
-    if(ss.mY + ss.mDstRect.h >= tex.mY
-            && ss.mY <= tex.mY + tex.mH)
-    {
-        vertCol = true;
-    }
-*/
+      if(ss.mY + ss.mDstRect.h >= tex.mY
+      && ss.mY <= tex.mY + tex.mH)
+      {
+      vertCol = true;
+      }
+     */
 
     //new texture col
     if(ss.mX + ss.mColBoxOffset.x + ss.mColBoxOffset.w >= tex.mX + tex.mColBoxOffset.x 
