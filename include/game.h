@@ -62,6 +62,8 @@ TextLine InitTextLine(SDL_Texture *fontTex,
         int y
         );
 
+void RenderTextLine(SDL_Renderer *renderer, TextLine tLine);
+
 bool DarkenTexture(Texture *tex, Uint32 curTime);
 
 bool LightenTexture(Texture *tex, Uint32 curTime);

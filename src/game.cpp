@@ -836,6 +836,71 @@ TextLine InitTextLine(SDL_Texture *fontTex,
     return outTextLine;
 }
 
+void RenderTextLine(SDL_Renderer *renderer, TextLine tLine)
+{
+    SDL_Rect srcRect, dstRect;
+
+    srcRect.x = 0;
+    srcRect.y = 0;
+    srcRect.w = tLine.mFontW;
+    srcRect.h = tLine.mFontH;
+
+    dstRect.x = tLine.mX;
+    dstRect.y = tLine.mY;
+    dstRect.w = tLine.mFontW;
+    dstRect.h = tLine.mFontH;
+
+    int curXPos = 0;
+    int curYPos = 0;
+
+    int numLetters = tLine.mText.size();
+
+    for(int i = 0; i < numLetters; i++)
+    {
+        char curChar = tLine.mText[i];
+        int xTextPos = 0;
+        int yTextPos = 0;
+        //Capitals
+
+        if ((int)curChar >= 65 && (int)curChar <= 90)
+        {
+            xTextPos = (int)curChar - 65;
+        }
+        //lower case
+        else if ((int)curChar >= 97 && (int)curChar <= 122)
+        {
+            xTextPos = (int)curChar - 97;
+            yTextPos = 1;
+        }
+        //space
+        else if((int)curChar == 32)
+        {
+            xTextPos = 3;
+            yTextPos = 25;
+        }
+        //numbers
+        else if ((int)curChar >= 48 && (int)curChar <= 57)
+        {
+            xTextPos = (int)curChar - 48;
+            yTextPos = 2;
+        }
+
+        srcRect.x = xTextPos * tLine.mFontW;
+        srcRect.y = yTextPos * tLine.mFontH;
+
+        dstRect.x = tLine.mX + tLine.mFontW * curXPos;
+        dstRect.y = tLine.mY + tLine.mFontH * curYPos;
+
+        SDL_SetTextureBlendMode(tLine.mFontTex, SDL_BLENDMODE_BLEND);
+
+        SDL_SetTextureAlphaMod(tLine.mFontTex, tLine.mAlpha);
+        SDL_RenderCopyEx(renderer, tLine.mFontTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
+
+        curXPos += 1;
+    }
+
+}
+
 bool DarkenTexture(Texture *tex, Uint32 curTime)
 {
     int updateIncrement = 5;
@@ -1088,7 +1153,8 @@ void AddStoryLine(GameState *GS, string line)
                                             20,
                                             line,
                                             0,
-                                            0);
+                                            GS->curStory * 20);
+    GS->sStory[GS->curStory].mAlpha = 100;
     GS->curStory += 1;
 }
 
@@ -1224,6 +1290,7 @@ void LoadScene(GameState *GS, string sceneName)
         for(int i = 0; i < GS->curStory; i++)
         {
             cout << GS->sStory[i].mText << "\n";
+            RenderTextLine(GS->renderer, GS->sStory[i]);
         }
     }
 

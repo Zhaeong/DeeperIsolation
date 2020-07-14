@@ -301,6 +301,11 @@ void gameloop()
         RenderTextBox(GS.renderer, GS.curTime, &GS.tbArray[i]);
     }
 
+    for(int i = 0; i < GS.curStory; i++)
+    {
+        RenderTextLine(GS.renderer, GS.sStory[i]);
+    }
+
     //Render the fadeout textures
     RenderTexture(GS.renderer, GS.blackTex);
     ////////////////////////////////////////////////////////////////////////
