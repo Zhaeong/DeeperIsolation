@@ -200,6 +200,15 @@ struct TextBox
     int mNumRendered;
 };
 
+struct TextLine
+{
+    SDL_Texture *mFontTex;
+    int mFontW;
+    int mFontH;
+    string mText;
+    int mX, mY;
+    int mAlpha;
+};
 
 
 struct LevelInfo
@@ -245,7 +254,7 @@ struct GameState
     int NarrativeCounter;
 
     int curStory;
-    string sStory[NUM_LINES];
+    TextLine sStory[NUM_LINES];
 };
 
 

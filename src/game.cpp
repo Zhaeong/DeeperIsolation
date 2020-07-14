@@ -537,6 +537,8 @@ TextBox InitTextBox(SDL_Texture *fontTex,
     return outTextBox;
 }
 
+
+
 void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox)
 {
 
@@ -811,6 +813,28 @@ void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox)
     }
 }
 
+TextLine InitTextLine(SDL_Texture *fontTex,
+        int fontW,
+        int fontH,
+        string text,
+        int x,
+        int y
+        )
+{
+    TextLine outTextLine;
+
+    outTextLine.mFontTex = fontTex;
+    outTextLine.mFontW = fontW;
+    outTextLine.mFontH = fontH;
+
+    outTextLine.mText = text;
+    outTextLine.mX = x;
+    outTextLine.mY = y;
+
+    outTextLine.mAlpha = 0;
+
+    return outTextLine;
+}
 
 bool DarkenTexture(Texture *tex, Uint32 curTime)
 {
@@ -1059,7 +1083,12 @@ void SpawnControls(GameState *GS)
 
 void AddStoryLine(GameState *GS, string line)
 {
-    GS->sStory[GS->curStory] = line;
+    GS->sStory[GS->curStory] = InitTextLine(GS->fontTexture,
+                                            20,
+                                            20,
+                                            line,
+                                            0,
+                                            0);
     GS->curStory += 1;
 }
 
@@ -1094,7 +1123,7 @@ void LoadScene(GameState *GS, string sceneName)
         GS->curStory = 0;
         for(int i = 0; i < NUM_LINES; i++)
         {
-            GS->sStory[i] = "";
+            GS->sStory[i].mText = "";
         }
     }
     else if(sceneName == SCENE_BEDROOM)
@@ -1194,7 +1223,7 @@ void LoadScene(GameState *GS, string sceneName)
         AddStoryLine(GS, "He leaves for work, his child wakes in an empty home.");
         for(int i = 0; i < GS->curStory; i++)
         {
-            cout << GS->sStory[i] << "\n";
+            cout << GS->sStory[i].mText << "\n";
         }
     }
 

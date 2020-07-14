@@ -54,6 +54,14 @@ TextBox InitTextBox(SDL_Texture *fontTex,
 
 void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox);
 
+TextLine InitTextLine(SDL_Texture *fontTex,
+        int fontW,
+        int fontH,
+        string text,
+        int x,
+        int y
+        );
+
 bool DarkenTexture(Texture *tex, Uint32 curTime);
 
 bool LightenTexture(Texture *tex, Uint32 curTime);
