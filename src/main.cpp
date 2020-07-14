@@ -301,9 +301,12 @@ void gameloop()
         RenderTextBox(GS.renderer, GS.curTime, &GS.tbArray[i]);
     }
 
-    for(int i = 0; i < GS.curStory; i++)
+    if(GS.SceneCurrent == SCENE_ENDDOOR)
     {
-        RenderTextLine(GS.renderer, GS.sStory[i]);
+        for(int i = 0; i < GS.curStory; i++)
+        {
+            RenderTextLine(GS.renderer, GS.sStory[i]);
+        }
     }
 
     //Render the fadeout textures
