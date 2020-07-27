@@ -1155,6 +1155,7 @@ void AddStoryLine(GameState *GS, string line)
                                             0,
                                             GS->curStory * 20);
     GS->sStory[GS->curStory].mAlpha = 100;
+    GS->sStory[GS->curStory].mDelay = GS->curStory * 1000;
     GS->curStory += 1;
 }
 
@@ -1287,10 +1288,13 @@ void LoadScene(GameState *GS, string sceneName)
     {
         GS->lInfo = InitLevelInfo(GS, SCENE_BEDROOM);
         AddStoryLine(GS, "He leaves for work, his child wakes in an empty home.");
+
+        //init text start renderings
+
         for(int i = 0; i < GS->curStory; i++)
         {
             cout << GS->sStory[i].mText << "\n";
-            RenderTextLine(GS->renderer, GS->sStory[i]);
+            GS->sStory[i].mStartTime = GS->curTime;
         }
     }
 

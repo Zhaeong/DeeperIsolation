@@ -208,6 +208,9 @@ struct TextLine
     string mText;
     int mX, mY;
     int mAlpha;
+
+    Uint32 mStartTime;
+    Uint32 mDelay;
 };
 
 

@@ -305,7 +305,10 @@ void gameloop()
     {
         for(int i = 0; i < GS.curStory; i++)
         {
-            RenderTextLine(GS.renderer, GS.sStory[i]);
+            if(GS.curTime > GS.sStory[i].mStartTime + GS.sStory[i].mDelay)
+            {
+                RenderTextLine(GS.renderer, GS.sStory[i]);
+            }
         }
     }
 
