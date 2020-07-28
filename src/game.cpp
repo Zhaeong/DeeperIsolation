@@ -1204,6 +1204,8 @@ void LoadScene(GameState *GS, string sceneName)
         SpawnPlayer(GS, GS->lInfo.mInitPlayerPos.x, GS->lInfo.mInitPlayerPos.y);
 
         SpawnControls(GS);
+
+        //Door
         SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, TEX_DOOR);
 
         Texture door = InitTexture(doorTex, 
@@ -1215,11 +1217,10 @@ void LoadScene(GameState *GS, string sceneName)
         door.mButtonText = "Enter Living room";
         GS->tArray[0] = door;
 
+        //Sink
         SDL_Texture *sinkTex = GetSDLTexture(GS->renderer, GS->window, TEX_SINK);
 
-        Texture sink = InitTexture(sinkTex,
-                450,
-                GS->ssArray[SS_PLAYER].mY); //action same height player
+        Texture sink = InitTexture(sinkTex, 450, GS->ssArray[SS_PLAYER].mY); //action same height player
 
         sink.mType = TTYPE_ACTION;
         sink.mName = PLAYER_WASH; 
@@ -1228,6 +1229,13 @@ void LoadScene(GameState *GS, string sceneName)
         sink.mColBoxOffset.x = 60;
         sink.mColBoxOffset.w = 40;
         GS->tArray[1] = sink;
+
+        //ChildSleep
+
+        SDL_Texture *childsleepTex = GetSDLTexture(GS->renderer, GS->window, TEX_CHILDSLEEP);
+        Texture childSleep = InitTexture(childsleepTex, 300, GS->ssArray[SS_PLAYER].mY);
+
+        GS->tArray[2] = childSleep;
 
         //Special case for start spawn of the level where the player is in bed instead of door.
         if(GS->NarrativeCounter == 0)

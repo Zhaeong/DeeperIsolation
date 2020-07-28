@@ -163,53 +163,58 @@ Module.expectedDataFileDownloads++;
    "end": 3152,
    "audio": 0
   }, {
-   "filename": "/res/png/door.png",
+   "filename": "/res/png/childsleep.png",
    "start": 3152,
-   "end": 4607,
+   "end": 7112,
+   "audio": 0
+  }, {
+   "filename": "/res/png/door.png",
+   "start": 7112,
+   "end": 8567,
    "audio": 0
   }, {
    "filename": "/res/png/livingroom.png",
-   "start": 4607,
-   "end": 6710,
+   "start": 8567,
+   "end": 10670,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png",
-   "start": 6710,
-   "end": 9833,
+   "start": 10670,
+   "end": 13793,
    "audio": 0
   }, {
    "filename": "/res/png/manwake.png",
-   "start": 9833,
-   "end": 42479,
+   "start": 13793,
+   "end": 46439,
    "audio": 0
   }, {
    "filename": "/res/png/manwalk.png",
-   "start": 42479,
-   "end": 88352,
+   "start": 46439,
+   "end": 92312,
    "audio": 0
   }, {
    "filename": "/res/png/manwash.png",
-   "start": 88352,
-   "end": 124859,
+   "start": 92312,
+   "end": 128819,
    "audio": 0
   }, {
    "filename": "/res/png/sink.png",
-   "start": 124859,
-   "end": 126869,
+   "start": 128819,
+   "end": 130829,
    "audio": 0
   }, {
    "filename": "/res/png/textBox.png",
-   "start": 126869,
-   "end": 128254,
+   "start": 130829,
+   "end": 132214,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 128254,
-   "end": 564235,
+   "start": 132214,
+   "end": 568195,
    "audio": 0
   } ],
-  "remote_package_size": 564235,
-  "package_uuid": "0577d638-a6ac-47e6-8209-658c093f668b"
+  "remote_package_size": 568195,
+  "package_uuid": "3be5e8c1-35fe-46dd-ae9d-b5fe8a1fedc2"
  });
 })();
 
@@ -610,8 +615,8 @@ function setValue(ptr, value, type, noSafe) {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 1021,
- "maximum": 1021 + 0,
+ "initial": 1023,
+ "maximum": 1023 + 0,
  "element": "anyfunc"
 });
 
@@ -830,7 +835,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5345984, STACK_MAX = 103104, DYNAMIC_BASE = 5345984, DYNAMICTOP_PTR = 102944;
+var STACK_BASE = 5346064, STACK_MAX = 103184, DYNAMIC_BASE = 5346064, DYNAMICTOP_PTR = 103024;
 
 assert(STACK_BASE % 16 === 0, "stack must start aligned");
 
@@ -1195,7 +1200,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 35252: function($0, $1, $2) {
+ 35300: function($0, $1, $2) {
   var w = $0;
   var h = $1;
   var pixels = $2;
@@ -1266,7 +1271,7 @@ var ASM_CONSTS = {
   SDL2.ctx.putImageData(SDL2.image, 0, 0);
   return 0;
  },
- 36707: function($0, $1, $2, $3, $4) {
+ 36755: function($0, $1, $2, $3, $4) {
   var w = $0;
   var h = $1;
   var hot_x = $2;
@@ -1303,30 +1308,30 @@ var ASM_CONSTS = {
   stringToUTF8(url, urlBuf, url.length + 1);
   return urlBuf;
  },
- 37696: function($0) {
+ 37744: function($0) {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = UTF8ToString($0);
   }
   return 0;
  },
- 37789: function() {
+ 37837: function() {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = "none";
   }
  },
- 39014: function() {
+ 39062: function() {
   return screen.width;
  },
- 39041: function() {
+ 39089: function() {
   return screen.height;
  },
- 39114: function($0) {
+ 39162: function($0) {
   if (typeof Module["setWindowTitle"] !== "undefined") {
    Module["setWindowTitle"](UTF8ToString($0));
   }
   return 0;
  },
- 39268: function() {
+ 39316: function() {
   if (typeof AudioContext !== "undefined") {
    return 1;
   } else if (typeof webkitAudioContext !== "undefined") {
@@ -1334,7 +1339,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 39434: function() {
+ 39482: function() {
   if (typeof navigator.mediaDevices !== "undefined" && typeof navigator.mediaDevices.getUserMedia !== "undefined") {
    return 1;
   } else if (typeof navigator.webkitGetUserMedia !== "undefined") {
@@ -1342,7 +1347,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 39660: function($0) {
+ 39708: function($0) {
   if (typeof Module["SDL2"] === "undefined") {
    Module["SDL2"] = {};
   }
@@ -1361,11 +1366,11 @@ var ASM_CONSTS = {
   }
   return SDL2.audioContext === undefined ? -1 : 0;
  },
- 40143: function() {
+ 40191: function() {
   var SDL2 = Module["SDL2"];
   return SDL2.audioContext.sampleRate;
  },
- 40213: function($0, $1, $2, $3) {
+ 40261: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   var have_microphone = function(stream) {
    if (SDL2.capture.silenceTimer !== undefined) {
@@ -1406,7 +1411,7 @@ var ASM_CONSTS = {
    }, have_microphone, no_microphone);
   }
  },
- 41865: function($0, $1, $2, $3) {
+ 41913: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
   SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -1418,7 +1423,7 @@ var ASM_CONSTS = {
   };
   SDL2.audio.scriptProcessorNode["connect"](SDL2.audioContext["destination"]);
  },
- 42275: function($0, $1) {
+ 42323: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
   for (var c = 0; c < numChannels; ++c) {
@@ -1437,7 +1442,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 42880: function($0, $1) {
+ 42928: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
   for (var c = 0; c < numChannels; ++c) {
@@ -1450,7 +1455,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 43360: function($0) {
+ 43408: function($0) {
   var SDL2 = Module["SDL2"];
   if ($0) {
    if (SDL2.capture.silenceTimer !== undefined) {
