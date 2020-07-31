@@ -32,8 +32,9 @@ He leaves for work, his child wakes in an empty home.
 const Uint32 TEXTUREFORMAT = SDL_PIXELFORMAT_RGBA8888;
 
 const int NUM_SPRITESHEET = 5;
-const int SS_PLAYER = 0;
-const int SS_PLAYER_ACTION = 1;
+const int SS_PLAYER = 3;
+const int SS_PLAYER_ACTION = 4;
+const int SS_CHILD = 0;
 
 //Actions in the form of sprite sheets
 const string PLAYER_WALK = "./res/png/manwalk.png";
@@ -42,6 +43,7 @@ const string PLAYER_WAKE = "./res/png/manwake.png";
 
 const string PLAYER_WASH = "./res/png/manwash.png";
 
+//specific frame in player walk animation png which contains the idle frame
 const int PLAYER_IDLE_FRAME = 18;
 
 //player char states
@@ -53,7 +55,6 @@ const string STATE_LEFT = "Left";
 const string STATE_RIGHT = "Right";
 
 
-const int SS_ACTION = 1;
 
 const int NUM_TEXTBOX = 5;
 

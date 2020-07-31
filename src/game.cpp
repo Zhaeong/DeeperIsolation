@@ -300,6 +300,7 @@ SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
     sSheet.mDstRect.h = h;
     sSheet.mNumFrames = numFrames;
 
+    sSheet.mUpdateInterval = 1000;
     sSheet.mCurFrame = 0;
 
     sSheet.mRotation = 0;
@@ -1233,9 +1234,15 @@ void LoadScene(GameState *GS, string sceneName)
         //ChildSleep
 
         SDL_Texture *childsleepTex = GetSDLTexture(GS->renderer, GS->window, TEX_CHILDSLEEP);
-        Texture childSleep = InitTexture(childsleepTex, 300, GS->ssArray[SS_PLAYER].mY);
 
-        GS->tArray[2] = childSleep;
+        SpriteSheet childSleepSS = InitSpriteSheet(childsleepTex, 100, 100, 4);
+
+        childSleepSS.mX = 300;
+        childSleepSS.mY = GS->ssArray[SS_PLAYER].mY;
+        childSleepSS.mUpdateInterval = 1500;
+        GS->ssArray[SS_CHILD] = childSleepSS;
+
+        
 
         //Special case for start spawn of the level where the player is in bed instead of door.
         if(GS->NarrativeCounter == 0)
