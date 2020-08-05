@@ -36,7 +36,7 @@ void gameloop()
     int textureCol = -1;
     for(int i = 0; i < NUM_TEXTURE; i++)
     {
-        if(GS.tArray[i].mInteract && SpriteTextureCollision(GS.ssArray[0], GS.tArray[i]))
+        if(GS.tArray[i].mInteract && SpriteTextureCollision(GS.ssArray[SS_PLAYER], GS.tArray[i]))
         {
             textureCol = i;
             if(GS.tArray[i].mType == TTYPE_TRANSIT)
@@ -76,6 +76,20 @@ void gameloop()
     {
         GS.tbArray[4].mActive = false;
     }
+
+    //Spritesheel collisions
+
+    for(int i = 0; i < NUM_SPRITESHEET; i++)
+    {
+        if(i != SS_PLAYER)
+        {
+            if(SpriteToSpriteCollision(GS.ssArray[SS_PLAYER], GS.ssArray[i]))
+            {
+                cout << "fsjfsdjkl\n";
+            }
+        }
+    }
+
 
 
     //Handle user input

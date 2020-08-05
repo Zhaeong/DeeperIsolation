@@ -1358,3 +1358,30 @@ bool SpriteTextureCollision(SpriteSheet ss, Texture tex)
 
 }
 
+bool SpriteToSpriteCollision(SpriteSheet ss, SpriteSheet ss2)
+{
+    //if either is inactive, return false;
+    if(!ss.mActive || !ss2.mActive)
+    {
+        return false; 
+    }
+    bool horizCol = false;
+    bool vertCol = false;
+
+    //new texture col
+    if(ss.mX + ss.mColBoxOffset.x + ss.mColBoxOffset.w >= ss2.mX + ss2.mColBoxOffset.x 
+            && ss.mX + ss.mColBoxOffset.x <= ss2.mX + ss2.mColBoxOffset.x + ss2.mColBoxOffset.w)
+    {
+        horizCol = true;
+    }
+
+    if(ss.mY + ss.mColBoxOffset.y + ss.mColBoxOffset.h >= ss2.mY + ss2.mColBoxOffset.y
+            && ss.mY + ss.mColBoxOffset.y <= ss2.mY + ss.mColBoxOffset.y + ss2.mColBoxOffset.h)
+    {
+        vertCol = true;
+    }
+
+    return horizCol && vertCol;
+
+}
+

@@ -88,7 +88,7 @@ void LoadScene(GameState *GS, string sceneName);
 
 bool SpriteTextureCollision(SpriteSheet ss, Texture tex);
 
-
+bool SpriteToSpriteCollision(SpriteSheet ss, SpriteSheet ss2);
 
 #endif // GAME_H
  
