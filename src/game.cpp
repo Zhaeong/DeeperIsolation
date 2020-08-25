@@ -300,6 +300,13 @@ SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
     sSheet.mDstRect.h = h;
     sSheet.mNumFrames = numFrames;
 
+    sSheet.mType = TTYPE_NORMAL;
+    sSheet.mButtonText = "";
+    sSheet.mNarration = "";
+
+
+
+    sSheet.mLastUpdate = 0;
     sSheet.mUpdateInterval = 1000;
     sSheet.mCurFrame = 0;
 
@@ -989,7 +996,7 @@ void LoadAction(GameState *GS, string action, int textureCol)
     {
         return;
     }
-
+    cout << "loaded action: " << action << "\n";
     GS->PlayerState = STATE_ACTION;
 
     SDL_Texture *actionTex = GetSDLTexture(GS->renderer, GS->window, action);
@@ -1150,11 +1157,11 @@ void SpawnControls(GameState *GS)
 void AddStoryLine(GameState *GS, string line)
 {
     GS->sStory[GS->curStory] = InitTextLine(GS->fontTexture,
-                                            20,
-                                            20,
-                                            line,
-                                            0,
-                                            GS->curStory * 20);
+            20,
+            20,
+            line,
+            0,
+            GS->curStory * 20);
     GS->sStory[GS->curStory].mAlpha = 100;
     GS->sStory[GS->curStory].mDelay = GS->curStory * 1000;
     GS->curStory += 1;
@@ -1237,12 +1244,16 @@ void LoadScene(GameState *GS, string sceneName)
 
         SpriteSheet childSleepSS = InitSpriteSheet(childsleepTex, 100, 100, 4);
 
+        childSleepSS.mType = TTYPE_ACTION;
+        childSleepSS.mButtonText = "Examine";
+        childSleepSS.mNarration = "His child still sleeps" ;
+
         childSleepSS.mX = 300;
         childSleepSS.mY = GS->ssArray[SS_PLAYER].mY;
         childSleepSS.mUpdateInterval = 1500;
         GS->ssArray[SS_CHILD] = childSleepSS;
 
-        
+
 
         //Special case for start spawn of the level where the player is in bed instead of door.
         if(GS->NarrativeCounter == 0)

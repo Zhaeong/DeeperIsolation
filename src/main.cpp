@@ -41,9 +41,9 @@ void gameloop()
             textureCol = i;
             if(GS.tArray[i].mType == TTYPE_TRANSIT)
             {
-                if(!GS.tbArray[4].mActive)
+                if(!GS.tbArray[TB_ACTION_BUTTON].mActive)
                 {
-                    GS.tbArray[4] = InitTextBox(GS.fontTexture,
+                    GS.tbArray[TB_ACTION_BUTTON] = InitTextBox(GS.fontTexture,
                             20,
                             20,
                             GS.mainBoxTexture,
@@ -56,9 +56,9 @@ void gameloop()
             }
             else if(GS.tArray[i].mType == TTYPE_ACTION)
             {
-                if(!GS.tbArray[4].mActive)
+                if(!GS.tbArray[TB_ACTION_BUTTON].mActive)
                 {
-                    GS.tbArray[4] = InitTextBox(GS.fontTexture,
+                    GS.tbArray[TB_ACTION_BUTTON] = InitTextBox(GS.fontTexture,
                             20,
                             20,
                             GS.mainBoxTexture,
@@ -72,22 +72,45 @@ void gameloop()
         }
 
     }
-    if(textureCol == -1)
-    {
-        GS.tbArray[4].mActive = false;
-    }
+
 
     //Spritesheel collisions
 
+    //Spritesheel collisions
+    int spriteCol = -1;
     for(int i = 0; i < NUM_SPRITESHEET; i++)
     {
         if(i != SS_PLAYER)
         {
             if(SpriteToSpriteCollision(GS.ssArray[SS_PLAYER], GS.ssArray[i]))
             {
-                cout << "fsjfsdjkl\n";
+                spriteCol = i;
+                cout << "colsss: " << spriteCol << "\n";
+
+                if(GS.ssArray[i].mType == TTYPE_ACTION)
+                {
+                    if(!GS.tbArray[TB_ACTION_BUTTON].mActive)
+                    {
+                        GS.tbArray[TB_ACTION_BUTTON] = InitTextBox(GS.fontTexture,
+                                20,
+                                20,
+                                GS.mainBoxTexture,
+                                GS.ssArray[i].mButtonText, 
+                                400,
+                                10,
+                                5,
+                                200);           
+                    }
+                }
+
+
             }
         }
+    }
+
+    if(textureCol == -1 && spriteCol == -1)
+    {
+        GS.tbArray[TB_ACTION_BUTTON].mActive = false;
     }
 
 
@@ -212,7 +235,7 @@ void gameloop()
                 else
                 {
                     ChangePlayerState(&GS, STATE_IDLE);
-                    if(textureCol != - 1 && GS.tbArray[4].mState == 2)
+                    if(textureCol != - 1 && GS.tbArray[TB_ACTION_BUTTON].mState == 2)
                     {
 
                         if(GS.tArray[textureCol].mType == TTYPE_TRANSIT)
@@ -223,9 +246,9 @@ void gameloop()
                         }
                         else if(GS.tArray[textureCol].mType == TTYPE_ACTION)
                         {
-                            cout << "action: " << GS.tArray[textureCol].mName << "\n";
                             LoadAction(&GS, GS.tArray[textureCol].mName, textureCol);
                         }
+                        
 
                     }
 

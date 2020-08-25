@@ -57,6 +57,7 @@ const string STATE_RIGHT = "Right";
 
 
 const int NUM_TEXTBOX = 5;
+const int TB_ACTION_BUTTON = 4;
 
 const int NUM_TEXTURE = 5;
 const int NUM_LINES = 10;
@@ -139,6 +140,11 @@ struct SpriteSheet
     int mAlpha;
     SDL_Point *mCenter;
     SDL_RendererFlip mFlip;
+
+
+    string mType;
+    string mButtonText;
+    string mNarration;
 
     //handling frame updates
     Uint32 mLastUpdate;
