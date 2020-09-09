@@ -990,6 +990,25 @@ LevelInfo InitLevelInfo(GameState *GS, string texturePath)
     return outLevel;
 }
 
+void LoadNarration(GameState *GS, string sNarration)
+{
+    GS->tbArray[TB_NARRATION_BOX] = InitTextBox(GS->fontTexture,
+            20,
+            20,
+            GS->mainBoxTexture,
+            sNarration,
+            200,
+            200,
+            14,
+            200);
+
+    GS->tbArray[TB_NARRATION_BOX].mDuration = sNarration.length() * 200;
+
+    AddStoryLine(GS, sNarration);
+
+    //GS->tArray[textureCol].mInteract = false;
+
+}
 void LoadAction(GameState *GS, string action, int textureCol)
 {
     if(textureCol != -1 && !GS->tArray[textureCol].mInteract)
@@ -1044,21 +1063,26 @@ void LoadAction(GameState *GS, string action, int textureCol)
 
     if(GS->tArray[textureCol].mNarration != "" && GS->tArray[textureCol].mNarration != "NONE")
     {
-        GS->tbArray[2] = InitTextBox(GS->fontTexture,
-                20,
-                20,
-                GS->mainBoxTexture,
-                GS->tArray[textureCol].mNarration,
-                200,
-                200,
-                14,
-                200);
 
-        GS->tbArray[2].mDuration = GS->tArray[textureCol].mNarration.length() * 200;
-
-        AddStoryLine(GS, GS->tArray[textureCol].mNarration);
-
+        LoadNarration(GS, GS->tArray[textureCol].mNarration);
         GS->tArray[textureCol].mInteract = false;
+        /*
+           GS->tbArray[2] = InitTextBox(GS->fontTexture,
+           20,
+           20,
+           GS->mainBoxTexture,
+           GS->tArray[textureCol].mNarration,
+           200,
+           200,
+           14,
+           200);
+
+           GS->tbArray[2].mDuration = GS->tArray[textureCol].mNarration.length() * 200;
+
+           AddStoryLine(GS, GS->tArray[textureCol].mNarration);
+
+           GS->tArray[textureCol].mInteract = false;
+         */
     }
 
 }

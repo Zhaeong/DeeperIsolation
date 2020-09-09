@@ -235,20 +235,32 @@ void gameloop()
                 else
                 {
                     ChangePlayerState(&GS, STATE_IDLE);
-                    if(textureCol != - 1 && GS.tbArray[TB_ACTION_BUTTON].mState == 2)
+                    if(GS.tbArray[TB_ACTION_BUTTON].mState == 2)
                     {
 
-                        if(GS.tArray[textureCol].mType == TTYPE_TRANSIT)
+                        //Handle texture collisions
+                        if(textureCol != -1)
                         {
-                            cout << "loading: " << GS.tArray[textureCol].mName << "\n";
-                            GS.SceneCurrent = SCENE_TRAN;
-                            GS.SceneNext = GS.tArray[textureCol].mName;
+                            if(GS.tArray[textureCol].mType == TTYPE_TRANSIT)
+                            {
+                                cout << "loading: " << GS.tArray[textureCol].mName << "\n";
+                                GS.SceneCurrent = SCENE_TRAN;
+                                GS.SceneNext = GS.tArray[textureCol].mName;
+                            }
+                            else if(GS.tArray[textureCol].mType == TTYPE_ACTION)
+                            {
+                                LoadAction(&GS, GS.tArray[textureCol].mName, textureCol);
+                            }
                         }
-                        else if(GS.tArray[textureCol].mType == TTYPE_ACTION)
+                        else if(spriteCol != -1)
                         {
-                            LoadAction(&GS, GS.tArray[textureCol].mName, textureCol);
+                            if(GS.ssArray[spriteCol].mType == TTYPE_ACTION)
+                            {
+                                cout << "actiobnnnt\n";
+                                LoadNarration(&GS, GS.ssArray[spriteCol].mNarration);
+                            }
                         }
-                        
+
 
                     }
 
