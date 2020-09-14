@@ -33,50 +33,18 @@ void gameloop()
     ////////////////////////////////////////////////////////////////////////
 
     //Update game state
+
+    //texture cols 
     int textureCol = -1;
     for(int i = 0; i < NUM_TEXTURE; i++)
     {
         if(GS.tArray[i].mInteract && SpriteTextureCollision(GS.ssArray[SS_PLAYER], GS.tArray[i]))
         {
             textureCol = i;
-            if(GS.tArray[i].mType == TTYPE_TRANSIT)
-            {
-                if(!GS.tbArray[TB_ACTION_BUTTON].mActive)
-                {
-                    GS.tbArray[TB_ACTION_BUTTON] = InitTextBox(GS.fontTexture,
-                            20,
-                            20,
-                            GS.mainBoxTexture,
-                            GS.tArray[i].mButtonText, 
-                            400,
-                            10,
-                            5,
-                            200);           
-                }
-            }
-            else if(GS.tArray[i].mType == TTYPE_ACTION)
-            {
-                if(!GS.tbArray[TB_ACTION_BUTTON].mActive)
-                {
-                    GS.tbArray[TB_ACTION_BUTTON] = InitTextBox(GS.fontTexture,
-                            20,
-                            20,
-                            GS.mainBoxTexture,
-                            GS.tArray[i].mButtonText, 
-                            400,
-                            10,
-                            5,
-                            200);           
-                }
-            }
         }
-
     }
 
-
-    //Spritesheel collisions
-
-    //Spritesheel collisions
+    //Spritesheet collisions
     int spriteCol = -1;
     for(int i = 0; i < NUM_SPRITESHEET; i++)
     {
@@ -85,35 +53,51 @@ void gameloop()
             if(SpriteToSpriteCollision(GS.ssArray[SS_PLAYER], GS.ssArray[i]))
             {
                 spriteCol = i;
-                cout << "colsss: " << spriteCol << "\n";
-
-                if(GS.ssArray[i].mType == TTYPE_ACTION)
-                {
-                    if(!GS.tbArray[TB_ACTION_BUTTON].mActive)
-                    {
-                        GS.tbArray[TB_ACTION_BUTTON] = InitTextBox(GS.fontTexture,
-                                20,
-                                20,
-                                GS.mainBoxTexture,
-                                GS.ssArray[i].mButtonText, 
-                                400,
-                                10,
-                                5,
-                                200);           
-                    }
-                }
-
-
             }
         }
     }
+    
 
-    if(textureCol == -1 && spriteCol == -1)
+    if(textureCol != -1 || spriteCol != -1)
     {
-        GS.tbArray[TB_ACTION_BUTTON].mActive = false;
+        TextBox textureTB;
+        string buttonText;
+        string type;
+        if(textureCol != -1)
+        {
+            buttonText = GS.tArray[textureCol].mButtonText; 
+            type = GS.tArray[textureCol].mType;
+        }
+        else if(spriteCol != -1)
+        {
+            buttonText = GS.ssArray[spriteCol].mButtonText;
+            type = GS.ssArray[spriteCol].mType;
+        }
+
+        textureTB = InitTextBox(GS.fontTexture,
+                            20,
+                            20,
+                            GS.mainBoxTexture,
+                            buttonText, 
+                            400,
+                            10,
+                            5,
+                            0);           
+
+        //the button text is a hack to redraw when moving player from
+        //one interactable object to another with no empty space inbetween
+        if(type != TTYPE_NORMAL && GS.tbArray[TB_ACTION_BUTTON].mText != buttonText)
+        {
+            GS.tbArray[TB_ACTION_BUTTON] = textureTB;
+        }
     }
 
-
+    else
+    {
+        //removes the text so that it can redraw due to the above check
+        GS.tbArray[TB_ACTION_BUTTON].mText = "";
+        GS.tbArray[TB_ACTION_BUTTON].mActive = false;
+    }
 
     //Handle user input
     int mouseX = 0;

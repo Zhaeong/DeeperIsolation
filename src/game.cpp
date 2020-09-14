@@ -1283,7 +1283,7 @@ void LoadScene(GameState *GS, string sceneName)
         if(GS->NarrativeCounter == 0)
         {
 
-            GS->tbArray[2] = InitTextBox(GS->fontTexture,
+            GS->tbArray[TB_NARRATION_BOX] = InitTextBox(GS->fontTexture,
                     20,
                     20,
                     GS->mainBoxTexture,
@@ -1293,7 +1293,7 @@ void LoadScene(GameState *GS, string sceneName)
                     14,
                     200);
 
-            GS->tbArray[2].mDuration = 4000;
+            GS->tbArray[TB_NARRATION_BOX].mDuration = 4000;
 
             AddStoryLine(GS, "A man wakes up for work");
 
