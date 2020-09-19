@@ -762,7 +762,7 @@ void RenderTextBox(SDL_Renderer *renderer, Uint32 curTime, TextBox *tBox)
     {
         tBox->mLastUpdate = curTime;
     }
-    if(tBox->mSpeed > 0 && tBox->mNumRendered < tBox->mText.size())
+    if(tBox->mSpeed > 0 && tBox->mNumRendered <= tBox->mText.size())
     {
         renderNum = tBox->mNumRendered;
 
@@ -992,6 +992,8 @@ LevelInfo InitLevelInfo(GameState *GS, string texturePath)
 
 void LoadNarration(GameState *GS, string sNarration)
 {
+
+    GS->PlayerState = STATE_NARRATION;
     GS->tbArray[TB_NARRATION_BOX] = InitTextBox(GS->fontTexture,
             20,
             20,
@@ -1000,14 +1002,11 @@ void LoadNarration(GameState *GS, string sNarration)
             200,
             200,
             14,
-            200);
+            100);
 
-    GS->tbArray[TB_NARRATION_BOX].mDuration = sNarration.length() * 200;
+    GS->tbArray[TB_NARRATION_BOX].mDuration = sNarration.size() * 200 + 1000;
 
     AddStoryLine(GS, sNarration);
-
-    //GS->tArray[textureCol].mInteract = false;
-
 }
 void LoadAction(GameState *GS, string action, int textureCol)
 {
@@ -1016,7 +1015,6 @@ void LoadAction(GameState *GS, string action, int textureCol)
         return;
     }
     cout << "loaded action: " << action << "\n";
-    GS->PlayerState = STATE_ACTION;
 
     SDL_Texture *actionTex = GetSDLTexture(GS->renderer, GS->window, action);
     RemoveTextureWhiteSpace(actionTex);
@@ -1063,27 +1061,11 @@ void LoadAction(GameState *GS, string action, int textureCol)
 
     if(GS->tArray[textureCol].mNarration != "" && GS->tArray[textureCol].mNarration != "NONE")
     {
-
         LoadNarration(GS, GS->tArray[textureCol].mNarration);
         GS->tArray[textureCol].mInteract = false;
-        /*
-           GS->tbArray[2] = InitTextBox(GS->fontTexture,
-           20,
-           20,
-           GS->mainBoxTexture,
-           GS->tArray[textureCol].mNarration,
-           200,
-           200,
-           14,
-           200);
-
-           GS->tbArray[2].mDuration = GS->tArray[textureCol].mNarration.length() * 200;
-
-           AddStoryLine(GS, GS->tArray[textureCol].mNarration);
-
-           GS->tArray[textureCol].mInteract = false;
-         */
     }
+
+    GS->PlayerState = STATE_ACTION;
 
 }
 
@@ -1091,7 +1073,7 @@ void ChangePlayerState(GameState *GS, string newState)
 {
     bool stateChange = true;
 
-    if(GS->PlayerState == STATE_ACTION)
+    if(GS->PlayerState == STATE_ACTION || GS->PlayerState == STATE_NARRATION)
     {
         return;
     }
@@ -1291,9 +1273,9 @@ void LoadScene(GameState *GS, string sceneName)
                     200,
                     200,
                     14,
-                    200);
+                    100);
 
-            GS->tbArray[TB_NARRATION_BOX].mDuration = 4000;
+            GS->tbArray[TB_NARRATION_BOX].mDuration = 5000;
 
             AddStoryLine(GS, "A man wakes up for work");
 

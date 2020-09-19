@@ -309,6 +309,16 @@ void gameloop()
             GS.PlayerState = STATE_IDLE;
         }
     }
+    else if(GS.PlayerState == STATE_NARRATION)
+    {
+
+        // +1 due to size > 1 to index of last element
+        //cout << "size: " << GS.tbArray[TB_NARRATION_BOX].mText.size()<< " num: " << GS.tbArray[TB_NARRATION_BOX].mNumRendered<< "\n";
+        if(GS.tbArray[TB_NARRATION_BOX].mNumRendered + 1 == GS.tbArray[TB_NARRATION_BOX].mText.size())
+        {
+            GS.PlayerState = STATE_IDLE;
+        }
+    }
     UpdateSpriteSheet(GS.ssArray, GS.curTime);
 
     //

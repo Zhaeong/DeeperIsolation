@@ -50,6 +50,7 @@ const int PLAYER_IDLE_FRAME = 18;
 //some textboxes use state strings as text display as well as state changes
 //might be an issue with data coupling
 const string STATE_ACTION = "ACTION";
+const string STATE_NARRATION = "NARRATION";
 const string STATE_IDLE = "IDLE";
 const string STATE_LEFT = "Left";
 const string STATE_RIGHT = "Right";
