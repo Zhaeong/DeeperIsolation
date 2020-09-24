@@ -28,7 +28,7 @@ SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
         int h,
         int numFrames);
 
-void UpdateSpriteSheet(SpriteSheet *ssArray, Uint32 curTime);
+void UpdateSpriteSheet(SpriteSheet *ssheet, Uint32 curTime);
 void RenderSpriteSheet(SDL_Renderer *renderer, SpriteSheet sSheet);
 void RemoveTextureWhiteSpace(SDL_Texture *texture);
 

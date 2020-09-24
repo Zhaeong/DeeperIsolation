@@ -38,7 +38,7 @@ void gameloop()
     int textureCol = -1;
     for(int i = 0; i < NUM_TEXTURE; i++)
     {
-        if(GS.tArray[i].mInteract && SpriteTextureCollision(GS.ssArray[SS_PLAYER], GS.tArray[i]))
+        if(GS.tArray[i].mInteract && SpriteTextureCollision(GS.ssPlayer, GS.tArray[i]))
         {
             textureCol = i;
         }
@@ -48,12 +48,9 @@ void gameloop()
     int spriteCol = -1;
     for(int i = 0; i < NUM_SPRITESHEET; i++)
     {
-        if(i != SS_PLAYER)
+        if(SpriteToSpriteCollision(GS.ssPlayer, GS.ssArray[i]))
         {
-            if(SpriteToSpriteCollision(GS.ssArray[SS_PLAYER], GS.ssArray[i]))
-            {
-                spriteCol = i;
-            }
+            spriteCol = i;
         }
     }
 
@@ -283,43 +280,43 @@ void gameloop()
     if(GS.PlayerState == STATE_LEFT)
     {
         //level boundary check, with the collision box offset
-        if((GS.ssArray[SS_PLAYER].mX + GS.ssArray[SS_PLAYER].mColBoxOffset.x)- GS.playerSpeed < GS.lInfo.mLevelTex.mX)
+        if((GS.ssPlayer.mX + GS.ssPlayer.mColBoxOffset.x)- GS.playerSpeed < GS.lInfo.mLevelTex.mX)
         {
             ChangePlayerState(&GS, STATE_IDLE);
         }
         else
         {
-            GS.ssArray[SS_PLAYER].mX -= GS.playerSpeed;
-            GS.ssArray[SS_PLAYER].mUpdate = true;
-            GS.ssArray[SS_PLAYER].mFlip = SDL_FLIP_HORIZONTAL;
+            GS.ssPlayer.mX -= GS.playerSpeed;
+            GS.ssPlayer.mUpdate = true;
+            GS.ssPlayer.mFlip = SDL_FLIP_HORIZONTAL;
         }
     }
     else if(GS.PlayerState == STATE_RIGHT)
     {
         //level boundary check, with the collision box offset
-        if((GS.ssArray[SS_PLAYER].mX + GS.ssArray[SS_PLAYER].mColBoxOffset.x + GS.ssArray[SS_PLAYER].mColBoxOffset.w) 
-            + GS.playerSpeed > (GS.lInfo.mLevelTex.mX + GS.lInfo.mLevelTex.mW))
+        if((GS.ssPlayer.mX + GS.ssPlayer.mColBoxOffset.x + GS.ssPlayer.mColBoxOffset.w) 
+                + GS.playerSpeed > (GS.lInfo.mLevelTex.mX + GS.lInfo.mLevelTex.mW))
         {
             ChangePlayerState(&GS, STATE_IDLE);
         }
         else
         {
-            GS.ssArray[SS_PLAYER].mX += GS.playerSpeed;
-            GS.ssArray[SS_PLAYER].mUpdate = true;
-            GS.ssArray[SS_PLAYER].mFlip = SDL_FLIP_NONE;
+            GS.ssPlayer.mX += GS.playerSpeed;
+            GS.ssPlayer.mUpdate = true;
+            GS.ssPlayer.mFlip = SDL_FLIP_NONE;
         }
     }
     else if(GS.PlayerState == STATE_IDLE)
     {
-        GS.ssArray[SS_PLAYER].mCurFrame = PLAYER_IDLE_FRAME; 
-        GS.ssArray[SS_PLAYER].mUpdate = false;
+        GS.ssPlayer.mCurFrame = PLAYER_IDLE_FRAME; 
+        GS.ssPlayer.mUpdate = false;
     }
 
     if(GS.PlayerState == STATE_ACTION)
     {
         if(GS.ssArray[SS_PLAYER_ACTION].mCurFrame == (GS.ssArray[SS_PLAYER_ACTION].mNumFrames - 1))
         {
-            GS.ssArray[SS_PLAYER].mActive = true;
+            GS.ssPlayer.mActive = true;
             GS.ssArray[SS_PLAYER_ACTION].mActive = false;
             //Not using function Change Player state here because when its state action only 
             //this part can change it back to idle
@@ -336,15 +333,18 @@ void gameloop()
             GS.PlayerState = STATE_IDLE;
         }
     }
-    UpdateSpriteSheet(GS.ssArray, GS.curTime);
 
+    for(int i = 0; i < NUM_SPRITESHEET; i++)
+    {
+        UpdateSpriteSheet(&GS.ssArray[i], GS.curTime);
+    }
+
+    UpdateSpriteSheet(&GS.ssPlayer, GS.curTime);
     //
     //Render Area
     //
 
     RenderTexture(GS.renderer, GS.lInfo.mLevelTex);
-
-
 
     for(int i = 0; i < NUM_TEXTURE; i++)
     {
@@ -371,6 +371,9 @@ void gameloop()
             }
         }
     }
+
+    //renderPlayer
+    RenderSpriteSheet(GS.renderer, GS.ssPlayer);
 
     //Render the fadeout textures
     RenderTexture(GS.renderer, GS.blackTex);

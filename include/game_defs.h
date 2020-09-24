@@ -32,7 +32,7 @@ He leaves for work, his child wakes in an empty home.
 const Uint32 TEXTUREFORMAT = SDL_PIXELFORMAT_RGBA8888;
 
 const int NUM_SPRITESHEET = 5;
-const int SS_PLAYER = 3;
+//const int SS_PLAYER = 3;
 const int SS_PLAYER_ACTION = 4;
 const int SS_CHILD = 0;
 
@@ -260,6 +260,7 @@ struct GameState
     Texture blackTex;
     LevelInfo lInfo;
 
+    SpriteSheet ssPlayer;
     SpriteSheet ssArray[NUM_SPRITESHEET];
     TextBox tbArray[NUM_TEXTBOX];
     Texture tArray[NUM_TEXTURE];

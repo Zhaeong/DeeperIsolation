@@ -329,17 +329,14 @@ SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
     return sSheet;
 }
 
-void UpdateSpriteSheet(SpriteSheet *ssArray, Uint32 curTime)
+void UpdateSpriteSheet(SpriteSheet *ssheet, Uint32 curTime)
 {
-    for(int i = 0; i < NUM_SPRITESHEET; i++)
+    if(ssheet->mActive && ssheet->mUpdate)
     {
-        if(ssArray[i].mActive && ssArray[i].mUpdate)
+        if(curTime > ssheet->mLastUpdate + ssheet->mUpdateInterval)
         {
-            if(curTime > ssArray[i].mLastUpdate + ssArray[i].mUpdateInterval)
-            {
-                ssArray[i].mCurFrame = (ssArray[i].mCurFrame + 1) % ssArray[i].mNumFrames;
-                ssArray[i].mLastUpdate = curTime;
-            }
+            ssheet->mCurFrame = (ssheet->mCurFrame + 1) % ssheet->mNumFrames;
+            ssheet->mLastUpdate = curTime;
         }
     }
 }
@@ -1019,8 +1016,8 @@ void LoadAction(GameState *GS, string action, int textureCol)
     SDL_Texture *actionTex = GetSDLTexture(GS->renderer, GS->window, action);
     RemoveTextureWhiteSpace(actionTex);
 
-    GS->ssArray[SS_PLAYER].mActive = false;
-    GS->ssArray[SS_PLAYER_ACTION].mActive = true;
+    GS->ssPlayer.mActive = false;
+    GS->ssPlayer.mActive = true;
 
     SpriteSheet actionSheet;
     if(action == PLAYER_WAKE)
@@ -1044,17 +1041,17 @@ void LoadAction(GameState *GS, string action, int textureCol)
 
     if(textureCol != -1)
     {
-        GS->ssArray[SS_PLAYER].mX = GS->tArray[textureCol].mX;
+        GS->ssPlayer.mX = GS->tArray[textureCol].mX;
 
-        GS->ssArray[SS_PLAYER].mY = GS->tArray[textureCol].mY;
+        GS->ssPlayer.mY = GS->tArray[textureCol].mY;
 
         actionSheet.mX = GS->tArray[textureCol].mX;
         actionSheet.mY = GS->tArray[textureCol].mY;
     }
     else
     {
-        actionSheet.mX = GS->ssArray[SS_PLAYER].mX;
-        actionSheet.mY = GS->ssArray[SS_PLAYER].mY;
+        actionSheet.mX = GS->ssPlayer.mX;
+        actionSheet.mY = GS->ssPlayer.mY;
 
     }
     GS->ssArray[SS_PLAYER_ACTION] = actionSheet; 
@@ -1128,9 +1125,9 @@ void SpawnPlayer(GameState *GS, float x, float y)
     manSheet.mColBoxOffset.w = 40;
 
     cout << "spawnY: " << manSheet.mY << "\n";
-    GS->ssArray[SS_PLAYER] = manSheet;
-    GS->ssArray[SS_PLAYER].mCurFrame = PLAYER_IDLE_FRAME;
-    GS->ssArray[SS_PLAYER].mUpdate = false;
+    GS->ssPlayer = manSheet;
+    GS->ssPlayer.mCurFrame = PLAYER_IDLE_FRAME;
+    GS->ssPlayer.mUpdate = false;
 }
 
 void SpawnControls(GameState *GS)
@@ -1234,7 +1231,7 @@ void LoadScene(GameState *GS, string sceneName)
         //Sink
         SDL_Texture *sinkTex = GetSDLTexture(GS->renderer, GS->window, TEX_SINK);
 
-        Texture sink = InitTexture(sinkTex, 450, GS->ssArray[SS_PLAYER].mY); //action same height player
+        Texture sink = InitTexture(sinkTex, 450, GS->ssPlayer.mY); //action same height player
 
         sink.mType = TTYPE_ACTION;
         sink.mName = PLAYER_WASH; 
@@ -1255,7 +1252,7 @@ void LoadScene(GameState *GS, string sceneName)
         childSleepSS.mNarration = "His child still sleeps" ;
 
         childSleepSS.mX = 300;
-        childSleepSS.mY = GS->ssArray[SS_PLAYER].mY;
+        childSleepSS.mY = GS->ssPlayer.mY;
         childSleepSS.mUpdateInterval = 1500;
         GS->ssArray[SS_CHILD] = childSleepSS;
 
@@ -1279,7 +1276,7 @@ void LoadScene(GameState *GS, string sceneName)
 
             AddStoryLine(GS, "A man wakes up for work");
 
-            GS->ssArray[SS_PLAYER].mX = 400;
+            GS->ssPlayer.mX = 400;
 
             GS->NarrativeCounter = 1;
             LoadAction(GS, PLAYER_WAKE, -1);
