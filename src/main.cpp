@@ -56,7 +56,7 @@ void gameloop()
             }
         }
     }
-    
+
 
     if(textureCol != -1 || spriteCol != -1)
     {
@@ -75,14 +75,14 @@ void gameloop()
         }
 
         textureTB = InitTextBox(GS.fontTexture,
-                            20,
-                            20,
-                            GS.mainBoxTexture,
-                            buttonText, 
-                            400,
-                            10,
-                            5,
-                            0);           
+                20,
+                20,
+                GS.mainBoxTexture,
+                buttonText, 
+                400,
+                10,
+                5,
+                0);           
 
         //the button text is a hack to redraw when moving player from
         //one interactable object to another with no empty space inbetween
@@ -282,15 +282,32 @@ void gameloop()
 
     if(GS.PlayerState == STATE_LEFT)
     {
-        GS.ssArray[SS_PLAYER].mX -= 0.5;
-        GS.ssArray[SS_PLAYER].mUpdate = true;
-        GS.ssArray[SS_PLAYER].mFlip = SDL_FLIP_HORIZONTAL;
+        //level boundary check, with the collision box offset
+        if((GS.ssArray[SS_PLAYER].mX + GS.ssArray[SS_PLAYER].mColBoxOffset.x)- GS.playerSpeed < GS.lInfo.mLevelTex.mX)
+        {
+            ChangePlayerState(&GS, STATE_IDLE);
+        }
+        else
+        {
+            GS.ssArray[SS_PLAYER].mX -= GS.playerSpeed;
+            GS.ssArray[SS_PLAYER].mUpdate = true;
+            GS.ssArray[SS_PLAYER].mFlip = SDL_FLIP_HORIZONTAL;
+        }
     }
     else if(GS.PlayerState == STATE_RIGHT)
     {
-        GS.ssArray[SS_PLAYER].mX += 0.5;
-        GS.ssArray[SS_PLAYER].mUpdate = true;
-        GS.ssArray[SS_PLAYER].mFlip = SDL_FLIP_NONE;
+        //level boundary check, with the collision box offset
+        if((GS.ssArray[SS_PLAYER].mX + GS.ssArray[SS_PLAYER].mColBoxOffset.x + GS.ssArray[SS_PLAYER].mColBoxOffset.w) 
+            + GS.playerSpeed > (GS.lInfo.mLevelTex.mX + GS.lInfo.mLevelTex.mW))
+        {
+            ChangePlayerState(&GS, STATE_IDLE);
+        }
+        else
+        {
+            GS.ssArray[SS_PLAYER].mX += GS.playerSpeed;
+            GS.ssArray[SS_PLAYER].mUpdate = true;
+            GS.ssArray[SS_PLAYER].mFlip = SDL_FLIP_NONE;
+        }
     }
     else if(GS.PlayerState == STATE_IDLE)
     {
@@ -392,6 +409,7 @@ int main(int argv, char **args)
     GS.SceneCurrent = SCENE_INTRO; 
     GS.SceneNext = SCENE_INTRO; 
     GS.PlayerState = STATE_IDLE;
+    GS.playerSpeed = 0.5;
     GS.screenColor.r = 200;
     GS.screenColor.g = 200;
     GS.screenColor.b = 200;

@@ -246,7 +246,7 @@ struct GameState
 
 
     string PlayerState;
-
+    float playerSpeed;
     
     //Time controls
     Uint32 startTime;
