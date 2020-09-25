@@ -32,9 +32,8 @@ He leaves for work, his child wakes in an empty home.
 const Uint32 TEXTUREFORMAT = SDL_PIXELFORMAT_RGBA8888;
 
 const int NUM_SPRITESHEET = 5;
-//const int SS_PLAYER = 3;
 const int SS_PLAYER_ACTION = 4;
-const int SS_CHILD = 0;
+const int SS_CHILD = 3;
 
 //Actions in the form of sprite sheets
 const string PLAYER_WALK = "./res/png/manwalk.png";
@@ -50,7 +49,7 @@ const int PLAYER_IDLE_FRAME = 18;
 //some textboxes use state strings as text display as well as state changes
 //might be an issue with data coupling
 const string STATE_ACTION = "ACTION";
-const string STATE_NARRATION = "NARRATION";
+const string STATE_NARRATION = "STATE_NARRATION";
 const string STATE_IDLE = "IDLE";
 const string STATE_LEFT = "Left";
 const string STATE_RIGHT = "Right";
@@ -82,6 +81,7 @@ const string TEX_CHILDSLEEP = "./res/png/childsleep.png";
 const string TTYPE_NORMAL = "NORM";
 const string TTYPE_TRANSIT = "TRANSIT";
 const string TTYPE_ACTION = "ACTION";
+const string TTYPE_NARRATION = "NARRATION";
 
 //Texture Actions
 const string TACTION_END = "END";
@@ -145,6 +145,7 @@ struct SpriteSheet
 
 
     string mType;
+    string mName;
     string mButtonText;
     string mNarration;
 

@@ -293,17 +293,39 @@ SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
     sSheet.mDstRect.x = 0;
     sSheet.mDstRect.y = 0;
 
-    sSheet.mXOffset = 0;
-    sSheet.mWoffset = 0;
+    //    sSheet.mXOffset = 0;
+    //    sSheet.mWoffset = 0;
+
+    SDL_Rect colOffset;
+    colOffset.x = 0;
+    colOffset.y = 0;
+    colOffset.w = w;
+    colOffset.h = h;
 
     sSheet.mDstRect.w = w;
     sSheet.mDstRect.h = h;
+
+    //if numFrames == 1, then the w and h are from texture
+    if(numFrames == 1)
+    {
+        int textureW, textureH;
+        SDL_QueryTexture(sdlTexture, NULL, NULL, &textureW, &textureH);
+
+        sSheet.mDstRect.w = textureW;
+        sSheet.mDstRect.h = textureH;
+
+        colOffset.w = textureW;
+        colOffset.h = textureH;
+    }
+
+
+    sSheet.mColBoxOffset = colOffset;
     sSheet.mNumFrames = numFrames;
 
     sSheet.mType = TTYPE_NORMAL;
     sSheet.mButtonText = "";
     sSheet.mNarration = "";
-
+    sSheet.mName = "";
 
 
     sSheet.mLastUpdate = 0;
@@ -317,13 +339,7 @@ SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
 
     sSheet.mFlip = SDL_FLIP_NONE;
 
-    SDL_Rect colOffset;
-    colOffset.x = 0;
-    colOffset.y = 0;
-    colOffset.w = w;
-    colOffset.h = h;
 
-    sSheet.mColBoxOffset = colOffset;
 
 
     return sSheet;
@@ -1219,14 +1235,14 @@ void LoadScene(GameState *GS, string sceneName)
         //Door
         SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, TEX_DOOR);
 
-        Texture door = InitTexture(doorTex, 
-                240, 
-                GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110);
-
+        SpriteSheet door = InitSpriteSheet(doorTex, 0, 0, 1); 
+        door.mX = 240;
+        door.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110;
         door.mType = TTYPE_TRANSIT;
         door.mName = SCENE_LIVINGROOM;
         door.mButtonText = "Enter Living room";
-        GS->tArray[0] = door;
+        cout << "door w: " << door.mDstRect.w << " h: " << door.mDstRect.h << "\n";
+        GS->ssArray[0] = door;
 
         //Sink
         SDL_Texture *sinkTex = GetSDLTexture(GS->renderer, GS->window, TEX_SINK);
@@ -1247,7 +1263,7 @@ void LoadScene(GameState *GS, string sceneName)
 
         SpriteSheet childSleepSS = InitSpriteSheet(childsleepTex, 100, 100, 4);
 
-        childSleepSS.mType = TTYPE_ACTION;
+        childSleepSS.mType = TTYPE_NARRATION;
         childSleepSS.mButtonText = "Examine";
         childSleepSS.mNarration = "His child still sleeps" ;
 
@@ -1255,8 +1271,6 @@ void LoadScene(GameState *GS, string sceneName)
         childSleepSS.mY = GS->ssPlayer.mY;
         childSleepSS.mUpdateInterval = 1500;
         GS->ssArray[SS_CHILD] = childSleepSS;
-
-
 
         //Special case for start spawn of the level where the player is in bed instead of door.
         if(GS->NarrativeCounter == 0)

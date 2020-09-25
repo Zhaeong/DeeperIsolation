@@ -235,10 +235,20 @@ void gameloop()
                         }
                         else if(spriteCol != -1)
                         {
-                            if(GS.ssArray[spriteCol].mType == TTYPE_ACTION)
+                            if(GS.ssArray[spriteCol].mType == TTYPE_NARRATION)
                             {
                                 cout << "actiobnnnt\n";
                                 LoadNarration(&GS, GS.ssArray[spriteCol].mNarration);
+                            }
+                            else if(GS.ssArray[spriteCol].mType == TTYPE_TRANSIT)
+                            {
+                                cout << "loading: " << GS.ssArray[spriteCol].mName << "\n";
+                                GS.SceneCurrent = SCENE_TRAN;
+                                GS.SceneNext = GS.ssArray[spriteCol].mName;
+                            }
+                            else if(GS.tArray[spriteCol].mType == TTYPE_ACTION)
+                            {
+                                LoadAction(&GS, GS.ssArray[spriteCol].mName, spriteCol);
                             }
                         }
 
