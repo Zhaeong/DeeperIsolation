@@ -74,7 +74,7 @@ LevelInfo InitLevelInfo(GameState *GS, string texturePath);
 
 void LoadNarration(GameState *GS, string sNarration);
 
-void LoadAction(GameState *GS, string action, int textureCol);
+void LoadAction(GameState *GS, string action, int spriteCol);
 
 void ChangePlayerState(GameState *GS, string newState);
 

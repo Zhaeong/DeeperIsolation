@@ -34,15 +34,6 @@ void gameloop()
 
     //Update game state
 
-    //texture cols 
-    int textureCol = -1;
-    for(int i = 0; i < NUM_TEXTURE; i++)
-    {
-        if(GS.tArray[i].mInteract && SpriteTextureCollision(GS.ssPlayer, GS.tArray[i]))
-        {
-            textureCol = i;
-        }
-    }
 
     //Spritesheet collisions
     int spriteCol = -1;
@@ -51,25 +42,20 @@ void gameloop()
         if(SpriteToSpriteCollision(GS.ssPlayer, GS.ssArray[i]))
         {
             spriteCol = i;
+
+            cout << "col: " << spriteCol << "\n";
         }
     }
 
 
-    if(textureCol != -1 || spriteCol != -1)
+    if(spriteCol != -1)
     {
         TextBox textureTB;
         string buttonText;
         string type;
-        if(textureCol != -1)
-        {
-            buttonText = GS.tArray[textureCol].mButtonText; 
-            type = GS.tArray[textureCol].mType;
-        }
-        else if(spriteCol != -1)
-        {
-            buttonText = GS.ssArray[spriteCol].mButtonText;
-            type = GS.ssArray[spriteCol].mType;
-        }
+
+        buttonText = GS.ssArray[spriteCol].mButtonText;
+        type = GS.ssArray[spriteCol].mType;
 
         textureTB = InitTextBox(GS.fontTexture,
                 20,
@@ -88,7 +74,6 @@ void gameloop()
             GS.tbArray[TB_ACTION_BUTTON] = textureTB;
         }
     }
-
     else
     {
         //removes the text so that it can redraw due to the above check
@@ -220,24 +205,11 @@ void gameloop()
                     {
 
                         //Handle texture collisions
-                        if(textureCol != -1)
-                        {
-                            if(GS.tArray[textureCol].mType == TTYPE_TRANSIT)
-                            {
-                                cout << "loading: " << GS.tArray[textureCol].mName << "\n";
-                                GS.SceneCurrent = SCENE_TRAN;
-                                GS.SceneNext = GS.tArray[textureCol].mName;
-                            }
-                            else if(GS.tArray[textureCol].mType == TTYPE_ACTION)
-                            {
-                                LoadAction(&GS, GS.tArray[textureCol].mName, textureCol);
-                            }
-                        }
-                        else if(spriteCol != -1)
+                        if(spriteCol != -1)
                         {
                             if(GS.ssArray[spriteCol].mType == TTYPE_NARRATION)
                             {
-                                cout << "actiobnnnt\n";
+                                cout << "narration\n";
                                 LoadNarration(&GS, GS.ssArray[spriteCol].mNarration);
                             }
                             else if(GS.ssArray[spriteCol].mType == TTYPE_TRANSIT)
@@ -246,8 +218,9 @@ void gameloop()
                                 GS.SceneCurrent = SCENE_TRAN;
                                 GS.SceneNext = GS.ssArray[spriteCol].mName;
                             }
-                            else if(GS.tArray[spriteCol].mType == TTYPE_ACTION)
+                            else if(GS.ssArray[spriteCol].mType == TTYPE_ACTION)
                             {
+                                cout << "actionnnn\n";
                                 LoadAction(&GS, GS.ssArray[spriteCol].mName, spriteCol);
                             }
                         }

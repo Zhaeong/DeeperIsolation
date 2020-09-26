@@ -121,6 +121,7 @@ struct Texture
 struct SpriteSheet 
 {
     bool mActive;
+    bool mInteract;
     bool mUpdate;
     SDL_Texture *mTexture;
 

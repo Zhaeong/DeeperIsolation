@@ -284,6 +284,7 @@ SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
     SpriteSheet sSheet;
 
     sSheet.mActive = true;
+    sSheet.mInteract = true;
     sSheet.mUpdate = true;
 
     sSheet.mTexture = sdlTexture;
@@ -1021,9 +1022,9 @@ void LoadNarration(GameState *GS, string sNarration)
 
     AddStoryLine(GS, sNarration);
 }
-void LoadAction(GameState *GS, string action, int textureCol)
+void LoadAction(GameState *GS, string action, int spriteCol)
 {
-    if(textureCol != -1 && !GS->tArray[textureCol].mInteract)
+    if(spriteCol != -1 && !GS->ssArray[spriteCol].mInteract)
     {
         return;
     }
@@ -1055,14 +1056,14 @@ void LoadAction(GameState *GS, string action, int textureCol)
         actionSheet.mUpdateInterval = 200;
     }
 
-    if(textureCol != -1)
+    if(spriteCol != -1)
     {
-        GS->ssPlayer.mX = GS->tArray[textureCol].mX;
+        GS->ssPlayer.mX = GS->ssArray[spriteCol].mX;
 
-        GS->ssPlayer.mY = GS->tArray[textureCol].mY;
+        GS->ssPlayer.mY = GS->ssArray[spriteCol].mY;
 
-        actionSheet.mX = GS->tArray[textureCol].mX;
-        actionSheet.mY = GS->tArray[textureCol].mY;
+        actionSheet.mX = GS->ssArray[spriteCol].mX;
+        actionSheet.mY = GS->ssArray[spriteCol].mY;
     }
     else
     {
@@ -1072,10 +1073,10 @@ void LoadAction(GameState *GS, string action, int textureCol)
     }
     GS->ssArray[SS_PLAYER_ACTION] = actionSheet; 
 
-    if(GS->tArray[textureCol].mNarration != "" && GS->tArray[textureCol].mNarration != "NONE")
+    if(GS->ssArray[spriteCol].mNarration != "" && GS->ssArray[spriteCol].mNarration != "NONE")
     {
-        LoadNarration(GS, GS->tArray[textureCol].mNarration);
-        GS->tArray[textureCol].mInteract = false;
+        LoadNarration(GS, GS->ssArray[spriteCol].mNarration);
+        GS->ssArray[spriteCol].mInteract = false;
     }
 
     GS->PlayerState = STATE_ACTION;
@@ -1237,7 +1238,7 @@ void LoadScene(GameState *GS, string sceneName)
 
         SpriteSheet door = InitSpriteSheet(doorTex, 0, 0, 1); 
         door.mX = 240;
-        door.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110;
+        door.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - door.mDstRect.h;
         door.mType = TTYPE_TRANSIT;
         door.mName = SCENE_LIVINGROOM;
         door.mButtonText = "Enter Living room";
@@ -1247,15 +1248,17 @@ void LoadScene(GameState *GS, string sceneName)
         //Sink
         SDL_Texture *sinkTex = GetSDLTexture(GS->renderer, GS->window, TEX_SINK);
 
-        Texture sink = InitTexture(sinkTex, 450, GS->ssPlayer.mY); //action same height player
-
+        //Texture sink = InitTexture(sinkTex, 450, GS->ssPlayer.mY); //action same height player
+        SpriteSheet sink = InitSpriteSheet(sinkTex, 0, 0, 1); //action same height player
+        sink.mX = 450;
+        sink.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - sink.mDstRect.h;;
         sink.mType = TTYPE_ACTION;
         sink.mName = PLAYER_WASH; 
         sink.mButtonText = "Wash";
         sink.mNarration = "It is necessary to be presentable";
         sink.mColBoxOffset.x = 60;
         sink.mColBoxOffset.w = 40;
-        GS->tArray[1] = sink;
+        GS->ssArray[1] = sink;
 
         //ChildSleep
 
