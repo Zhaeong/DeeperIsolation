@@ -1116,11 +1116,6 @@ void RefreshState(GameState *GS)
     {
         GS->tbArray[i].mActive = false;
     }
-
-    for(int i = 0; i < NUM_TEXTURE; i++)
-    {
-        GS->tArray[i].mActive = false;
-    }
 }
 
 
@@ -1311,22 +1306,24 @@ void LoadScene(GameState *GS, string sceneName)
         SpawnControls(GS);
         SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, TEX_DOOR);
 
-        Texture door = InitTexture(doorTex,GS->lInfo.mInitPlayerPos.x, 
-                GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110);
-
+        SpriteSheet door = InitSpriteSheet(doorTex, 0, 0 ,1);
+        door.mX = GS->lInfo.mInitPlayerPos.x;
+        door.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - door.mDstRect.h;
         door.mType = TTYPE_TRANSIT;
         door.mName = SCENE_BEDROOM;
         door.mButtonText = "Enter Bedroom";
-        GS->tArray[0] = door;
+        GS->ssArray[0] = door;
 
 
-        Texture endDoor = InitTexture(doorTex, GS->lInfo.mLevelTex.mX, 
-                GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - 110);
+        SpriteSheet endDoor = InitSpriteSheet(doorTex, 0, 0 , 1);
+
+        endDoor.mX = GS->lInfo.mLevelTex.mX;
+        endDoor.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - endDoor.mDstRect.h;
 
         endDoor.mType = TTYPE_TRANSIT;
         endDoor.mName = SCENE_ENDDOOR;
         endDoor.mButtonText = "Go to Work";
-        GS->tArray[1] = endDoor;
+        GS->ssArray[1] = endDoor;
 
 
     }

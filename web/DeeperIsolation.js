@@ -214,7 +214,7 @@ Module.expectedDataFileDownloads++;
    "audio": 0
   } ],
   "remote_package_size": 570269,
-  "package_uuid": "8102a3ca-3035-4f7c-a4b5-cdd933a2cbac"
+  "package_uuid": "d551ac97-2321-4aba-aa97-7ed6d098dd6f"
  });
 })();
 
@@ -835,7 +835,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5346624, STACK_MAX = 103744, DYNAMIC_BASE = 5346624, DYNAMICTOP_PTR = 103584;
+var STACK_BASE = 5346064, STACK_MAX = 103184, DYNAMIC_BASE = 5346064, DYNAMICTOP_PTR = 103024;
 
 assert(STACK_BASE % 16 === 0, "stack must start aligned");
 

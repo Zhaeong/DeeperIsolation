@@ -43,7 +43,7 @@ void gameloop()
         {
             spriteCol = i;
 
-            cout << "col: " << spriteCol << "\n";
+            //cout << "col: " << spriteCol << "\n";
         }
     }
 
@@ -328,11 +328,6 @@ void gameloop()
     //
 
     RenderTexture(GS.renderer, GS.lInfo.mLevelTex);
-
-    for(int i = 0; i < NUM_TEXTURE; i++)
-    {
-        RenderTexture(GS.renderer, GS.tArray[i]);
-    }
 
     for(int i = 0; i < NUM_SPRITESHEET; i++)
     {

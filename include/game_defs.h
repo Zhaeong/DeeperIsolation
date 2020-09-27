@@ -265,7 +265,7 @@ struct GameState
     SpriteSheet ssPlayer;
     SpriteSheet ssArray[NUM_SPRITESHEET];
     TextBox tbArray[NUM_TEXTBOX];
-    Texture tArray[NUM_TEXTURE];
+    //Texture tArray[NUM_TEXTURE];
 
     int NarrativeCounter;
 
