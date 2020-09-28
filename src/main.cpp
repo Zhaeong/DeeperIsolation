@@ -297,10 +297,10 @@ void gameloop()
 
     if(GS.PlayerState == STATE_ACTION)
     {
-        if(GS.ssArray[SS_PLAYER_ACTION].mCurFrame == (GS.ssArray[SS_PLAYER_ACTION].mNumFrames - 1))
+        if(GS.ssPlayerAction.mCurFrame == (GS.ssPlayerAction.mNumFrames - 1))
         {
             GS.ssPlayer.mActive = true;
-            GS.ssArray[SS_PLAYER_ACTION].mActive = false;
+            GS.ssPlayerAction.mActive = false;
             //Not using function Change Player state here because when its state action only 
             //this part can change it back to idle
             GS.PlayerState = STATE_IDLE;
@@ -322,6 +322,7 @@ void gameloop()
         UpdateSpriteSheet(&GS.ssArray[i], GS.curTime);
     }
 
+    UpdateSpriteSheet (&GS.ssPlayerAction, GS.curTime);
     UpdateSpriteSheet(&GS.ssPlayer, GS.curTime);
     //
     //Render Area
@@ -350,7 +351,8 @@ void gameloop()
         }
     }
 
-    //renderPlayer
+    //renderPlayersStuff
+    RenderSpriteSheet(GS.renderer, GS.ssPlayerAction);
     RenderSpriteSheet(GS.renderer, GS.ssPlayer);
 
     //Render the fadeout textures

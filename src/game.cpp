@@ -1071,7 +1071,8 @@ void LoadAction(GameState *GS, string action, int spriteCol)
         actionSheet.mY = GS->ssPlayer.mY;
 
     }
-    GS->ssArray[SS_PLAYER_ACTION] = actionSheet; 
+
+    GS->ssPlayerAction = actionSheet;
 
     if(GS->ssArray[spriteCol].mNarration != "" && GS->ssArray[spriteCol].mNarration != "NONE")
     {
