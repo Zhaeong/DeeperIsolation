@@ -72,6 +72,7 @@ const string SCENE_ENDDOOR = "./res/png/enddoor.png";
 const string TEX_DOOR = "./res/png/door.png";
 const string TEX_SINK = "./res/png/sink.png";
 const string TEX_CHILDSLEEP = "./res/png/childsleep.png";
+const string TEX_WINDOW = "./res/png/window.png";
 
 
 //Texture Types

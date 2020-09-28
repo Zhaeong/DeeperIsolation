@@ -1326,6 +1326,21 @@ void LoadScene(GameState *GS, string sceneName)
         endDoor.mButtonText = "Go to Work";
         GS->ssArray[1] = endDoor;
 
+        //ChildSleep
+
+        SDL_Texture *windowTex= GetSDLTexture(GS->renderer, GS->window, TEX_WINDOW);
+
+        SpriteSheet windowSS = InitSpriteSheet(windowTex, 50, 50, 6);
+
+        windowSS.mType = TTYPE_NARRATION;
+        windowSS.mButtonText = "Examine";
+        windowSS.mNarration = "The weather is nice outside" ;
+
+        windowSS.mX = 300;
+        windowSS.mY = GS->ssPlayer.mY;
+        windowSS.mUpdateInterval = 1500;
+        GS->ssArray[2] = windowSS;
+
 
     }
     else if(sceneName == SCENE_ENDDOOR)
