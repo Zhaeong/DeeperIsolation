@@ -54,6 +54,8 @@ const string STATE_RIGHT = "Right";
 
 
 const int NUM_TEXTBOX = 5;
+const int MAIN_TEXT_W = 12;
+const int MAIN_TEXT_H = 15;
 const int TB_NARRATION_BOX = 2;
 const int TB_ACTION_BUTTON = 4;
 

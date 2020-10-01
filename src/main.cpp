@@ -58,8 +58,8 @@ void gameloop()
         type = GS.ssArray[spriteCol].mType;
 
         textureTB = InitTextBox(GS.fontTexture,
-                20,
-                20,
+                MAIN_TEXT_W,
+                MAIN_TEXT_H,
                 GS.mainBoxTexture,
                 buttonText, 
                 400,

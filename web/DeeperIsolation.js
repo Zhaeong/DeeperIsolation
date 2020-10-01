@@ -180,51 +180,56 @@ Module.expectedDataFileDownloads++;
   }, {
    "filename": "/res/png/mainText.png",
    "start": 12744,
-   "end": 23323,
+   "end": 18901,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png~",
-   "start": 23323,
-   "end": 26446,
+   "start": 18901,
+   "end": 22024,
+   "audio": 0
+  }, {
+   "filename": "/res/png/mainText50.png",
+   "start": 22024,
+   "end": 31083,
    "audio": 0
   }, {
    "filename": "/res/png/manwake.png",
-   "start": 26446,
-   "end": 59092,
+   "start": 31083,
+   "end": 63729,
    "audio": 0
   }, {
    "filename": "/res/png/manwalk.png",
-   "start": 59092,
-   "end": 104965,
+   "start": 63729,
+   "end": 109602,
    "audio": 0
   }, {
    "filename": "/res/png/manwash.png",
-   "start": 104965,
-   "end": 141472,
+   "start": 109602,
+   "end": 146109,
    "audio": 0
   }, {
    "filename": "/res/png/sink.png",
-   "start": 141472,
-   "end": 143482,
+   "start": 146109,
+   "end": 148119,
    "audio": 0
   }, {
    "filename": "/res/png/textBox.png",
-   "start": 143482,
-   "end": 144867,
+   "start": 148119,
+   "end": 149504,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 144867,
-   "end": 580848,
+   "start": 149504,
+   "end": 585485,
    "audio": 0
   }, {
    "filename": "/res/png/window.png",
-   "start": 580848,
-   "end": 588119,
+   "start": 585485,
+   "end": 592756,
    "audio": 0
   } ],
-  "remote_package_size": 588119,
-  "package_uuid": "c0b57dc3-bba9-4014-83b1-8e5903d8c3bd"
+  "remote_package_size": 592756,
+  "package_uuid": "04fe16a1-63e8-4131-a61d-3bb901fb4b64"
  });
 })();
 

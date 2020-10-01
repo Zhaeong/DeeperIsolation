@@ -1009,8 +1009,8 @@ void LoadNarration(GameState *GS, string sNarration)
 
     GS->PlayerState = STATE_NARRATION;
     GS->tbArray[TB_NARRATION_BOX] = InitTextBox(GS->fontTexture,
-            20,
-            20,
+            MAIN_TEXT_W,
+            MAIN_TEXT_H,
             GS->mainBoxTexture,
             sNarration,
             200,
@@ -1146,8 +1146,8 @@ void SpawnPlayer(GameState *GS, float x, float y)
 void SpawnControls(GameState *GS)
 {
     GS->tbArray[0] = InitTextBox(GS->fontTexture,
-            20,
-            20,
+            MAIN_TEXT_W,
+            MAIN_TEXT_H,
             GS->mainBoxTexture,
             STATE_LEFT,
             10,
@@ -1158,8 +1158,8 @@ void SpawnControls(GameState *GS)
     GS->tbArray[0].mType = TBTYPE_INPUT;
 
     GS->tbArray[1] = InitTextBox(GS->fontTexture,
-            20,
-            20,
+            MAIN_TEXT_W,
+            MAIN_TEXT_H,
             GS->mainBoxTexture,
             STATE_RIGHT,
             200,
@@ -1202,8 +1202,8 @@ void LoadScene(GameState *GS, string sceneName)
         GS->ssArray[1] = titleSheet;
 
         GS->tbArray[0] = InitTextBox(GS->fontTexture,
-                20,
-                20,
+                MAIN_TEXT_W,
+                MAIN_TEXT_H,
                 GS->mainBoxTexture,
                 "Start",
                 300,
@@ -1276,8 +1276,8 @@ void LoadScene(GameState *GS, string sceneName)
         {
 
             GS->tbArray[TB_NARRATION_BOX] = InitTextBox(GS->fontTexture,
-                    20,
-                    20,
+                    MAIN_TEXT_W,
+                    MAIN_TEXT_H,
                     GS->mainBoxTexture,
                     "A man wakes up for work",
                     200,
