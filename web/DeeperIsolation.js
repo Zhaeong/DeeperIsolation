@@ -173,63 +173,73 @@ Module.expectedDataFileDownloads++;
    "end": 10641,
    "audio": 0
   }, {
-   "filename": "/res/png/livingroom.png",
+   "filename": "/res/png/fridge.png",
    "start": 10641,
-   "end": 12744,
+   "end": 13308,
+   "audio": 0
+  }, {
+   "filename": "/res/png/livingroom.png",
+   "start": 13308,
+   "end": 15411,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png",
-   "start": 12744,
-   "end": 18901,
+   "start": 15411,
+   "end": 21568,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png~",
-   "start": 18901,
-   "end": 22024,
+   "start": 21568,
+   "end": 24691,
    "audio": 0
   }, {
    "filename": "/res/png/mainText50.png",
-   "start": 22024,
-   "end": 31083,
+   "start": 24691,
+   "end": 33750,
    "audio": 0
   }, {
    "filename": "/res/png/manwake.png",
-   "start": 31083,
-   "end": 63729,
+   "start": 33750,
+   "end": 66396,
    "audio": 0
   }, {
    "filename": "/res/png/manwalk.png",
-   "start": 63729,
-   "end": 109602,
+   "start": 66396,
+   "end": 112269,
    "audio": 0
   }, {
    "filename": "/res/png/manwash.png",
-   "start": 109602,
-   "end": 146109,
+   "start": 112269,
+   "end": 148776,
+   "audio": 0
+  }, {
+   "filename": "/res/png/manweat.png",
+   "start": 148776,
+   "end": 221898,
    "audio": 0
   }, {
    "filename": "/res/png/sink.png",
-   "start": 146109,
-   "end": 148119,
+   "start": 221898,
+   "end": 223908,
    "audio": 0
   }, {
    "filename": "/res/png/textBox.png",
-   "start": 148119,
-   "end": 149504,
+   "start": 223908,
+   "end": 225293,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 149504,
-   "end": 585485,
+   "start": 225293,
+   "end": 661274,
    "audio": 0
   }, {
    "filename": "/res/png/window.png",
-   "start": 585485,
-   "end": 592756,
+   "start": 661274,
+   "end": 668545,
    "audio": 0
   } ],
-  "remote_package_size": 592756,
-  "package_uuid": "04fe16a1-63e8-4131-a61d-3bb901fb4b64"
+  "remote_package_size": 668545,
+  "package_uuid": "6e443a6a-fe9a-4d40-83e5-ccb698cc867f"
  });
 })();
 
@@ -630,8 +640,8 @@ function setValue(ptr, value, type, noSafe) {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 1029,
- "maximum": 1029 + 0,
+ "initial": 1033,
+ "maximum": 1033 + 0,
  "element": "anyfunc"
 });
 
@@ -850,7 +860,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5346288, STACK_MAX = 103408, DYNAMIC_BASE = 5346288, DYNAMICTOP_PTR = 103248;
+var STACK_BASE = 5346480, STACK_MAX = 103600, DYNAMIC_BASE = 5346480, DYNAMICTOP_PTR = 103440;
 
 assert(STACK_BASE % 16 === 0, "stack must start aligned");
 
@@ -1215,7 +1225,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 35492: function($0, $1, $2) {
+ 35636: function($0, $1, $2) {
   var w = $0;
   var h = $1;
   var pixels = $2;
@@ -1286,7 +1296,7 @@ var ASM_CONSTS = {
   SDL2.ctx.putImageData(SDL2.image, 0, 0);
   return 0;
  },
- 36947: function($0, $1, $2, $3, $4) {
+ 37091: function($0, $1, $2, $3, $4) {
   var w = $0;
   var h = $1;
   var hot_x = $2;
@@ -1323,30 +1333,30 @@ var ASM_CONSTS = {
   stringToUTF8(url, urlBuf, url.length + 1);
   return urlBuf;
  },
- 37936: function($0) {
+ 38080: function($0) {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = UTF8ToString($0);
   }
   return 0;
  },
- 38029: function() {
+ 38173: function() {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = "none";
   }
  },
- 39254: function() {
+ 39398: function() {
   return screen.width;
  },
- 39281: function() {
+ 39425: function() {
   return screen.height;
  },
- 39354: function($0) {
+ 39498: function($0) {
   if (typeof Module["setWindowTitle"] !== "undefined") {
    Module["setWindowTitle"](UTF8ToString($0));
   }
   return 0;
  },
- 39508: function() {
+ 39652: function() {
   if (typeof AudioContext !== "undefined") {
    return 1;
   } else if (typeof webkitAudioContext !== "undefined") {
@@ -1354,7 +1364,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 39674: function() {
+ 39818: function() {
   if (typeof navigator.mediaDevices !== "undefined" && typeof navigator.mediaDevices.getUserMedia !== "undefined") {
    return 1;
   } else if (typeof navigator.webkitGetUserMedia !== "undefined") {
@@ -1362,7 +1372,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 39900: function($0) {
+ 40044: function($0) {
   if (typeof Module["SDL2"] === "undefined") {
    Module["SDL2"] = {};
   }
@@ -1381,11 +1391,11 @@ var ASM_CONSTS = {
   }
   return SDL2.audioContext === undefined ? -1 : 0;
  },
- 40383: function() {
+ 40527: function() {
   var SDL2 = Module["SDL2"];
   return SDL2.audioContext.sampleRate;
  },
- 40453: function($0, $1, $2, $3) {
+ 40597: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   var have_microphone = function(stream) {
    if (SDL2.capture.silenceTimer !== undefined) {
@@ -1426,7 +1436,7 @@ var ASM_CONSTS = {
    }, have_microphone, no_microphone);
   }
  },
- 42105: function($0, $1, $2, $3) {
+ 42249: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
   SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -1438,7 +1448,7 @@ var ASM_CONSTS = {
   };
   SDL2.audio.scriptProcessorNode["connect"](SDL2.audioContext["destination"]);
  },
- 42515: function($0, $1) {
+ 42659: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
   for (var c = 0; c < numChannels; ++c) {
@@ -1457,7 +1467,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 43120: function($0, $1) {
+ 43264: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
   for (var c = 0; c < numChannels; ++c) {
@@ -1470,7 +1480,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 43600: function($0) {
+ 43744: function($0) {
   var SDL2 = Module["SDL2"];
   if ($0) {
    if (SDL2.capture.silenceTimer !== undefined) {

@@ -1055,6 +1055,16 @@ void LoadAction(GameState *GS, string action, int spriteCol)
 
         actionSheet.mUpdateInterval = 200;
     }
+    else if(action == PLAYER_WEAT)
+    {
+        actionSheet = InitSpriteSheet(actionTex,
+                100,
+                100,
+                67); 
+
+        actionSheet.mUpdateInterval = 200;
+
+    }
 
     if(spriteCol != -1)
     {
@@ -1326,7 +1336,6 @@ void LoadScene(GameState *GS, string sceneName)
         endDoor.mButtonText = "Go to Work";
         GS->ssArray[1] = endDoor;
 
-        //ChildSleep
 
         SDL_Texture *windowTex= GetSDLTexture(GS->renderer, GS->window, TEX_WINDOW);
 
@@ -1341,6 +1350,20 @@ void LoadScene(GameState *GS, string sceneName)
         windowSS.mUpdateInterval = 1500;
         GS->ssArray[2] = windowSS;
 
+
+        SDL_Texture *fridgeTex = GetSDLTexture(GS->renderer, GS->window, TEX_FRIDGE);
+
+        //Texture sink = InitTexture(sinkTex, 450, GS->ssPlayer.mY); //action same height player
+        SpriteSheet fridge = InitSpriteSheet(fridgeTex, 0, 0, 1); //action same height player
+        fridge.mX = 140;
+        fridge.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - fridge.mDstRect.h;;
+        fridge.mType = TTYPE_ACTION;
+        fridge.mName = PLAYER_WEAT; 
+        fridge.mButtonText = "Eat";
+        fridge.mNarration = "Breakfast is the most important part of the day";
+        fridge.mColBoxOffset.x = 49;
+        fridge.mColBoxOffset.w = 5;
+        GS->ssArray[3] = fridge;
 
     }
     else if(sceneName == SCENE_ENDDOOR)

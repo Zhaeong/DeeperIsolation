@@ -38,6 +38,7 @@ const int SS_CHILD = 3;
 const string PLAYER_WALK = "./res/png/manwalk.png";
 const string PLAYER_WAKE = "./res/png/manwake.png";
 const string PLAYER_WASH = "./res/png/manwash.png";
+const string PLAYER_WEAT = "./res/png/manweat.png";
 
 //specific frame in player walk animation png which contains the idle frame
 const int PLAYER_IDLE_FRAME = 18;
@@ -75,6 +76,7 @@ const string TEX_DOOR = "./res/png/door.png";
 const string TEX_SINK = "./res/png/sink.png";
 const string TEX_CHILDSLEEP = "./res/png/childsleep.png";
 const string TEX_WINDOW = "./res/png/window.png";
+const string TEX_FRIDGE = "./res/png/fridge.png";
 
 
 //Texture Types
