@@ -155,91 +155,91 @@ Module.expectedDataFileDownloads++;
   "files": [ {
    "filename": "/res/png/bedroom.png",
    "start": 0,
-   "end": 1929,
+   "end": 1879,
    "audio": 0
   }, {
    "filename": "/res/png/black.png",
-   "start": 1929,
-   "end": 3152,
+   "start": 1879,
+   "end": 3102,
    "audio": 0
   }, {
    "filename": "/res/png/childsleep.png",
-   "start": 3152,
-   "end": 9186,
+   "start": 3102,
+   "end": 9136,
    "audio": 0
   }, {
    "filename": "/res/png/door.png",
-   "start": 9186,
-   "end": 10641,
+   "start": 9136,
+   "end": 10591,
    "audio": 0
   }, {
    "filename": "/res/png/fridge.png",
-   "start": 10641,
-   "end": 13308,
+   "start": 10591,
+   "end": 13258,
    "audio": 0
   }, {
    "filename": "/res/png/livingroom.png",
-   "start": 13308,
-   "end": 15411,
+   "start": 13258,
+   "end": 15287,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png",
-   "start": 15411,
-   "end": 21568,
+   "start": 15287,
+   "end": 21444,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png~",
-   "start": 21568,
-   "end": 24691,
+   "start": 21444,
+   "end": 24567,
    "audio": 0
   }, {
    "filename": "/res/png/mainText50.png",
-   "start": 24691,
-   "end": 33750,
+   "start": 24567,
+   "end": 33626,
    "audio": 0
   }, {
    "filename": "/res/png/manwake.png",
-   "start": 33750,
-   "end": 66396,
+   "start": 33626,
+   "end": 66272,
    "audio": 0
   }, {
    "filename": "/res/png/manwalk.png",
-   "start": 66396,
-   "end": 112269,
+   "start": 66272,
+   "end": 112145,
    "audio": 0
   }, {
    "filename": "/res/png/manwash.png",
-   "start": 112269,
-   "end": 148776,
+   "start": 112145,
+   "end": 148652,
    "audio": 0
   }, {
    "filename": "/res/png/manweat.png",
-   "start": 148776,
-   "end": 221898,
+   "start": 148652,
+   "end": 221774,
    "audio": 0
   }, {
    "filename": "/res/png/sink.png",
-   "start": 221898,
-   "end": 223908,
+   "start": 221774,
+   "end": 223784,
    "audio": 0
   }, {
    "filename": "/res/png/textBox.png",
-   "start": 223908,
-   "end": 225293,
+   "start": 223784,
+   "end": 225169,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 225293,
-   "end": 661274,
+   "start": 225169,
+   "end": 661150,
    "audio": 0
   }, {
    "filename": "/res/png/window.png",
-   "start": 661274,
-   "end": 668545,
+   "start": 661150,
+   "end": 668421,
    "audio": 0
   } ],
-  "remote_package_size": 668545,
-  "package_uuid": "6e443a6a-fe9a-4d40-83e5-ccb698cc867f"
+  "remote_package_size": 668421,
+  "package_uuid": "a4ff681c-34d2-4ba7-a6cd-eba855a573e1"
  });
 })();
 

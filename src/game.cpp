@@ -1251,21 +1251,6 @@ void LoadScene(GameState *GS, string sceneName)
         cout << "door w: " << door.mDstRect.w << " h: " << door.mDstRect.h << "\n";
         GS->ssArray[0] = door;
 
-        //Sink
-        SDL_Texture *sinkTex = GetSDLTexture(GS->renderer, GS->window, TEX_SINK);
-
-        //Texture sink = InitTexture(sinkTex, 450, GS->ssPlayer.mY); //action same height player
-        SpriteSheet sink = InitSpriteSheet(sinkTex, 0, 0, 1); //action same height player
-        sink.mX = 450;
-        sink.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - sink.mDstRect.h;;
-        sink.mType = TTYPE_ACTION;
-        sink.mName = PLAYER_WASH; 
-        sink.mButtonText = "Wash";
-        sink.mNarration = "It is necessary to be presentable";
-        sink.mColBoxOffset.x = 60;
-        sink.mColBoxOffset.w = 40;
-        GS->ssArray[1] = sink;
-
         //ChildSleep
 
         SDL_Texture *childsleepTex = GetSDLTexture(GS->renderer, GS->window, TEX_CHILDSLEEP);
@@ -1353,7 +1338,6 @@ void LoadScene(GameState *GS, string sceneName)
 
         SDL_Texture *fridgeTex = GetSDLTexture(GS->renderer, GS->window, TEX_FRIDGE);
 
-        //Texture sink = InitTexture(sinkTex, 450, GS->ssPlayer.mY); //action same height player
         SpriteSheet fridge = InitSpriteSheet(fridgeTex, 0, 0, 1); //action same height player
         fridge.mX = 140;
         fridge.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - fridge.mDstRect.h;;
@@ -1364,6 +1348,21 @@ void LoadScene(GameState *GS, string sceneName)
         fridge.mColBoxOffset.x = 49;
         fridge.mColBoxOffset.w = 5;
         GS->ssArray[3] = fridge;
+
+        //Sink
+        SDL_Texture *sinkTex = GetSDLTexture(GS->renderer, GS->window, TEX_SINK);
+
+        //Texture sink = InitTexture(sinkTex, 450, GS->ssPlayer.mY); //action same height player
+        SpriteSheet sink = InitSpriteSheet(sinkTex, 0, 0, 1); //action same height player
+        sink.mX = 450;
+        sink.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - sink.mDstRect.h;;
+        sink.mType = TTYPE_ACTION;
+        sink.mName = PLAYER_WASH; 
+        sink.mButtonText = "Wash";
+        sink.mNarration = "It is necessary to be presentable";
+        sink.mColBoxOffset.x = 60;
+        sink.mColBoxOffset.w = 40;
+        GS->ssArray[4] = sink;
 
     }
     else if(sceneName == SCENE_ENDDOOR)
