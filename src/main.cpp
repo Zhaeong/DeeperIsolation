@@ -11,7 +11,6 @@ const int FrameDelay = 1000 / FPS;
 #endif 
 
 bool ShowDebug = true;
-SDL_AudioDeviceID audioDevice;
 
 void gameloop() 
 {
@@ -413,15 +412,16 @@ int main(int argv, char **args)
     LoadScene(&GS, SCENE_INTRO);
 
     //GS.blackTex.mAlpha = 0;
-    /*
+    GS.IntroMus = InitAudio("./res/music/intro.wav");
 
-       audioDevice = SDL_OpenAudioDevice(NULL, 0, &ToddlerMus.wavSpec, NULL, 0);
-       if (audioDevice == 0) {
-       printf("Failed to open audio: %s", SDL_GetError());
-       } 
-     */
+    GS.audioDevice = SDL_OpenAudioDevice(NULL, 0, &GS.IntroMus.wavSpec, NULL, 0);
+    if (GS.audioDevice == 0) 
+    {
+        printf("Failed to open audio: %s", SDL_GetError());
+    } 
 
-    //    SDL_PauseAudioDevice(audioDevice, 0);
+
+    SDL_PauseAudioDevice(GS.audioDevice, 0);
 
 
 #ifdef EMSCRIPTEN

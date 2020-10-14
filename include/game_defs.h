@@ -244,8 +244,11 @@ struct GameState
     SDL_Color screenColor;
     SDL_Window *window;
     SDL_Renderer *renderer;
-    SDL_AudioDeviceID audioDevice;
 
+
+    //Audio
+    SDL_AudioDeviceID audioDevice;
+    AudioClip IntroMus;
     //SpriteSheet manSheet;
 
 
