@@ -62,7 +62,7 @@ void gameloop()
                 GS.mainBoxTexture,
                 buttonText, 
                 GAMEWIDTH/2 - (buttonText.length() * MAIN_TEXT_W + 4)/2,
-                360,
+                370,
                 buttonText.length(),
                 0);           
 
