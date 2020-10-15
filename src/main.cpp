@@ -61,9 +61,9 @@ void gameloop()
                 MAIN_TEXT_H,
                 GS.mainBoxTexture,
                 buttonText, 
-                400,
-                10,
-                5,
+                GAMEWIDTH/2 - (buttonText.length() * MAIN_TEXT_W + 4)/2,
+                360,
+                buttonText.length(),
                 0);           
 
         //the button text is a hack to redraw when moving player from
@@ -321,7 +321,7 @@ void gameloop()
         UpdateSpriteSheet(&GS.ssArray[i], GS.curTime);
     }
 
-    UpdateSpriteSheet (&GS.ssPlayerAction, GS.curTime);
+    UpdateSpriteSheet(&GS.ssPlayerAction, GS.curTime);
     UpdateSpriteSheet(&GS.ssPlayer, GS.curTime);
     //
     //Render Area

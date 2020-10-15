@@ -1156,13 +1156,19 @@ void SpawnPlayer(GameState *GS, float x, float y)
 
 void SpawnControls(GameState *GS)
 {
+    int controlWidth = 5;
+
+    //Width of the textbox is calculated by column * fontW + tbox->mBoxMargin * 2
+    int boxWidthInPixels = controlWidth * MAIN_TEXT_W + (2*2);
+    
+    int yLocation = 410; 
     GS->tbArray[0] = InitTextBox(GS->fontTexture,
             MAIN_TEXT_W,
             MAIN_TEXT_H,
             GS->mainBoxTexture,
             STATE_LEFT,
-            10,
-            10,
+            GAMEWIDTH/2 - boxWidthInPixels - 10, 
+            yLocation,
             5,
             200);
 
@@ -1173,8 +1179,8 @@ void SpawnControls(GameState *GS)
             MAIN_TEXT_H,
             GS->mainBoxTexture,
             STATE_RIGHT,
-            200,
-            10,
+            GAMEWIDTH/2 + 10, 
+            yLocation,
             5,
             200);
 

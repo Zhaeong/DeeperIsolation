@@ -42,6 +42,8 @@ SDL_Point RotatePointByOtherPoint(int inX,
                                   int centerY,
                                   int degrees);
 
+//Width of the textbox is calculated by column * fontW + tbox->mBoxMargin * 2
+//default mBoxMargin == 2 
 TextBox InitTextBox(SDL_Texture *fontTex,
         int fontW,
         int fontH,
