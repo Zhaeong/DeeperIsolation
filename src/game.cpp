@@ -1265,7 +1265,7 @@ void LoadScene(GameState *GS, string sceneName)
         SpriteSheet childSleepSS = InitSpriteSheet(childsleepTex, 100, 100, 4);
 
         childSleepSS.mType = TTYPE_NARRATION;
-        childSleepSS.mButtonText = "Examine";
+        childSleepSS.mButtonText = "Stare";
         childSleepSS.mNarration = "His child still sleeps" ;
 
         childSleepSS.mX = 300;
@@ -1334,7 +1334,7 @@ void LoadScene(GameState *GS, string sceneName)
         SpriteSheet windowSS = InitSpriteSheet(windowTex, 50, 50, 6);
 
         windowSS.mType = TTYPE_NARRATION;
-        windowSS.mButtonText = "Examine";
+        windowSS.mButtonText = "Look";
         windowSS.mNarration = "The weather is nice outside" ;
 
         windowSS.mX = 300;
