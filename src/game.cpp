@@ -1025,6 +1025,10 @@ void LoadNarration(GameState *GS, string sNarration)
 }
 void LoadAction(GameState *GS, string action, int spriteCol)
 {
+
+    //make player sprite invisible
+    GS->ssPlayer.mActive = false;
+
     if(spriteCol != -1 && !GS->ssArray[spriteCol].mInteract)
     {
         return;
@@ -1033,9 +1037,6 @@ void LoadAction(GameState *GS, string action, int spriteCol)
 
     SDL_Texture *actionTex = GetSDLTexture(GS->renderer, GS->window, action);
     RemoveTextureWhiteSpace(actionTex);
-
-    GS->ssPlayer.mActive = false;
-    GS->ssPlayer.mActive = true;
 
     SpriteSheet actionSheet;
     if(action == PLAYER_WAKE)
