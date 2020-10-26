@@ -66,6 +66,7 @@ const int NUM_LINES = 10;
 //Game Scenes
 const string SCENE_INTRO = "INTRO";
 const string SCENE_TRAN  = "TRAN";
+const string SCENE_LIGHTEN = "LIGHT";
 const string SCENE_BEDROOM = "./res/png/bedroom.png";
 const string SCENE_LIVINGROOM = "./res/png/livingroom.png";
 const string SCENE_ENDDOOR = "./res/png/enddoor.png";
@@ -269,6 +270,7 @@ struct GameState
 
     SpriteSheet ssPlayer;
     SpriteSheet ssPlayerAction;
+    int actionCol;
 
     SpriteSheet ssArray[NUM_SPRITESHEET];
     TextBox tbArray[NUM_TEXTBOX];

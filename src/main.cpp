@@ -42,7 +42,6 @@ void gameloop()
         {
             spriteCol = i;
 
-            //cout << "col: " << spriteCol << "\n";
         }
     }
 
@@ -213,7 +212,6 @@ void gameloop()
                             }
                             else if(GS.ssArray[spriteCol].mType == TTYPE_TRANSIT)
                             {
-                                cout << "loading: " << GS.ssArray[spriteCol].mName << "\n";
                                 GS.SceneCurrent = SCENE_TRAN;
                                 GS.SceneNext = GS.ssArray[spriteCol].mName;
                             }
@@ -247,10 +245,9 @@ void gameloop()
 
     if(GS.SceneCurrent == SCENE_TRAN)
     {
-        if(DarkenTexture(&GS.blackTex, GS.curTime))
+        if(DarkenTexture(&GS))
         {
             LoadScene(&GS, GS.SceneNext); 
-            GS.SceneCurrent = GS.SceneNext;
         }
     }
     else
@@ -300,6 +297,11 @@ void gameloop()
         {
             GS.ssPlayer.mActive = true;
             GS.ssPlayerAction.mActive = false;
+            if(GS.actionCol> 0)
+            {
+                GS.ssArray[GS.actionCol].mActive = true;
+                cout << "finiACtion : " << GS.actionCol << "\n";
+            }
             //Not using function Change Player state here because when its state action only 
             //this part can change it back to idle
             GS.PlayerState = STATE_IDLE;
@@ -351,9 +353,9 @@ void gameloop()
     }
 
     //renderPlayersStuff
-    RenderSpriteSheet(GS.renderer, GS.ssPlayerAction);
     RenderSpriteSheet(GS.renderer, GS.ssPlayer);
 
+    RenderSpriteSheet(GS.renderer, GS.ssPlayerAction);
     //Render the fadeout textures
     RenderTexture(GS.renderer, GS.blackTex);
     ////////////////////////////////////////////////////////////////////////
@@ -409,7 +411,7 @@ int main(int argv, char **args)
     GS.mainBoxTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/textBox.png");
     RemoveTextureWhiteSpace(GS.mainBoxTexture);
 
-    LoadScene(&GS, SCENE_INTRO);
+    
 
     //GS.blackTex.mAlpha = 0;
     GS.IntroMus = InitAudio("./res/music/intro.wav");
@@ -422,6 +424,8 @@ int main(int argv, char **args)
 
 
     SDL_PauseAudioDevice(GS.audioDevice, 0);
+
+    LoadScene(&GS, SCENE_INTRO);
 
 
 #ifdef EMSCRIPTEN

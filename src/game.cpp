@@ -924,20 +924,21 @@ void RenderTextLine(SDL_Renderer *renderer, TextLine tLine)
 
 }
 
-bool DarkenTexture(Texture *tex, Uint32 curTime)
+bool DarkenTexture(GameState *GS)
 {
     int updateIncrement = 5;
-    if(tex->mLastUpdate + 10 < curTime && tex->mAlpha < 255)
+    //cout << "texalpha : " << GS->blackTex.mAlpha << "\n";
+    if(GS->blackTex.mAlpha < 255)
     {
-        if(tex->mAlpha + updateIncrement >= 255)
+        if(GS->blackTex.mAlpha + updateIncrement >= 255)
         {
-            tex->mAlpha = 255;
+            GS->blackTex.mAlpha = 255;
             return true;
         }
         else
         {
-            tex->mAlpha += updateIncrement;
-            tex->mLastUpdate = curTime;
+            GS->blackTex.mAlpha += updateIncrement;
+            GS->blackTex.mLastUpdate = GS->curTime;
             return false;
         }
     }
@@ -947,7 +948,7 @@ bool DarkenTexture(Texture *tex, Uint32 curTime)
 bool LightenTexture(Texture *tex, Uint32 curTime)
 {
     int updateIncrement = 5;
-    if(tex->mLastUpdate + 10 < curTime && tex->mAlpha > 0)
+    if(tex->mAlpha > 0)
     {
         if(tex->mAlpha - updateIncrement <= 0)
         {
@@ -1028,12 +1029,14 @@ void LoadAction(GameState *GS, string action, int spriteCol)
 
     //make player sprite invisible
     GS->ssPlayer.mActive = false;
+    GS->ssArray[spriteCol].mActive = false;
+    GS->actionCol = spriteCol;
 
     if(spriteCol != -1 && !GS->ssArray[spriteCol].mInteract)
     {
         return;
     }
-    cout << "loaded action: " << action << "\n";
+    cout << "loaded action: " << action << " spritecol: " << spriteCol << "\n";
 
     SDL_Texture *actionTex = GetSDLTexture(GS->renderer, GS->window, action);
     RemoveTextureWhiteSpace(actionTex);
@@ -1161,7 +1164,7 @@ void SpawnControls(GameState *GS)
 
     //Width of the textbox is calculated by column * fontW + tbox->mBoxMargin * 2
     int boxWidthInPixels = controlWidth * MAIN_TEXT_W + (2*2);
-    
+
     int yLocation = 410; 
     GS->tbArray[0] = InitTextBox(GS->fontTexture,
             MAIN_TEXT_W,
@@ -1204,7 +1207,10 @@ void AddStoryLine(GameState *GS, string line)
 void LoadScene(GameState *GS, string sceneName)
 {
 
+    cout << "Loading Scene: " << sceneName << "\n";
+
     RefreshState(GS);
+    GS->SceneCurrent = sceneName;
 
     if(sceneName == SCENE_INTRO)
     {
@@ -1330,6 +1336,7 @@ void LoadScene(GameState *GS, string sceneName)
         GS->ssArray[1] = endDoor;
 
 
+        //window
         SDL_Texture *windowTex= GetSDLTexture(GS->renderer, GS->window, TEX_WINDOW);
 
         SpriteSheet windowSS = InitSpriteSheet(windowTex, 50, 50, 6);
@@ -1343,11 +1350,11 @@ void LoadScene(GameState *GS, string sceneName)
         windowSS.mUpdateInterval = 1500;
         GS->ssArray[2] = windowSS;
 
-
+        //fridge
         SDL_Texture *fridgeTex = GetSDLTexture(GS->renderer, GS->window, TEX_FRIDGE);
 
         SpriteSheet fridge = InitSpriteSheet(fridgeTex, 0, 0, 1); //action same height player
-        fridge.mX = 140;
+        fridge.mX = 170;
         fridge.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - fridge.mDstRect.h;;
         fridge.mType = TTYPE_ACTION;
         fridge.mName = PLAYER_WEAT; 
@@ -1362,7 +1369,7 @@ void LoadScene(GameState *GS, string sceneName)
 
         //Texture sink = InitTexture(sinkTex, 450, GS->ssPlayer.mY); //action same height player
         SpriteSheet sink = InitSpriteSheet(sinkTex, 0, 0, 1); //action same height player
-        sink.mX = 450;
+        sink.mX = GS->lInfo.mLevelTex.mX + GS->lInfo.mLevelTex.mW - sink.mDstRect.w;
         sink.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - sink.mDstRect.h;;
         sink.mType = TTYPE_ACTION;
         sink.mName = PLAYER_WASH; 
@@ -1386,6 +1393,7 @@ void LoadScene(GameState *GS, string sceneName)
             GS->sStory[i].mStartTime = GS->curTime;
         }
     }
+
 
 }
 
