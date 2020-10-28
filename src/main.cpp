@@ -420,7 +420,7 @@ int main(int argv, char **args)
     GS.SceneCurrent = SCENE_INTRO; 
     GS.SceneNext = SCENE_INTRO; 
     GS.PlayerState = STATE_IDLE;
-    GS.playerSpeed = 0.6;
+    
     GS.screenColor.r = 200;
     GS.screenColor.g = 200;
     GS.screenColor.b = 200;
