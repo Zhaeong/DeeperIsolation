@@ -138,7 +138,34 @@ void gameloop()
                         {
                             break;
                         }
+                    case SDLK_i:
+                        {
+                            GS.playerSpeed += 0.1;
+                            cout << "playerSpeed: " << GS.playerSpeed << "\n";
+                            break;
+                        }
+                        //Debug keysym
+                    case SDLK_o:
+                        {
+                            GS.playerSpeed -= 0.1;
+                            cout << "playerSpeed: " << GS.playerSpeed << "\n";
+                            break;
+                        }
+                    case SDLK_j:
+                        {
+                            GS.ssPlayer.mUpdateInterval += 1;
+                            cout << "playerSpeed: " << GS.ssPlayer.mUpdateInterval << "\n";
+                            break;
+                        }
+                        //Debug keysym
+                    case SDLK_k:
+                        {
+                            GS.ssPlayer.mUpdateInterval -= 1;
+                            cout << "playerSpeed: " << GS.ssPlayer.mUpdateInterval << "\n";
+                            break;
+                        }
                     case SDLK_1:
+
                         {
                             LoadScene(&GS, SCENE_BEDROOM); 
                             break;
@@ -393,7 +420,7 @@ int main(int argv, char **args)
     GS.SceneCurrent = SCENE_INTRO; 
     GS.SceneNext = SCENE_INTRO; 
     GS.PlayerState = STATE_IDLE;
-    GS.playerSpeed = 0.5;
+    GS.playerSpeed = 0.6;
     GS.screenColor.r = 200;
     GS.screenColor.g = 200;
     GS.screenColor.b = 200;
@@ -411,7 +438,7 @@ int main(int argv, char **args)
     GS.mainBoxTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/textBox.png");
     RemoveTextureWhiteSpace(GS.mainBoxTexture);
 
-    
+
 
     //GS.blackTex.mAlpha = 0;
     GS.IntroMus = InitAudio("./res/music/intro.wav");

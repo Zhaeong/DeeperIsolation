@@ -1067,7 +1067,7 @@ void LoadAction(GameState *GS, string action, int spriteCol)
                 100,
                 67); 
 
-        actionSheet.mUpdateInterval = 200;
+        actionSheet.mUpdateInterval = 100;
 
     }
 
@@ -1144,7 +1144,10 @@ void SpawnPlayer(GameState *GS, float x, float y)
             100,
             18); 
 
-    manSheet.mUpdateInterval = 200;
+    //Need fine tuning to match sprite sheet updating with transforming
+    manSheet.mUpdateInterval = 127;
+    GS->playerSpeed = 0.6;
+
     manSheet.mX = x;
 
     manSheet.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - manSheet.mDstRect.h;
