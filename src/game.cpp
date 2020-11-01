@@ -472,7 +472,7 @@ void PlayAudio(GameState *GS, AudioClip clip)
     //Layering sounds 
     if(GS->curSound.mActive)
     {
-        //need to accound for currently played audio 
+        //need to account for currently played audio 
         Uint32 sizeCurAudio = SDL_GetQueuedAudioSize(GS->audioDevice);
 
         wavLength = sizeCurAudio;

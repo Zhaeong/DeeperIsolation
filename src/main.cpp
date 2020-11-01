@@ -164,6 +164,12 @@ void gameloop()
                             cout << "playerSpeed: " << GS.ssPlayer.mUpdateInterval << "\n";
                             break;
                         }
+                    case SDLK_n:
+                        {
+                            PlayAudio(&GS, GS.WalkMus);
+                            cout << "playerAudio: " << GS.ssPlayer.mUpdateInterval << "\n";
+                            break;
+                        }
                     case SDLK_1:
 
                         {
