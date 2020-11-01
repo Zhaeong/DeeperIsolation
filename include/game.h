@@ -34,7 +34,7 @@ void RemoveTextureWhiteSpace(SDL_Texture *texture);
 
 AudioClip InitAudio(string filepath);
 
-void PlayAudio(SDL_AudioDeviceID audioDevice, AudioClip clip);
+void PlayAudio(GameState *GS, AudioClip clip);
 
 SDL_Point RotatePointByOtherPoint(int inX,
                                   int inY,

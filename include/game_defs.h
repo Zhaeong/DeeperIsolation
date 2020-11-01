@@ -15,7 +15,7 @@ using namespace std;
 
 
 #define PI 3.14159265
-
+#define AUDIO_FORMAT AUDIO_S16LSB
 
 /*
 A man wakes up for work
@@ -167,6 +167,7 @@ struct vect2
 
 struct AudioClip
 {
+    bool mActive;
     string wavPath;
     SDL_AudioSpec wavSpec;
     Uint32 wavLength;
@@ -249,7 +250,10 @@ struct GameState
 
     //Audio
     SDL_AudioDeviceID audioDevice;
+
+    AudioClip curSound;
     AudioClip IntroMus;
+    AudioClip WalkMus;
     //SpriteSheet manSheet;
 
 

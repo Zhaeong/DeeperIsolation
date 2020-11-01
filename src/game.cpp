@@ -454,6 +454,7 @@ void SetTextureColor(SDL_Texture *texture, int R, int G, int B, int A)
 AudioClip InitAudio(string filepath)
 {
     AudioClip clip;
+    clip.mActive = true;
     clip.wavPath = filepath;
     if (SDL_LoadWAV(clip.wavPath.c_str(), &clip.wavSpec, &clip.wavBuffer, &clip.wavLength) == NULL) 
     {
@@ -462,13 +463,42 @@ AudioClip InitAudio(string filepath)
     return clip;
 }
 
-void PlayAudio(SDL_AudioDeviceID audioDevice, AudioClip clip)
+void PlayAudio(GameState *GS, AudioClip clip)
 {
-    int success = SDL_QueueAudio(audioDevice, clip.wavBuffer, clip.wavLength);
+
+    Uint32 wavLength;
+    Uint8 *wavBuffer;
+
+    //Layering sounds 
+    if(GS->curSound.mActive)
+    {
+        //need to accound for currently played audio 
+        Uint32 sizeCurAudio = SDL_GetQueuedAudioSize(GS->audioDevice);
+
+        wavLength = sizeCurAudio;
+        SDL_ClearQueuedAudio(GS->audioDevice);
+
+        //Get current played part of playing audio 
+        wavBuffer = GS->curSound.wavBuffer + GS->curSound.wavLength - sizeCurAudio;
+
+        SDL_MixAudioFormat(wavBuffer, clip.wavBuffer, AUDIO_FORMAT, clip.wavLength, SDL_MIX_MAXVOLUME);
+
+    }
+    else
+    {
+        wavLength = clip.wavLength;
+        wavBuffer = clip.wavBuffer;
+    }
+
+    int success = SDL_QueueAudio(GS->audioDevice, wavBuffer, wavLength);
     cout << "audioret: " << success << "\n";
     if(success < 0)
     {
         printf("SDL_QueueAudio failed %s, err: %s", clip.wavPath.c_str(), SDL_GetError()); 
+    }
+    else
+    {
+        GS->curSound = clip;
     }
 
 }
@@ -1286,7 +1316,8 @@ void LoadScene(GameState *GS, string sceneName)
         //Special case for start spawn of the level where the player is in bed instead of door.
         if(GS->NarrativeCounter == 0)
         {
-            PlayAudio(GS->audioDevice, GS->IntroMus); 
+            PlayAudio(GS, GS->IntroMus); 
+            PlayAudio(GS, GS->WalkMus); 
             GS->tbArray[TB_NARRATION_BOX] = InitTextBox(GS->fontTexture,
                     MAIN_TEXT_W,
                     MAIN_TEXT_H,

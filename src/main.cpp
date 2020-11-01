@@ -352,6 +352,20 @@ void gameloop()
 
     UpdateSpriteSheet(&GS.ssPlayerAction, GS.curTime);
     UpdateSpriteSheet(&GS.ssPlayer, GS.curTime);
+
+
+    //Audio portion
+    if(GS.curSound.mActive)
+    {
+        if(SDL_GetQueuedAudioSize(GS.audioDevice) == 0)
+        {
+            cout << "audio finished\n";
+            GS.curSound.mActive = false;
+        }
+    }
+
+
+
     //
     //Render Area
     //
@@ -420,7 +434,7 @@ int main(int argv, char **args)
     GS.SceneCurrent = SCENE_INTRO; 
     GS.SceneNext = SCENE_INTRO; 
     GS.PlayerState = STATE_IDLE;
-    
+
     GS.screenColor.r = 200;
     GS.screenColor.g = 200;
     GS.screenColor.b = 200;
@@ -442,6 +456,8 @@ int main(int argv, char **args)
 
     //GS.blackTex.mAlpha = 0;
     GS.IntroMus = InitAudio("./res/music/intro.wav");
+    GS.WalkMus = InitAudio("./res/music/walk.wav");
+    GS.curSound.mActive = false;
 
     GS.audioDevice = SDL_OpenAudioDevice(NULL, 0, &GS.IntroMus.wavSpec, NULL, 0);
     if (GS.audioDevice == 0) 
