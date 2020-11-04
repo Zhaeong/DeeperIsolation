@@ -465,6 +465,9 @@ AudioClip InitAudio(string filepath)
 
 void PlayAudio(GameState *GS, AudioClip clip)
 {
+
+    //using malloc and memcpy because we don't want to touch the 
+    //original audio
     Uint8 *clipBuffer = (Uint8 *) malloc(clip.wavLength);
     memcpy(clipBuffer, clip.wavBuffer, clip.wavLength);
 
@@ -474,7 +477,9 @@ void PlayAudio(GameState *GS, AudioClip clip)
     //Layering sounds 
     if(GS->curSound.mActive)
     {
+        //Buffer which stores the remaining data in queue 
         Uint8 *wavBuffer;
+
         //need to account for currently played audio 
         Uint32 sizeCurAudio = SDL_GetQueuedAudioSize(GS->audioDevice);
 
@@ -484,7 +489,7 @@ void PlayAudio(GameState *GS, AudioClip clip)
 
         //This new pointer is the offsetted pointer location of the current sound that's already been played
         //We can simply clear queue and queue this pointer and it will seem like nothing happened and 
-        //The track will play still as normal
+        //The track will play still as normal, but we want to mix the remaining portion with the new audio
         Uint8 *curAudioOffset = GS->curSound.wavBuffer + (GS->curSound.wavLength - sizeCurAudio);
 
         //printf("new:  %p\n", curAudioOffset);
@@ -500,7 +505,7 @@ void PlayAudio(GameState *GS, AudioClip clip)
             SDL_ClearQueuedAudio(GS->audioDevice);
             success = SDL_QueueAudio(GS->audioDevice, wavBuffer, sizeCurAudio);
         }
-        //else if the new audio is greater in lenght than the remaining audio in queue
+        //else if the new audio is greater in length than the remaining audio in queue
         //then the new audio becomes mainaudio and mix the remaining audio with the new audio
         else
         {
