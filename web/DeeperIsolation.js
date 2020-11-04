@@ -154,113 +154,118 @@ Module.expectedDataFileDownloads++;
  };
  loadPackage({
   "files": [ {
-   "filename": "/res/music/intro.wav",
+   "filename": "/res/music/girlfrombar.wav",
    "start": 0,
-   "end": 368684,
+   "end": 3186732,
+   "audio": 1
+  }, {
+   "filename": "/res/music/intro.wav",
+   "start": 3186732,
+   "end": 3555416,
    "audio": 1
   }, {
    "filename": "/res/music/walk.wav",
-   "start": 368684,
-   "end": 943796,
+   "start": 3555416,
+   "end": 4130528,
    "audio": 1
   }, {
    "filename": "/res/png/bedroom.png",
-   "start": 943796,
-   "end": 945675,
+   "start": 4130528,
+   "end": 4132407,
    "audio": 0
   }, {
    "filename": "/res/png/black.png",
-   "start": 945675,
-   "end": 946898,
+   "start": 4132407,
+   "end": 4133630,
    "audio": 0
   }, {
    "filename": "/res/png/childsleep.png",
-   "start": 946898,
-   "end": 952932,
+   "start": 4133630,
+   "end": 4139664,
    "audio": 0
   }, {
    "filename": "/res/png/door.png",
-   "start": 952932,
-   "end": 954387,
+   "start": 4139664,
+   "end": 4141119,
    "audio": 0
   }, {
    "filename": "/res/png/fridge.png",
-   "start": 954387,
-   "end": 957054,
+   "start": 4141119,
+   "end": 4143786,
    "audio": 0
   }, {
    "filename": "/res/png/livingroom.png",
-   "start": 957054,
-   "end": 959083,
+   "start": 4143786,
+   "end": 4145815,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png",
-   "start": 959083,
-   "end": 965240,
+   "start": 4145815,
+   "end": 4151972,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png~",
-   "start": 965240,
-   "end": 968363,
+   "start": 4151972,
+   "end": 4155095,
    "audio": 0
   }, {
    "filename": "/res/png/mainText50.png",
-   "start": 968363,
-   "end": 977422,
+   "start": 4155095,
+   "end": 4164154,
    "audio": 0
   }, {
    "filename": "/res/png/manwake.png",
-   "start": 977422,
-   "end": 1010068,
+   "start": 4164154,
+   "end": 4196800,
    "audio": 0
   }, {
    "filename": "/res/png/manwalk.png",
-   "start": 1010068,
-   "end": 1046845,
+   "start": 4196800,
+   "end": 4233577,
    "audio": 0
   }, {
    "filename": "/res/png/manwalkOriginal.png",
-   "start": 1046845,
-   "end": 1090395,
+   "start": 4233577,
+   "end": 4277127,
    "audio": 0
   }, {
    "filename": "/res/png/manwash.png",
-   "start": 1090395,
-   "end": 1126902,
+   "start": 4277127,
+   "end": 4313634,
    "audio": 0
   }, {
    "filename": "/res/png/manweat.png",
-   "start": 1126902,
-   "end": 1200024,
+   "start": 4313634,
+   "end": 4386756,
    "audio": 0
   }, {
    "filename": "/res/png/sink.png",
-   "start": 1200024,
-   "end": 1202034,
+   "start": 4386756,
+   "end": 4388766,
    "audio": 0
   }, {
    "filename": "/res/png/textBox.png",
-   "start": 1202034,
-   "end": 1203416,
+   "start": 4388766,
+   "end": 4390148,
    "audio": 0
   }, {
    "filename": "/res/png/textBoxOri.png",
-   "start": 1203416,
-   "end": 1204801,
+   "start": 4390148,
+   "end": 4391533,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 1204801,
-   "end": 1640782,
+   "start": 4391533,
+   "end": 4827514,
    "audio": 0
   }, {
    "filename": "/res/png/window.png",
-   "start": 1640782,
-   "end": 1648053,
+   "start": 4827514,
+   "end": 4834785,
    "audio": 0
   } ],
-  "remote_package_size": 1648053,
-  "package_uuid": "23ca9538-22a5-466f-8f52-5a97bcbaad3a"
+  "remote_package_size": 4834785,
+  "package_uuid": "c8882a87-6d38-43d1-a3a3-ea39bca5cb90"
  });
 })();
 
@@ -881,7 +886,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5349504, STACK_MAX = 106624, DYNAMIC_BASE = 5349504, DYNAMICTOP_PTR = 106464;
+var STACK_BASE = 5349568, STACK_MAX = 106688, DYNAMIC_BASE = 5349568, DYNAMICTOP_PTR = 106528;
 
 assert(STACK_BASE % 16 === 0, "stack must start aligned");
 
@@ -1246,7 +1251,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 38260: function($0, $1, $2) {
+ 38324: function($0, $1, $2) {
   var w = $0;
   var h = $1;
   var pixels = $2;
@@ -1317,7 +1322,7 @@ var ASM_CONSTS = {
   SDL2.ctx.putImageData(SDL2.image, 0, 0);
   return 0;
  },
- 39715: function($0, $1, $2, $3, $4) {
+ 39779: function($0, $1, $2, $3, $4) {
   var w = $0;
   var h = $1;
   var hot_x = $2;
@@ -1354,30 +1359,30 @@ var ASM_CONSTS = {
   stringToUTF8(url, urlBuf, url.length + 1);
   return urlBuf;
  },
- 40704: function($0) {
+ 40768: function($0) {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = UTF8ToString($0);
   }
   return 0;
  },
- 40797: function() {
+ 40861: function() {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = "none";
   }
  },
- 42022: function() {
+ 42086: function() {
   return screen.width;
  },
- 42049: function() {
+ 42113: function() {
   return screen.height;
  },
- 42122: function($0) {
+ 42186: function($0) {
   if (typeof Module["setWindowTitle"] !== "undefined") {
    Module["setWindowTitle"](UTF8ToString($0));
   }
   return 0;
  },
- 42276: function() {
+ 42340: function() {
   if (typeof AudioContext !== "undefined") {
    return 1;
   } else if (typeof webkitAudioContext !== "undefined") {
@@ -1385,7 +1390,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 42442: function() {
+ 42506: function() {
   if (typeof navigator.mediaDevices !== "undefined" && typeof navigator.mediaDevices.getUserMedia !== "undefined") {
    return 1;
   } else if (typeof navigator.webkitGetUserMedia !== "undefined") {
@@ -1393,7 +1398,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 42668: function($0) {
+ 42732: function($0) {
   if (typeof Module["SDL2"] === "undefined") {
    Module["SDL2"] = {};
   }
@@ -1412,11 +1417,11 @@ var ASM_CONSTS = {
   }
   return SDL2.audioContext === undefined ? -1 : 0;
  },
- 43151: function() {
+ 43215: function() {
   var SDL2 = Module["SDL2"];
   return SDL2.audioContext.sampleRate;
  },
- 43221: function($0, $1, $2, $3) {
+ 43285: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   var have_microphone = function(stream) {
    if (SDL2.capture.silenceTimer !== undefined) {
@@ -1457,7 +1462,7 @@ var ASM_CONSTS = {
    }, have_microphone, no_microphone);
   }
  },
- 44873: function($0, $1, $2, $3) {
+ 44937: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
   SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -1469,7 +1474,7 @@ var ASM_CONSTS = {
   };
   SDL2.audio.scriptProcessorNode["connect"](SDL2.audioContext["destination"]);
  },
- 45283: function($0, $1) {
+ 45347: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
   for (var c = 0; c < numChannels; ++c) {
@@ -1488,7 +1493,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 45888: function($0, $1) {
+ 45952: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
   for (var c = 0; c < numChannels; ++c) {
@@ -1501,7 +1506,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 46368: function($0) {
+ 46432: function($0) {
   var SDL2 = Module["SDL2"];
   if ($0) {
    if (SDL2.capture.silenceTimer !== undefined) {
@@ -9183,16 +9188,16 @@ var _main = Module["_main"] = function() {
  return Module["asm"]["main"].apply(null, arguments);
 };
 
-var _free = Module["_free"] = function() {
- assert(runtimeInitialized, "you need to wait for the runtime to be ready (e.g. wait for main() to be called)");
- assert(!runtimeExited, "the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)");
- return Module["asm"]["free"].apply(null, arguments);
-};
-
 var _malloc = Module["_malloc"] = function() {
  assert(runtimeInitialized, "you need to wait for the runtime to be ready (e.g. wait for main() to be called)");
  assert(!runtimeExited, "the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)");
  return Module["asm"]["malloc"].apply(null, arguments);
+};
+
+var _free = Module["_free"] = function() {
+ assert(runtimeInitialized, "you need to wait for the runtime to be ready (e.g. wait for main() to be called)");
+ assert(!runtimeExited, "the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)");
+ return Module["asm"]["free"].apply(null, arguments);
 };
 
 var _realloc = Module["_realloc"] = function() {

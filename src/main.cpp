@@ -161,13 +161,17 @@ void gameloop()
                     case SDLK_k:
                         {
                             GS.ssPlayer.mUpdateInterval -= 1;
-                            cout << "playerSpeed: " << GS.ssPlayer.mUpdateInterval << "\n";
                             break;
                         }
                     case SDLK_n:
                         {
                             PlayAudio(&GS, GS.WalkMus);
-                            cout << "playerAudio: " << GS.ssPlayer.mUpdateInterval << "\n";
+                            break;
+                        }
+                    case SDLK_m:
+                        {
+                            PlayAudio(&GS, GS.IntroMus);
+                            cout << "playerAudio: " << GS.IntroMus.wavPath << "\n";
                             break;
                         }
                     case SDLK_1:
@@ -461,7 +465,7 @@ int main(int argv, char **args)
 
 
     //GS.blackTex.mAlpha = 0;
-    GS.IntroMus = InitAudio("./res/music/intro.wav");
+    GS.IntroMus = InitAudio("./res/music/girlfrombar.wav");
     GS.WalkMus = InitAudio("./res/music/walk.wav");
     GS.curSound.mActive = false;
 

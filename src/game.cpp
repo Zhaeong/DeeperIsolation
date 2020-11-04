@@ -466,39 +466,63 @@ AudioClip InitAudio(string filepath)
 void PlayAudio(GameState *GS, AudioClip clip)
 {
 
-    Uint32 wavLength;
-    Uint8 *wavBuffer;
 
+    Uint8 *clipBuffer = (Uint8 *) malloc(clip.wavLength);
+    memcpy(clipBuffer, clip.wavBuffer, clip.wavLength);
+
+
+    int success = -1;
+
+    cout << "playerAudio: " << clip.wavPath << "\n";
     //Layering sounds 
     if(GS->curSound.mActive)
     {
+        Uint8 *wavBuffer;
         //need to account for currently played audio 
         Uint32 sizeCurAudio = SDL_GetQueuedAudioSize(GS->audioDevice);
 
-        wavLength = sizeCurAudio;
-        SDL_ClearQueuedAudio(GS->audioDevice);
+        wavBuffer = (Uint8 *)malloc(sizeCurAudio);
 
-        //Get current played part of playing audio 
-        wavBuffer = GS->curSound.wavBuffer + GS->curSound.wavLength - sizeCurAudio;
+        //printf("ori:  %p\n", GS->curSound.wavBuffer);
 
-        SDL_MixAudioFormat(wavBuffer, clip.wavBuffer, AUDIO_FORMAT, clip.wavLength, SDL_MIX_MAXVOLUME);
+        Uint8 *curAudioOffset = GS->curSound.wavBuffer + (GS->curSound.wavLength - sizeCurAudio);
 
-    }
-    else
-    {
-        wavLength = clip.wavLength;
-        wavBuffer = clip.wavBuffer;
-    }
+        //printf("new:  %p\n", curAudioOffset);
 
-    int success = SDL_QueueAudio(GS->audioDevice, wavBuffer, wavLength);
-    cout << "audioret: " << success << "\n";
-    if(success < 0)
-    {
-        printf("SDL_QueueAudio failed %s, err: %s", clip.wavPath.c_str(), SDL_GetError()); 
+        memcpy(wavBuffer, curAudioOffset, sizeCurAudio);
+
+        //if the next to be played audio is less in lenght than queue, then mix the new clip with the current clip
+        //at the offset
+        if(sizeCurAudio > clip.wavLength)
+        {
+            //here
+            cout << "here\n";
+            SDL_MixAudioFormat(wavBuffer, clipBuffer, AUDIO_FORMAT, clip.wavLength, SDL_MIX_MAXVOLUME);
+
+            SDL_ClearQueuedAudio(GS->audioDevice);
+            success = SDL_QueueAudio(GS->audioDevice, wavBuffer, sizeCurAudio);
+        }
+        else
+        {
+            //there
+            GS->curSound = clip;
+            SDL_MixAudioFormat(clipBuffer, wavBuffer, AUDIO_FORMAT, sizeCurAudio, SDL_MIX_MAXVOLUME);
+            SDL_ClearQueuedAudio(GS->audioDevice);
+            success = SDL_QueueAudio(GS->audioDevice, clipBuffer, clip.wavLength);
+        }
+
     }
     else
     {
         GS->curSound = clip;
+        success = SDL_QueueAudio(GS->audioDevice, clipBuffer, clip.wavLength);
+    }
+
+
+    cout << "audioret: " << success << "\n";
+    if(success < 0)
+    {
+        printf("SDL_QueueAudio failed %s, err: %s", clip.wavPath.c_str(), SDL_GetError()); 
     }
 
 }
@@ -1316,8 +1340,8 @@ void LoadScene(GameState *GS, string sceneName)
         //Special case for start spawn of the level where the player is in bed instead of door.
         if(GS->NarrativeCounter == 0)
         {
-            PlayAudio(GS, GS->IntroMus); 
-            PlayAudio(GS, GS->WalkMus); 
+            //PlayAudio(GS, GS->IntroMus); 
+            //PlayAudio(GS, GS->WalkMus); 
             GS->tbArray[TB_NARRATION_BOX] = InitTextBox(GS->fontTexture,
                     MAIN_TEXT_W,
                     MAIN_TEXT_H,
