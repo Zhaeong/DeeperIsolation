@@ -465,11 +465,8 @@ AudioClip InitAudio(string filepath)
 
 void PlayAudio(GameState *GS, AudioClip clip)
 {
-
-
     Uint8 *clipBuffer = (Uint8 *) malloc(clip.wavLength);
     memcpy(clipBuffer, clip.wavBuffer, clip.wavLength);
-
 
     int success = -1;
 
@@ -485,23 +482,26 @@ void PlayAudio(GameState *GS, AudioClip clip)
 
         //printf("ori:  %p\n", GS->curSound.wavBuffer);
 
+        //This new pointer is the offsetted pointer location of the current sound that's already been played
+        //We can simply clear queue and queue this pointer and it will seem like nothing happened and 
+        //The track will play still as normal
         Uint8 *curAudioOffset = GS->curSound.wavBuffer + (GS->curSound.wavLength - sizeCurAudio);
 
         //printf("new:  %p\n", curAudioOffset);
 
         memcpy(wavBuffer, curAudioOffset, sizeCurAudio);
 
-        //if the next to be played audio is less in lenght than queue, then mix the new clip with the current clip
-        //at the offset
+        //Two conditions, if the new audio that wants to be played is shorter than the remaining audio left 
+        //to be played in queue, then mix the new audio with the remaining audio in queue
         if(sizeCurAudio > clip.wavLength)
         {
-            //here
-            cout << "here\n";
             SDL_MixAudioFormat(wavBuffer, clipBuffer, AUDIO_FORMAT, clip.wavLength, SDL_MIX_MAXVOLUME);
 
             SDL_ClearQueuedAudio(GS->audioDevice);
             success = SDL_QueueAudio(GS->audioDevice, wavBuffer, sizeCurAudio);
         }
+        //else if the new audio is greater in lenght than the remaining audio in queue
+        //then the new audio becomes mainaudio and mix the remaining audio with the new audio
         else
         {
             //there
@@ -511,6 +511,9 @@ void PlayAudio(GameState *GS, AudioClip clip)
             success = SDL_QueueAudio(GS->audioDevice, clipBuffer, clip.wavLength);
         }
 
+        free(wavBuffer);
+        
+
     }
     else
     {
@@ -518,7 +521,7 @@ void PlayAudio(GameState *GS, AudioClip clip)
         success = SDL_QueueAudio(GS->audioDevice, clipBuffer, clip.wavLength);
     }
 
-
+    free(clipBuffer);
     cout << "audioret: " << success << "\n";
     if(success < 0)
     {
