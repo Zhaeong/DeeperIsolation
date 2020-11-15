@@ -517,7 +517,7 @@ void PlayAudio(GameState *GS, AudioClip clip)
         }
 
         free(wavBuffer);
-        
+
 
     }
     else
@@ -1322,7 +1322,7 @@ void LoadScene(GameState *GS, string sceneName)
         SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, TEX_DOOR);
 
         SpriteSheet door = InitSpriteSheet(doorTex, 0, 0, 1); 
-        door.mX = 240;
+        door.mX = 210;
         door.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - door.mDstRect.h;
         door.mType = TTYPE_TRANSIT;
         door.mName = SCENE_LIVINGROOM;
@@ -1344,6 +1344,19 @@ void LoadScene(GameState *GS, string sceneName)
         childSleepSS.mY = GS->ssPlayer.mY;
         childSleepSS.mUpdateInterval = 1500;
         GS->ssArray[SS_CHILD] = childSleepSS;
+
+
+        //manbed
+
+        SDL_Texture *manbedTex = GetSDLTexture(GS->renderer, GS->window, TEX_MANBED);
+
+        SpriteSheet manbedSS = InitSpriteSheet(manbedTex, 106, 100, 1);
+
+        manbedSS.mType = TTYPE_NORMAL;
+
+        manbedSS.mX = 410;
+        manbedSS.mY = GS->ssPlayer.mY;
+        GS->ssArray[4] = manbedSS;
 
         //Special case for start spawn of the level where the player is in bed instead of door.
         if(GS->NarrativeCounter == 0)
@@ -1508,6 +1521,10 @@ bool SpriteTextureCollision(SpriteSheet ss, Texture tex)
 
 bool SpriteToSpriteCollision(SpriteSheet ss, SpriteSheet ss2)
 {
+    if(ss2.mType == TTYPE_NORMAL)
+    {
+        return false;
+    }
     //if either is inactive, return false;
     if(!ss.mActive || !ss2.mActive)
     {

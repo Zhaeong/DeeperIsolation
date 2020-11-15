@@ -78,6 +78,7 @@ const string TEX_SINK = "./res/png/sink.png";
 const string TEX_CHILDSLEEP = "./res/png/childsleep.png";
 const string TEX_WINDOW = "./res/png/window.png";
 const string TEX_FRIDGE = "./res/png/fridge.png";
+const string TEX_MANBED = "./res/png/manbed.png";
 
 
 //Texture Types
