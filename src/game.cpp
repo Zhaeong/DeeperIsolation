@@ -1443,10 +1443,19 @@ void LoadScene(GameState *GS, string sceneName)
         fridge.mColBoxOffset.w = 5;
         GS->ssArray[3] = fridge;
 
+        //toilet
+        SDL_Texture *toiletTex = GetSDLTexture(GS->renderer, GS->window, TEX_TOILET);
+        RemoveTextureWhiteSpace(toiletTex);
+        SpriteSheet toilet = InitSpriteSheet(toiletTex, 0, 0, 1); //action same height player
+        toilet.mX = GS->lInfo.mLevelTex.mX + GS->lInfo.mLevelTex.mW - toilet.mDstRect.w;
+        toilet.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - toilet.mDstRect.h;;
+        toilet.mType = TTYPE_NORMAL;
+        GS->ssArray[4] = toilet;
+
+
         //Sink
         SDL_Texture *sinkTex = GetSDLTexture(GS->renderer, GS->window, TEX_SINK);
-
-        //Texture sink = InitTexture(sinkTex, 450, GS->ssPlayer.mY); //action same height player
+        RemoveTextureWhiteSpace(sinkTex);
         SpriteSheet sink = InitSpriteSheet(sinkTex, 0, 0, 1); //action same height player
         sink.mX = GS->lInfo.mLevelTex.mX + GS->lInfo.mLevelTex.mW - sink.mDstRect.w;
         sink.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - sink.mDstRect.h;;
@@ -1456,7 +1465,7 @@ void LoadScene(GameState *GS, string sceneName)
         sink.mNarration = "It is necessary to be presentable";
         sink.mColBoxOffset.x = 60;
         sink.mColBoxOffset.w = 40;
-        GS->ssArray[4] = sink;
+        GS->ssArray[5] = sink;
 
     }
     else if(sceneName == SCENE_ENDDOOR)

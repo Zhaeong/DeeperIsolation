@@ -31,7 +31,7 @@ He leaves for work, his child wakes in an empty home.
 */
 const Uint32 TEXTUREFORMAT = SDL_PIXELFORMAT_RGBA8888;
 
-const int NUM_SPRITESHEET = 5;
+const int NUM_SPRITESHEET = 6;
 const int SS_CHILD = 3;
 
 //Actions in the form of sprite sheets
@@ -79,6 +79,7 @@ const string TEX_CHILDSLEEP = "./res/png/childsleep.png";
 const string TEX_WINDOW = "./res/png/window.png";
 const string TEX_FRIDGE = "./res/png/fridge.png";
 const string TEX_MANBED = "./res/png/manbed.png";
+const string TEX_TOILET = "./res/png/toilet.png";
 
 
 //Texture Types
