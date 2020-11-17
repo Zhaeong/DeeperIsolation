@@ -1155,6 +1155,12 @@ void LoadAction(GameState *GS, string action, int spriteCol)
     {
         LoadNarration(GS, GS->ssArray[spriteCol].mNarration);
         GS->ssArray[spriteCol].mInteract = false;
+        cout << "buttonith: " << GS->ssArray[spriteCol].mButtonText << "\n";
+        if(GS->ssArray[spriteCol].mButtonText == BUTTON_Stare)
+        {
+            cout << "playing: " << GS->chordG.wavPath << "\n";
+            PlayAudio(GS, GS->chordG);
+        }
     }
 
     GS->PlayerState = STATE_ACTION;
@@ -1337,7 +1343,7 @@ void LoadScene(GameState *GS, string sceneName)
         SpriteSheet childSleepSS = InitSpriteSheet(childsleepTex, 100, 100, 4);
 
         childSleepSS.mType = TTYPE_NARRATION;
-        childSleepSS.mButtonText = "Stare";
+        childSleepSS.mButtonText = BUTTON_Stare;
         childSleepSS.mNarration = "His child still sleeps" ;
 
         childSleepSS.mX = 300;
@@ -1361,8 +1367,7 @@ void LoadScene(GameState *GS, string sceneName)
         //Special case for start spawn of the level where the player is in bed instead of door.
         if(GS->NarrativeCounter == 0)
         {
-            //PlayAudio(GS, GS->IntroMus); 
-            //PlayAudio(GS, GS->WalkMus); 
+            PlayAudio(GS, GS->chordDm); 
             GS->tbArray[TB_NARRATION_BOX] = InitTextBox(GS->fontTexture,
                     MAIN_TEXT_W,
                     MAIN_TEXT_H,

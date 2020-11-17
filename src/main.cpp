@@ -170,8 +170,8 @@ void gameloop()
                         }
                     case SDLK_m:
                         {
-                            PlayAudio(&GS, GS.IntroMus);
-                            cout << "playerAudio: " << GS.IntroMus.wavPath << "\n";
+                            PlayAudio(&GS, GS.chordDm);
+                            cout << "playerAudio: " << GS.chordDm.wavPath << "\n";
                             break;
                         }
                     case SDLK_1:
@@ -246,6 +246,11 @@ void gameloop()
                             {
                                 cout << "narration\n";
                                 LoadNarration(&GS, GS.ssArray[spriteCol].mNarration);
+                                if(GS.ssArray[spriteCol].mButtonText == BUTTON_Stare)
+                                {
+                                    cout << "playing: " << GS.chordG.wavPath << "\n";
+                                    PlayAudio(&GS, GS.chordG);
+                                }
                             }
                             else if(GS.ssArray[spriteCol].mType == TTYPE_TRANSIT)
                             {
@@ -465,11 +470,13 @@ int main(int argv, char **args)
 
 
     //GS.blackTex.mAlpha = 0;
-    GS.IntroMus = InitAudio("./res/music/girlfrombar.wav");
+    GS.chordDm = InitAudio("./res/music/dminor.wav");
+    GS.chordD = InitAudio("./res/music/d.wav");
+    GS.chordG = InitAudio("./res/music/g.wav");
     GS.WalkMus = InitAudio("./res/music/walk.wav");
     GS.curSound.mActive = false;
 
-    GS.audioDevice = SDL_OpenAudioDevice(NULL, 0, &GS.IntroMus.wavSpec, NULL, 0);
+    GS.audioDevice = SDL_OpenAudioDevice(NULL, 0, &GS.chordDm.wavSpec, NULL, 0);
     if (GS.audioDevice == 0) 
     {
         printf("Failed to open audio: %s", SDL_GetError());

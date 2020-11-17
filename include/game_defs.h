@@ -91,6 +91,9 @@ const string TTYPE_NARRATION = "NARRATION";
 //Texture Actions
 const string TACTION_END = "END";
 
+//Buttons
+const string BUTTON_Stare = "Stare";
+
 //TextBox types
 const string TBTYPE_NORM = "NORM";
 const string TBTYPE_INPUT = "INPUT";
@@ -254,7 +257,9 @@ struct GameState
     SDL_AudioDeviceID audioDevice;
 
     AudioClip curSound;
-    AudioClip IntroMus;
+    AudioClip chordDm;
+    AudioClip chordD;
+    AudioClip chordG;
     AudioClip WalkMus;
     //SpriteSheet manSheet;
 
