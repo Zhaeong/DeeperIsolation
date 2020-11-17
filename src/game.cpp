@@ -1155,12 +1155,7 @@ void LoadAction(GameState *GS, string action, int spriteCol)
     {
         LoadNarration(GS, GS->ssArray[spriteCol].mNarration);
         GS->ssArray[spriteCol].mInteract = false;
-        cout << "buttonith: " << GS->ssArray[spriteCol].mButtonText << "\n";
-        if(GS->ssArray[spriteCol].mButtonText == BUTTON_Stare)
-        {
-            cout << "playing: " << GS->chordG.wavPath << "\n";
-            PlayAudio(GS, GS->chordG);
-        }
+        
     }
 
     GS->PlayerState = STATE_ACTION;
