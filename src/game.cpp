@@ -1260,8 +1260,8 @@ void SpawnControls(GameState *GS)
 void AddStoryLine(GameState *GS, string line)
 {
     GS->sStory[GS->curStory] = InitTextLine(GS->fontTexture,
-            20,
-            20,
+            MAIN_TEXT_W,
+            MAIN_TEXT_H,
             line,
             0,
             GS->curStory * 20);
