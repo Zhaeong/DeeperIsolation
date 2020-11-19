@@ -19,14 +19,7 @@ using namespace std;
 
 /*
 A man wakes up for work
-His child still sleeps 
-It is necessary to be presentable
-Breakfast is the most important part of the day
-The weather is nice outside
 
-He goes back to check on his child, work can wait for now.
-
-He leaves for work, his child wakes in an empty home.
 
 */
 const Uint32 TEXTUREFORMAT = SDL_PIXELFORMAT_RGBA8888;
@@ -98,6 +91,22 @@ const string BUTTON_Stare = "Stare";
 const string TBTYPE_NORM = "NORM";
 const string TBTYPE_INPUT = "INPUT";
 
+//Storylines
+
+const string LINE_0 = "A man wakes up for work";
+const string LINE_1 = "His child still sleeps";
+const string LINE_2 = "It is necessary to be presentable";
+const string LINE_3 = "Breakfast is the most important part of the day";
+const string LINE_4 = "The weather is nice outside";
+const string LINE_5 = "He goes back to check on his child, work can wait for now";
+const string LINE_6 = "As he leaves for work his child wakes in an empty home";
+
+//AudioClips
+const int NUM_AUDIO_CLIPS = 4;
+const string AUDIO_Walk = "./res/music/walk.wav";
+const string AUDIO_Dm = "./res/music/dminor.wav";
+const string AUDIO_D = "./res/music/d.wav";
+const string AUDIO_G = "./res/music/g.wav";
 
 //Declared as extern so that it's shared between files
 extern bool ShowDebug;
@@ -230,6 +239,8 @@ struct TextLine
     int mX, mY;
     int mAlpha;
 
+    string mAudioPath;
+
     Uint32 mStartTime;
     Uint32 mDelay;
 };
@@ -256,7 +267,10 @@ struct GameState
     //Audio
     SDL_AudioDeviceID audioDevice;
 
+    //Used for when two sounds are played at once
     AudioClip curSound;
+
+    AudioClip acArray[NUM_AUDIO_CLIPS];
     AudioClip chordDm;
     AudioClip chordD;
     AudioClip chordG;

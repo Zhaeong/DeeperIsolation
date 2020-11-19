@@ -221,7 +221,6 @@ Texture InitTexture(SDL_Texture *sdlTexture, int x, int y)
 
     outTex.mColBoxOffset = colOffset;
 
-
     return outTex;
 }
 
@@ -535,6 +534,16 @@ void PlayAudio(GameState *GS, AudioClip clip)
 
 }
 
+void PlayAudioFromPath(GameState *GS, string clipPath)
+{
+    for(int i = 0; i < NUM_AUDIO_CLIPS; i++)
+    {
+        if(clipPath == GS->acArray[i].wavPath)
+        {
+            PlayAudio(GS, GS->acArray[i]);
+        }
+    }
+}
 
 bool TextureMouseCollisionSingle(Texture mTexture, int xPos, int yPos)
 {
@@ -1155,7 +1164,7 @@ void LoadAction(GameState *GS, string action, int spriteCol)
     {
         LoadNarration(GS, GS->ssArray[spriteCol].mNarration);
         GS->ssArray[spriteCol].mInteract = false;
-        
+
     }
 
     GS->PlayerState = STATE_ACTION;
@@ -1267,6 +1276,45 @@ void AddStoryLine(GameState *GS, string line)
             GS->curStory * 20);
     GS->sStory[GS->curStory].mAlpha = 100;
     GS->sStory[GS->curStory].mDelay = GS->curStory * 1000;
+
+    string audioPath = "";
+    //Handle adding audio here
+    if(line == LINE_0)
+    {
+        audioPath = AUDIO_Dm;
+    }
+    else if(line == LINE_1)
+    {
+        audioPath = AUDIO_G;
+    }
+    else if(line == LINE_2)
+    {
+        audioPath = AUDIO_D;
+    }
+    else if(line == LINE_3)
+    {
+        audioPath = AUDIO_Dm;
+    }
+    else if(line == LINE_4)
+    {
+        audioPath = AUDIO_Dm;
+    }
+    else if(line == LINE_5)
+    {
+        audioPath = AUDIO_Dm;
+    }
+    else if(line == LINE_6)
+    {
+        audioPath = AUDIO_Dm;
+    }
+    else 
+    {
+        cout << "Warning, No Audio set:" << line << "\n";
+    }
+
+    GS->sStory[GS->curStory].mAudioPath = audioPath;
+    PlayAudioFromPath(GS, audioPath);
+
     GS->curStory += 1;
 }
 
@@ -1339,7 +1387,7 @@ void LoadScene(GameState *GS, string sceneName)
 
         childSleepSS.mType = TTYPE_NARRATION;
         childSleepSS.mButtonText = BUTTON_Stare;
-        childSleepSS.mNarration = "His child still sleeps" ;
+        childSleepSS.mNarration = LINE_1 ;
 
         childSleepSS.mX = 300;
         childSleepSS.mY = GS->ssPlayer.mY;
@@ -1362,12 +1410,11 @@ void LoadScene(GameState *GS, string sceneName)
         //Special case for start spawn of the level where the player is in bed instead of door.
         if(GS->NarrativeCounter == 0)
         {
-            PlayAudio(GS, GS->chordDm); 
             GS->tbArray[TB_NARRATION_BOX] = InitTextBox(GS->fontTexture,
                     MAIN_TEXT_W,
                     MAIN_TEXT_H,
                     GS->mainBoxTexture,
-                    "A man wakes up for work",
+                    LINE_0,
                     200,
                     200,
                     14,
@@ -1375,7 +1422,7 @@ void LoadScene(GameState *GS, string sceneName)
 
             GS->tbArray[TB_NARRATION_BOX].mDuration = 5000;
 
-            AddStoryLine(GS, "A man wakes up for work");
+            AddStoryLine(GS, LINE_0);
 
             GS->ssPlayer.mX = 400;
 
@@ -1422,7 +1469,7 @@ void LoadScene(GameState *GS, string sceneName)
 
         windowSS.mType = TTYPE_NARRATION;
         windowSS.mButtonText = "Look";
-        windowSS.mNarration = "The weather is nice outside" ;
+        windowSS.mNarration = LINE_4;
 
         windowSS.mX = 300;
         windowSS.mY = GS->ssPlayer.mY;
@@ -1438,7 +1485,7 @@ void LoadScene(GameState *GS, string sceneName)
         fridge.mType = TTYPE_ACTION;
         fridge.mName = PLAYER_WEAT; 
         fridge.mButtonText = "Eat";
-        fridge.mNarration = "Breakfast is the most important part of the day";
+        fridge.mNarration = LINE_3;
         fridge.mColBoxOffset.x = 49;
         fridge.mColBoxOffset.w = 5;
         GS->ssArray[3] = fridge;
@@ -1462,7 +1509,7 @@ void LoadScene(GameState *GS, string sceneName)
         sink.mType = TTYPE_ACTION;
         sink.mName = PLAYER_WASH; 
         sink.mButtonText = "Wash";
-        sink.mNarration = "It is necessary to be presentable";
+        sink.mNarration = LINE_2;
         sink.mColBoxOffset.x = 60;
         sink.mColBoxOffset.w = 40;
         GS->ssArray[5] = sink;
@@ -1471,7 +1518,7 @@ void LoadScene(GameState *GS, string sceneName)
     else if(sceneName == SCENE_ENDDOOR)
     {
         GS->lInfo = InitLevelInfo(GS, SCENE_BEDROOM);
-        AddStoryLine(GS, "He leaves for work, his child wakes in an empty home.");
+        AddStoryLine(GS, LINE_6);
 
         //init text start renderings
 

@@ -36,6 +36,8 @@ AudioClip InitAudio(string filepath);
 
 void PlayAudio(GameState *GS, AudioClip clip);
 
+void PlayAudioFromPath(GameState *GS, string clipPath);
+
 SDL_Point RotatePointByOtherPoint(int inX,
                                   int inY,
                                   int centerX,
