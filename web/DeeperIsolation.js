@@ -186,116 +186,116 @@ Module.expectedDataFileDownloads++;
   }, {
    "filename": "/res/png/bedroom.png",
    "start": 6869968,
-   "end": 6871870,
+   "end": 6871634,
    "audio": 0
   }, {
    "filename": "/res/png/black.png",
-   "start": 6871870,
-   "end": 6873093,
+   "start": 6871634,
+   "end": 6872857,
    "audio": 0
   }, {
    "filename": "/res/png/childsleep.png",
-   "start": 6873093,
-   "end": 6879127,
+   "start": 6872857,
+   "end": 6878891,
    "audio": 0
   }, {
    "filename": "/res/png/door.png",
-   "start": 6879127,
-   "end": 6880582,
+   "start": 6878891,
+   "end": 6880346,
    "audio": 0
   }, {
    "filename": "/res/png/fridge.png",
-   "start": 6880582,
-   "end": 6883249,
+   "start": 6880346,
+   "end": 6883013,
    "audio": 0
   }, {
    "filename": "/res/png/livingroom.png",
-   "start": 6883249,
-   "end": 6885278,
+   "start": 6883013,
+   "end": 6884762,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png",
-   "start": 6885278,
-   "end": 6891435,
+   "start": 6884762,
+   "end": 6890919,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png~",
-   "start": 6891435,
-   "end": 6894558,
+   "start": 6890919,
+   "end": 6894042,
    "audio": 0
   }, {
    "filename": "/res/png/mainText50.png",
-   "start": 6894558,
-   "end": 6903617,
+   "start": 6894042,
+   "end": 6903101,
    "audio": 0
   }, {
    "filename": "/res/png/manbed.png",
-   "start": 6903617,
-   "end": 6905979,
+   "start": 6903101,
+   "end": 6905463,
    "audio": 0
   }, {
    "filename": "/res/png/manwake.png",
-   "start": 6905979,
-   "end": 6933671,
+   "start": 6905463,
+   "end": 6933155,
    "audio": 0
   }, {
    "filename": "/res/png/manwake2.png",
-   "start": 6933671,
-   "end": 6961904,
+   "start": 6933155,
+   "end": 6961388,
    "audio": 0
   }, {
    "filename": "/res/png/manwalk.png",
-   "start": 6961904,
-   "end": 6998681,
+   "start": 6961388,
+   "end": 6998165,
    "audio": 0
   }, {
    "filename": "/res/png/manwalkOriginal.png",
-   "start": 6998681,
-   "end": 7042231,
+   "start": 6998165,
+   "end": 7041715,
    "audio": 0
   }, {
    "filename": "/res/png/manwash.png",
-   "start": 7042231,
-   "end": 7078738,
+   "start": 7041715,
+   "end": 7072851,
    "audio": 0
   }, {
    "filename": "/res/png/manweat.png",
-   "start": 7078738,
-   "end": 7151860,
+   "start": 7072851,
+   "end": 7145973,
    "audio": 0
   }, {
    "filename": "/res/png/sink.png",
-   "start": 7151860,
-   "end": 7153870,
+   "start": 7145973,
+   "end": 7147983,
    "audio": 0
   }, {
    "filename": "/res/png/textBox.png",
-   "start": 7153870,
-   "end": 7155252,
+   "start": 7147983,
+   "end": 7149365,
    "audio": 0
   }, {
    "filename": "/res/png/textBoxOri.png",
-   "start": 7155252,
-   "end": 7156637,
+   "start": 7149365,
+   "end": 7150750,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 7156637,
-   "end": 7592618,
+   "start": 7150750,
+   "end": 7586731,
    "audio": 0
   }, {
    "filename": "/res/png/toilet.png",
-   "start": 7592618,
-   "end": 7595745,
+   "start": 7586731,
+   "end": 7589858,
    "audio": 0
   }, {
    "filename": "/res/png/window.png",
-   "start": 7595745,
-   "end": 7603016,
+   "start": 7589858,
+   "end": 7597129,
    "audio": 0
   } ],
-  "remote_package_size": 7603016,
-  "package_uuid": "f39f4eb6-a27d-4dfe-94ef-53e5ede96e79"
+  "remote_package_size": 7597129,
+  "package_uuid": "89407f01-b06a-4a4e-b05a-deb0854c8d9b"
  });
 })();
 

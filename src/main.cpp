@@ -409,6 +409,20 @@ void gameloop()
     RenderSpriteSheet(GS.renderer, GS.ssPlayerAction);
     //Render the fadeout textures
     RenderTexture(GS.renderer, GS.blackTex);
+
+
+    //Render level outline
+
+    SDL_SetRenderDrawColor(GS.renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+    SDL_Rect outLineRect;
+    outLineRect.x = GS.lInfo.mLevelTex.mX;
+    outLineRect.y = GS.lInfo.mLevelTex.mY;
+    outLineRect.w = GS.lInfo.mLevelTex.mW;
+    outLineRect.h = GS.lInfo.mLevelTex.mH;
+
+    SDL_RenderDrawRect(GS.renderer, &outLineRect); 
+
+
     ////////////////////////////////////////////////////////////////////////
     //End of main game code
     ////////////////////////////////////////////////////////////////////////
