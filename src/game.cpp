@@ -1080,15 +1080,33 @@ LevelInfo InitLevelInfo(GameState *GS, string texturePath)
 void LoadNarration(GameState *GS, string sNarration)
 {
 
+    int x = 200;
+    int y = 200;
+    int column = 14;
+
+    if(sNarration == LINE_1)
+    {
+        column = 15;
+    }
+    else if(sNarration ==  LINE_3)
+    {
+        x = 300;
+    }
+    else if(sNarration == LINE_4)
+    {
+        x = 150;
+    }
+
+
     GS->PlayerState = STATE_NARRATION;
     GS->tbArray[TB_NARRATION_BOX] = InitTextBox(GS->fontTexture,
             MAIN_TEXT_W,
             MAIN_TEXT_H,
             GS->mainBoxTexture,
             sNarration,
-            200,
-            200,
-            14,
+            x,
+            y,
+            column,
             100);
 
     GS->tbArray[TB_NARRATION_BOX].mDuration = sNarration.size() * 200 + 1000;
