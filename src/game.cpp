@@ -1080,23 +1080,11 @@ LevelInfo InitLevelInfo(GameState *GS, string texturePath)
 void LoadNarration(GameState *GS, string sNarration)
 {
 
-    int x = 200;
-    int y = 200;
-    int column = 14;
-
-    if(sNarration == LINE_1)
-    {
-        column = 15;
-    }
-    else if(sNarration ==  LINE_3)
-    {
-        x = 300;
-    }
-    else if(sNarration == LINE_4)
-    {
-        x = 150;
-    }
-
+    //2 is the margin of text box, really should change it so that the box begins
+    //at left instead of marging going past
+    int x = GS->lInfo.mLevelTex.mX + 2;
+    int y = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH + 10;
+    int column = sNarration.size();
 
     GS->PlayerState = STATE_NARRATION;
     GS->tbArray[TB_NARRATION_BOX] = InitTextBox(GS->fontTexture,
@@ -1428,19 +1416,7 @@ void LoadScene(GameState *GS, string sceneName)
         //Special case for start spawn of the level where the player is in bed instead of door.
         if(GS->NarrativeCounter == 0)
         {
-            GS->tbArray[TB_NARRATION_BOX] = InitTextBox(GS->fontTexture,
-                    MAIN_TEXT_W,
-                    MAIN_TEXT_H,
-                    GS->mainBoxTexture,
-                    LINE_0,
-                    200,
-                    200,
-                    14,
-                    100);
-
-            GS->tbArray[TB_NARRATION_BOX].mDuration = 5000;
-
-            AddStoryLine(GS, LINE_0);
+            LoadNarration(GS, LINE_0);
 
             GS->ssPlayer.mX = 400;
 
