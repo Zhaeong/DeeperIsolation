@@ -1082,9 +1082,17 @@ void LoadNarration(GameState *GS, string sNarration)
 
     //2 is the margin of text box, really should change it so that the box begins
     //at left instead of marging going past
-    int x = GS->lInfo.mLevelTex.mX + 2;
     int y = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH + 10;
     int column = sNarration.size();
+
+    if(sNarration == LINE_3)
+    {
+        column = 37;
+    }
+
+    //Mid point of the level minus half the width of the textbox
+    //So that the textbox is centered according to the level texture
+    int x = (GS->lInfo.mLevelTex.mX + GS->lInfo.mLevelTex.mW/2) - (column * MAIN_TEXT_W)/2;
 
     GS->PlayerState = STATE_NARRATION;
     GS->tbArray[TB_NARRATION_BOX] = InitTextBox(GS->fontTexture,
