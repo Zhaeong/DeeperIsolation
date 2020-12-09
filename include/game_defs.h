@@ -32,6 +32,7 @@ const string PLAYER_WALK = "./res/png/manwalk.png";
 const string PLAYER_WAKE = "./res/png/manwake.png";
 const string PLAYER_WASH = "./res/png/manwash.png";
 const string PLAYER_WEAT = "./res/png/manweat.png";
+const string CHILD_WAKE = "./res/png/childwake.png";
 
 //specific frame in player walk animation png which contains the idle frame
 const int PLAYER_IDLE_FRAME = 18;

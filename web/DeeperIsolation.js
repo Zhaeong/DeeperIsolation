@@ -199,103 +199,108 @@ Module.expectedDataFileDownloads++;
    "end": 6878891,
    "audio": 0
   }, {
-   "filename": "/res/png/door.png",
+   "filename": "/res/png/childwake.png",
    "start": 6878891,
-   "end": 6880346,
+   "end": 6902844,
+   "audio": 0
+  }, {
+   "filename": "/res/png/door.png",
+   "start": 6902844,
+   "end": 6904299,
    "audio": 0
   }, {
    "filename": "/res/png/fridge.png",
-   "start": 6880346,
-   "end": 6883013,
+   "start": 6904299,
+   "end": 6906966,
    "audio": 0
   }, {
    "filename": "/res/png/livingroom.png",
-   "start": 6883013,
-   "end": 6884762,
+   "start": 6906966,
+   "end": 6908715,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png",
-   "start": 6884762,
-   "end": 6890919,
+   "start": 6908715,
+   "end": 6914872,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png~",
-   "start": 6890919,
-   "end": 6894042,
+   "start": 6914872,
+   "end": 6917995,
    "audio": 0
   }, {
    "filename": "/res/png/mainText50.png",
-   "start": 6894042,
-   "end": 6903101,
+   "start": 6917995,
+   "end": 6927054,
    "audio": 0
   }, {
    "filename": "/res/png/manbed.png",
-   "start": 6903101,
-   "end": 6905463,
+   "start": 6927054,
+   "end": 6929416,
    "audio": 0
   }, {
    "filename": "/res/png/manwake.png",
-   "start": 6905463,
-   "end": 6933155,
+   "start": 6929416,
+   "end": 6957108,
    "audio": 0
   }, {
    "filename": "/res/png/manwake2.png",
-   "start": 6933155,
-   "end": 6961388,
+   "start": 6957108,
+   "end": 6985341,
    "audio": 0
   }, {
    "filename": "/res/png/manwalk.png",
-   "start": 6961388,
-   "end": 6998165,
+   "start": 6985341,
+   "end": 7022118,
    "audio": 0
   }, {
    "filename": "/res/png/manwalkOriginal.png",
-   "start": 6998165,
-   "end": 7041715,
+   "start": 7022118,
+   "end": 7065668,
    "audio": 0
   }, {
    "filename": "/res/png/manwash.png",
-   "start": 7041715,
-   "end": 7072851,
+   "start": 7065668,
+   "end": 7096804,
    "audio": 0
   }, {
    "filename": "/res/png/manweat.png",
-   "start": 7072851,
-   "end": 7145973,
+   "start": 7096804,
+   "end": 7169926,
    "audio": 0
   }, {
    "filename": "/res/png/sink.png",
-   "start": 7145973,
-   "end": 7147983,
+   "start": 7169926,
+   "end": 7171936,
    "audio": 0
   }, {
    "filename": "/res/png/textBox.png",
-   "start": 7147983,
-   "end": 7149365,
+   "start": 7171936,
+   "end": 7173318,
    "audio": 0
   }, {
    "filename": "/res/png/textBoxOri.png",
-   "start": 7149365,
-   "end": 7150750,
+   "start": 7173318,
+   "end": 7174703,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 7150750,
-   "end": 7586731,
+   "start": 7174703,
+   "end": 7610684,
    "audio": 0
   }, {
    "filename": "/res/png/toilet.png",
-   "start": 7586731,
-   "end": 7589858,
+   "start": 7610684,
+   "end": 7613811,
    "audio": 0
   }, {
    "filename": "/res/png/window.png",
-   "start": 7589858,
-   "end": 7597129,
+   "start": 7613811,
+   "end": 7621082,
    "audio": 0
   } ],
-  "remote_package_size": 7597129,
-  "package_uuid": "bfe59de7-4bb4-4e92-a6d7-b8f14dd7fbf1"
+  "remote_package_size": 7621082,
+  "package_uuid": "55a11f88-8123-499a-b789-132f34427c78"
  });
 })();
 
@@ -696,8 +701,8 @@ function setValue(ptr, value, type, noSafe) {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 1096,
- "maximum": 1096 + 0,
+ "initial": 1098,
+ "maximum": 1098 + 0,
  "element": "anyfunc"
 });
 
@@ -916,7 +921,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5350960, STACK_MAX = 108080, DYNAMIC_BASE = 5350960, DYNAMICTOP_PTR = 107920;
+var STACK_BASE = 5351024, STACK_MAX = 108144, DYNAMIC_BASE = 5351024, DYNAMICTOP_PTR = 107984;
 
 assert(STACK_BASE % 16 === 0, "stack must start aligned");
 
@@ -1281,7 +1286,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 38836: function($0, $1, $2) {
+ 38884: function($0, $1, $2) {
   var w = $0;
   var h = $1;
   var pixels = $2;
@@ -1352,7 +1357,7 @@ var ASM_CONSTS = {
   SDL2.ctx.putImageData(SDL2.image, 0, 0);
   return 0;
  },
- 40291: function($0, $1, $2, $3, $4) {
+ 40339: function($0, $1, $2, $3, $4) {
   var w = $0;
   var h = $1;
   var hot_x = $2;
@@ -1389,30 +1394,30 @@ var ASM_CONSTS = {
   stringToUTF8(url, urlBuf, url.length + 1);
   return urlBuf;
  },
- 41280: function($0) {
+ 41328: function($0) {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = UTF8ToString($0);
   }
   return 0;
  },
- 41373: function() {
+ 41421: function() {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = "none";
   }
  },
- 42598: function() {
+ 42646: function() {
   return screen.width;
  },
- 42625: function() {
+ 42673: function() {
   return screen.height;
  },
- 42698: function($0) {
+ 42746: function($0) {
   if (typeof Module["setWindowTitle"] !== "undefined") {
    Module["setWindowTitle"](UTF8ToString($0));
   }
   return 0;
  },
- 42852: function() {
+ 42900: function() {
   if (typeof AudioContext !== "undefined") {
    return 1;
   } else if (typeof webkitAudioContext !== "undefined") {
@@ -1420,7 +1425,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 43018: function() {
+ 43066: function() {
   if (typeof navigator.mediaDevices !== "undefined" && typeof navigator.mediaDevices.getUserMedia !== "undefined") {
    return 1;
   } else if (typeof navigator.webkitGetUserMedia !== "undefined") {
@@ -1428,7 +1433,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 43244: function($0) {
+ 43292: function($0) {
   if (typeof Module["SDL2"] === "undefined") {
    Module["SDL2"] = {};
   }
@@ -1447,11 +1452,11 @@ var ASM_CONSTS = {
   }
   return SDL2.audioContext === undefined ? -1 : 0;
  },
- 43727: function() {
+ 43775: function() {
   var SDL2 = Module["SDL2"];
   return SDL2.audioContext.sampleRate;
  },
- 43797: function($0, $1, $2, $3) {
+ 43845: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   var have_microphone = function(stream) {
    if (SDL2.capture.silenceTimer !== undefined) {
@@ -1492,7 +1497,7 @@ var ASM_CONSTS = {
    }, have_microphone, no_microphone);
   }
  },
- 45449: function($0, $1, $2, $3) {
+ 45497: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
   SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -1504,7 +1509,7 @@ var ASM_CONSTS = {
   };
   SDL2.audio.scriptProcessorNode["connect"](SDL2.audioContext["destination"]);
  },
- 45859: function($0, $1) {
+ 45907: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
   for (var c = 0; c < numChannels; ++c) {
@@ -1523,7 +1528,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 46464: function($0, $1) {
+ 46512: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
   for (var c = 0; c < numChannels; ++c) {
@@ -1536,7 +1541,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 46944: function($0) {
+ 46992: function($0) {
   var SDL2 = Module["SDL2"];
   if ($0) {
    if (SDL2.capture.silenceTimer !== undefined) {

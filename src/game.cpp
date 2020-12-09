@@ -1155,6 +1155,15 @@ void LoadAction(GameState *GS, string action, int spriteCol)
         actionSheet.mUpdateInterval = 100;
 
     }
+    else if(action == CHILD_WAKE)
+    {
+        actionSheet = InitSpriteSheet(actionTex,
+                100,
+                100,
+                16); 
+
+        actionSheet.mUpdateInterval = 100;
+    }
 
     if(spriteCol != -1)
     {
@@ -1523,6 +1532,7 @@ void LoadScene(GameState *GS, string sceneName)
         AddStoryLine(GS, LINE_6);
 
         //init text start renderings
+        LoadAction(GS, CHILD_WAKE, -1);
 
         for(int i = 0; i < GS->curStory; i++)
         {
