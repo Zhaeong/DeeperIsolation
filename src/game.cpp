@@ -1162,7 +1162,7 @@ void LoadAction(GameState *GS, string action, int spriteCol)
                 100,
                 16); 
 
-        actionSheet.mUpdateInterval = 100;
+        actionSheet.mUpdateInterval = 500;
     }
 
     if(spriteCol != -1)
