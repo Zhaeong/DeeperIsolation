@@ -85,9 +85,6 @@ const string TTYPE_NARRATION = "NARRATION";
 //Texture Actions
 const string TACTION_END = "END";
 
-//Buttons
-const string BUTTON_Stare = "Stare";
-
 //TextBox types
 const string TBTYPE_NORM = "NORM";
 const string TBTYPE_INPUT = "INPUT";

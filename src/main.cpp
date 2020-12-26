@@ -21,8 +21,14 @@ void gameloop()
     GS.curTime = frameStart - GS.startTime;
 
     //The color at which the screen will be if alpha = 0 on all textures
-    SDL_SetRenderDrawColor(GS.renderer, GS.screenColor.r, GS.screenColor.g, GS.screenColor.b, GS.screenColor.a);
-
+    if(GS.SceneCurrent == SCENE_ENDDOOR)
+    {
+        SDL_SetRenderDrawColor(GS.renderer, 255, 255, 255, GS.screenColor.a);
+    }
+    else
+    {
+        SDL_SetRenderDrawColor(GS.renderer, GS.screenColor.r, GS.screenColor.g, GS.screenColor.b, GS.screenColor.a);
+    }
 
     SDL_RenderClear(GS.renderer);
 
@@ -279,7 +285,6 @@ void gameloop()
         }
     }
 
-
     if(GS.SceneCurrent == SCENE_TRAN)
     {
         if(DarkenTexture(&GS))
@@ -332,8 +337,6 @@ void gameloop()
     {
         if(GS.ssPlayerAction.mCurFrame == (GS.ssPlayerAction.mNumFrames - 1))
         {
-            GS.ssPlayer.mActive = true;
-            GS.ssPlayerAction.mActive = false;
             if(GS.actionCol> 0)
             {
                 GS.ssArray[GS.actionCol].mActive = true;
@@ -341,7 +344,12 @@ void gameloop()
             }
             //Not using function Change Player state here because when its state action only 
             //this part can change it back to idle
-            GS.PlayerState = STATE_IDLE;
+            if(GS.SceneCurrent != SCENE_ENDDOOR)
+            {
+                GS.PlayerState = STATE_IDLE;
+                GS.ssPlayer.mActive = true;
+                GS.ssPlayerAction.mActive = false;
+            }
         }
     }
     else if(GS.PlayerState == STATE_NARRATION)
@@ -360,7 +368,19 @@ void gameloop()
         UpdateSpriteSheet(&GS.ssArray[i], GS.curTime);
     }
 
-    UpdateSpriteSheet(&GS.ssPlayerAction, GS.curTime);
+    //If it's an ending scene we want to stop the animation at the last frame
+    if(GS.SceneCurrent == SCENE_ENDDOOR)
+    {
+        if(GS.ssPlayerAction.mCurFrame != GS.ssPlayerAction.mNumFrames - 1)
+        {
+            UpdateSpriteSheet(&GS.ssPlayerAction, GS.curTime);
+        }
+    }
+    else
+    {
+        UpdateSpriteSheet(&GS.ssPlayerAction, GS.curTime);
+    }
+
     UpdateSpriteSheet(&GS.ssPlayer, GS.curTime);
 
 
@@ -380,17 +400,6 @@ void gameloop()
     //Render Area
     //
 
-    RenderTexture(GS.renderer, GS.lInfo.mLevelTex);
-
-    for(int i = 0; i < NUM_SPRITESHEET; i++)
-    {
-        RenderSpriteSheet(GS.renderer, GS.ssArray[i]);
-    }
-
-    for(int i = 0; i < NUM_TEXTBOX; i++)
-    {
-        RenderTextBox(GS.renderer, GS.curTime, &GS.tbArray[i]);
-    }
 
     if(GS.SceneCurrent == SCENE_ENDDOOR)
     {
@@ -402,9 +411,37 @@ void gameloop()
             }
         }
     }
+    else
+    {
 
-    //renderPlayersStuff
-    RenderSpriteSheet(GS.renderer, GS.ssPlayer);
+        RenderTexture(GS.renderer, GS.lInfo.mLevelTex);
+        SDL_SetRenderDrawColor(GS.renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+
+
+
+        for(int i = 0; i < NUM_SPRITESHEET; i++)
+        {
+            RenderSpriteSheet(GS.renderer, GS.ssArray[i]);
+        }
+
+        for(int i = 0; i < NUM_TEXTBOX; i++)
+        {
+            RenderTextBox(GS.renderer, GS.curTime, &GS.tbArray[i]);
+        }
+
+        //renderPlayersStuff
+        RenderSpriteSheet(GS.renderer, GS.ssPlayer);
+
+        //Outline rendered last
+        SDL_Rect outLineRect;
+        outLineRect.x = GS.lInfo.mLevelTex.mX;
+        outLineRect.y = GS.lInfo.mLevelTex.mY;
+        outLineRect.w = GS.lInfo.mLevelTex.mW;
+        outLineRect.h = GS.lInfo.mLevelTex.mH;
+        SDL_RenderDrawRect(GS.renderer, &outLineRect); 
+
+    }
+
 
     RenderSpriteSheet(GS.renderer, GS.ssPlayerAction);
     //Render the fadeout textures
@@ -413,14 +450,7 @@ void gameloop()
 
     //Render level outline
 
-    SDL_SetRenderDrawColor(GS.renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-    SDL_Rect outLineRect;
-    outLineRect.x = GS.lInfo.mLevelTex.mX;
-    outLineRect.y = GS.lInfo.mLevelTex.mY;
-    outLineRect.w = GS.lInfo.mLevelTex.mW;
-    outLineRect.h = GS.lInfo.mLevelTex.mH;
 
-    SDL_RenderDrawRect(GS.renderer, &outLineRect); 
 
 
     ////////////////////////////////////////////////////////////////////////

@@ -1409,7 +1409,7 @@ void LoadScene(GameState *GS, string sceneName)
         SpriteSheet childSleepSS = InitSpriteSheet(childsleepTex, 100, 100, 4);
 
         childSleepSS.mType = TTYPE_NARRATION;
-        childSleepSS.mButtonText = BUTTON_Stare;
+        childSleepSS.mButtonText = "Look";
         childSleepSS.mNarration = LINE_1 ;
 
         childSleepSS.mX = 300;
@@ -1531,6 +1531,11 @@ void LoadScene(GameState *GS, string sceneName)
         GS->lInfo = InitLevelInfo(GS, SCENE_BEDROOM);
         AddStoryLine(GS, LINE_6);
 
+        //50 because the sprite anim is 100x100
+        //And i idiotically implemented action initiation by passing in string
+        //So there's no way of me finding out the dimensions through the image
+        GS->ssPlayer.mX = GAMEWIDTH/2 - 50;
+        GS->ssPlayer.mY = GAMEHEIGHT/2 - 50;
         //init text start renderings
         LoadAction(GS, CHILD_WAKE, -1);
 
