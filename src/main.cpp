@@ -183,7 +183,7 @@ void gameloop()
                     case SDLK_1:
 
                         {
-                            LoadScene(&GS, SCENE_BEDROOM); 
+                            LoadScene(&GS, SCENE_INTRO); 
                             break;
                         }
                     case SDLK_2:
@@ -409,6 +409,12 @@ void gameloop()
             {
                 RenderTextLine(GS.renderer, GS.sStory[i]);
             }
+        }
+
+        //hardcoded time left until back to start scene
+        if(GS.curTime > GS.sStory[GS.curStory - 1].mStartTime + GS.sStory[GS.curStory - 1].mDelay + 10000)
+        {
+            LoadScene(&GS, SCENE_INTRO);
         }
     }
     else
