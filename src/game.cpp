@@ -1377,6 +1377,25 @@ void LoadScene(GameState *GS, string sceneName)
         {
             GS->sStory[i].mText = "";
         }
+
+        //SceneSpefic stuff
+        GS->NarrativeCounter = 0;
+
+        //RemoveTextureWhiteSpace(GS.man);
+        GS->SceneCurrent = SCENE_INTRO; 
+        GS->SceneNext = SCENE_INTRO; 
+        GS->PlayerState = STATE_IDLE;
+
+        GS->screenColor.r = 200;
+        GS->screenColor.g = 200;
+        GS->screenColor.b = 200;
+        GS->screenColor.a = 255;
+
+        GS->lInfo.mActive = false;
+        GS->ssPlayer.mActive = false;
+        GS->ssPlayerAction.mActive = false; 
+
+
     }
     else if(sceneName == SCENE_BEDROOM)
     {

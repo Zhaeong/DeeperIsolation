@@ -438,13 +438,16 @@ void gameloop()
         //renderPlayersStuff
         RenderSpriteSheet(GS.renderer, GS.ssPlayer);
 
-        //Outline rendered last
-        SDL_Rect outLineRect;
-        outLineRect.x = GS.lInfo.mLevelTex.mX;
-        outLineRect.y = GS.lInfo.mLevelTex.mY;
-        outLineRect.w = GS.lInfo.mLevelTex.mW;
-        outLineRect.h = GS.lInfo.mLevelTex.mH;
-        SDL_RenderDrawRect(GS.renderer, &outLineRect); 
+        if(GS.lInfo.mActive)
+        {
+            //Outline rendered last
+            SDL_Rect outLineRect;
+            outLineRect.x = GS.lInfo.mLevelTex.mX;
+            outLineRect.y = GS.lInfo.mLevelTex.mY;
+            outLineRect.w = GS.lInfo.mLevelTex.mW;
+            outLineRect.h = GS.lInfo.mLevelTex.mH;
+            SDL_RenderDrawRect(GS.renderer, &outLineRect); 
+        }
 
     }
 
@@ -487,19 +490,6 @@ int main(int argv, char **args)
     GS.curTime = SDL_GetTicks();
     //Initiate SDL
     StartSDL(&(GS.window), &(GS.renderer));
-
-    GS.NarrativeCounter = 0;
-
-    //RemoveTextureWhiteSpace(GS.man);
-    GS.SceneCurrent = SCENE_INTRO; 
-    GS.SceneNext = SCENE_INTRO; 
-    GS.PlayerState = STATE_IDLE;
-
-    GS.screenColor.r = 200;
-    GS.screenColor.g = 200;
-    GS.screenColor.b = 200;
-    GS.screenColor.a = 255;
-
 
     //Initial state variables
     GS.blackTex = InitTexture(GetSDLTexture(GS.renderer, GS.window, "./res/png/black.png"), 0 ,0);
