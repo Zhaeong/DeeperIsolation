@@ -1164,6 +1164,15 @@ void LoadAction(GameState *GS, string action, int spriteCol)
 
         actionSheet.mUpdateInterval = 500;
     }
+    else if(action == MAN_SLEEP)
+    {
+        actionSheet = InitSpriteSheet(actionTex,
+                100,
+                100,
+                26); 
+
+        actionSheet.mUpdateInterval = 500;
+    }
 
     if(spriteCol != -1)
     {
@@ -1379,7 +1388,7 @@ void LoadScene(GameState *GS, string sceneName)
         }
 
         //SceneSpefic stuff
-        GS->NarrativeCounter = 0;
+        GS->curStory = 0;
 
         //RemoveTextureWhiteSpace(GS.man);
         GS->SceneCurrent = SCENE_INTRO; 
@@ -1450,13 +1459,13 @@ void LoadScene(GameState *GS, string sceneName)
         GS->ssArray[4] = manbedSS;
 
         //Special case for start spawn of the level where the player is in bed instead of door.
-        if(GS->NarrativeCounter == 0)
+        if(GS->curStory == 0)
         {
             LoadNarration(GS, LINE_0);
 
             GS->ssPlayer.mX = 400;
 
-            GS->NarrativeCounter = 1;
+            GS->curStory = 1;
             LoadAction(GS, PLAYER_WAKE, -1);
         }
 
@@ -1558,6 +1567,21 @@ void LoadScene(GameState *GS, string sceneName)
         //init text start renderings
         LoadAction(GS, CHILD_WAKE, -1);
 
+        for(int i = 0; i < GS->curStory; i++)
+        {
+            cout << GS->sStory[i].mText << "\n";
+            GS->sStory[i].mStartTime = GS->curTime;
+        }
+    }
+    else if(sceneName == SCENE_ENDROOM)
+    {
+        GS->lInfo = InitLevelInfo(GS, SCENE_BEDROOM);
+        AddStoryLine(GS, LINE_6);
+
+        GS->ssPlayer.mX = GAMEWIDTH/2 - 50;
+        GS->ssPlayer.mY = GAMEHEIGHT/2 - 50;
+        //init text start renderings
+        LoadAction(GS, MAN_SLEEP, -1);
         for(int i = 0; i < GS->curStory; i++)
         {
             cout << GS->sStory[i].mText << "\n";

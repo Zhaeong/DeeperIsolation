@@ -239,68 +239,73 @@ Module.expectedDataFileDownloads++;
    "end": 6929416,
    "audio": 0
   }, {
-   "filename": "/res/png/manwake.png",
+   "filename": "/res/png/mansleep.png",
    "start": 6929416,
-   "end": 6957108,
+   "end": 6982473,
+   "audio": 0
+  }, {
+   "filename": "/res/png/manwake.png",
+   "start": 6982473,
+   "end": 7010165,
    "audio": 0
   }, {
    "filename": "/res/png/manwake2.png",
-   "start": 6957108,
-   "end": 6985341,
+   "start": 7010165,
+   "end": 7038398,
    "audio": 0
   }, {
    "filename": "/res/png/manwalk.png",
-   "start": 6985341,
-   "end": 7022118,
+   "start": 7038398,
+   "end": 7075175,
    "audio": 0
   }, {
    "filename": "/res/png/manwalkOriginal.png",
-   "start": 7022118,
-   "end": 7065668,
+   "start": 7075175,
+   "end": 7118725,
    "audio": 0
   }, {
    "filename": "/res/png/manwash.png",
-   "start": 7065668,
-   "end": 7096804,
+   "start": 7118725,
+   "end": 7149861,
    "audio": 0
   }, {
    "filename": "/res/png/manweat.png",
-   "start": 7096804,
-   "end": 7169926,
+   "start": 7149861,
+   "end": 7222983,
    "audio": 0
   }, {
    "filename": "/res/png/sink.png",
-   "start": 7169926,
-   "end": 7171936,
+   "start": 7222983,
+   "end": 7224993,
    "audio": 0
   }, {
    "filename": "/res/png/textBox.png",
-   "start": 7171936,
-   "end": 7173318,
+   "start": 7224993,
+   "end": 7226375,
    "audio": 0
   }, {
    "filename": "/res/png/textBoxOri.png",
-   "start": 7173318,
-   "end": 7174703,
+   "start": 7226375,
+   "end": 7227760,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 7174703,
-   "end": 7610684,
+   "start": 7227760,
+   "end": 7663741,
    "audio": 0
   }, {
    "filename": "/res/png/toilet.png",
-   "start": 7610684,
-   "end": 7613811,
+   "start": 7663741,
+   "end": 7666868,
    "audio": 0
   }, {
    "filename": "/res/png/window.png",
-   "start": 7613811,
-   "end": 7621082,
+   "start": 7666868,
+   "end": 7674139,
    "audio": 0
   } ],
-  "remote_package_size": 7621082,
-  "package_uuid": "58dd56b9-c9f5-49cb-b6f6-34f1a91f1754"
+  "remote_package_size": 7674139,
+  "package_uuid": "8bd3650f-cdd8-470a-93f9-d4b04e0511f3"
  });
 })();
 
@@ -701,8 +706,8 @@ function setValue(ptr, value, type, noSafe) {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 1096,
- "maximum": 1096 + 0,
+ "initial": 1100,
+ "maximum": 1100 + 0,
  "element": "anyfunc"
 });
 
@@ -921,7 +926,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5350992, STACK_MAX = 108112, DYNAMIC_BASE = 5350992, DYNAMICTOP_PTR = 107952;
+var STACK_BASE = 5351104, STACK_MAX = 108224, DYNAMIC_BASE = 5351104, DYNAMICTOP_PTR = 108064;
 
 assert(STACK_BASE % 16 === 0, "stack must start aligned");
 
@@ -1286,7 +1291,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 38868: function($0, $1, $2) {
+ 38932: function($0, $1, $2) {
   var w = $0;
   var h = $1;
   var pixels = $2;
@@ -1357,7 +1362,7 @@ var ASM_CONSTS = {
   SDL2.ctx.putImageData(SDL2.image, 0, 0);
   return 0;
  },
- 40323: function($0, $1, $2, $3, $4) {
+ 40387: function($0, $1, $2, $3, $4) {
   var w = $0;
   var h = $1;
   var hot_x = $2;
@@ -1394,30 +1399,30 @@ var ASM_CONSTS = {
   stringToUTF8(url, urlBuf, url.length + 1);
   return urlBuf;
  },
- 41312: function($0) {
+ 41376: function($0) {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = UTF8ToString($0);
   }
   return 0;
  },
- 41405: function() {
+ 41469: function() {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = "none";
   }
  },
- 42630: function() {
+ 42694: function() {
   return screen.width;
  },
- 42657: function() {
+ 42721: function() {
   return screen.height;
  },
- 42730: function($0) {
+ 42794: function($0) {
   if (typeof Module["setWindowTitle"] !== "undefined") {
    Module["setWindowTitle"](UTF8ToString($0));
   }
   return 0;
  },
- 42884: function() {
+ 42948: function() {
   if (typeof AudioContext !== "undefined") {
    return 1;
   } else if (typeof webkitAudioContext !== "undefined") {
@@ -1425,7 +1430,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 43050: function() {
+ 43114: function() {
   if (typeof navigator.mediaDevices !== "undefined" && typeof navigator.mediaDevices.getUserMedia !== "undefined") {
    return 1;
   } else if (typeof navigator.webkitGetUserMedia !== "undefined") {
@@ -1433,7 +1438,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 43276: function($0) {
+ 43340: function($0) {
   if (typeof Module["SDL2"] === "undefined") {
    Module["SDL2"] = {};
   }
@@ -1452,11 +1457,11 @@ var ASM_CONSTS = {
   }
   return SDL2.audioContext === undefined ? -1 : 0;
  },
- 43759: function() {
+ 43823: function() {
   var SDL2 = Module["SDL2"];
   return SDL2.audioContext.sampleRate;
  },
- 43829: function($0, $1, $2, $3) {
+ 43893: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   var have_microphone = function(stream) {
    if (SDL2.capture.silenceTimer !== undefined) {
@@ -1497,7 +1502,7 @@ var ASM_CONSTS = {
    }, have_microphone, no_microphone);
   }
  },
- 45481: function($0, $1, $2, $3) {
+ 45545: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
   SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -1509,7 +1514,7 @@ var ASM_CONSTS = {
   };
   SDL2.audio.scriptProcessorNode["connect"](SDL2.audioContext["destination"]);
  },
- 45891: function($0, $1) {
+ 45955: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
   for (var c = 0; c < numChannels; ++c) {
@@ -1528,7 +1533,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 46496: function($0, $1) {
+ 46560: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
   for (var c = 0; c < numChannels; ++c) {
@@ -1541,7 +1546,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 46976: function($0) {
+ 47040: function($0) {
   var SDL2 = Module["SDL2"];
   if ($0) {
    if (SDL2.capture.silenceTimer !== undefined) {

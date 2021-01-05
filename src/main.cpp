@@ -257,6 +257,11 @@ void gameloop()
                             {
                                 GS.SceneCurrent = SCENE_TRAN;
                                 GS.SceneNext = GS.ssArray[spriteCol].mName;
+
+                                if(GS.SceneNext == SCENE_BEDROOM && GS.curStory > 1)
+                                {
+                                    GS.SceneNext = SCENE_ENDROOM;
+                                }
                             }
                             else if(GS.ssArray[spriteCol].mType == TTYPE_ACTION)
                             {
@@ -369,7 +374,7 @@ void gameloop()
     }
 
     //If it's an ending scene we want to stop the animation at the last frame
-    if(GS.SceneCurrent == SCENE_ENDDOOR)
+    if(GS.SceneCurrent == SCENE_ENDDOOR || GS.SceneCurrent == SCENE_ENDROOM)
     {
         if(GS.ssPlayerAction.mCurFrame != GS.ssPlayerAction.mNumFrames - 1)
         {
@@ -401,7 +406,7 @@ void gameloop()
     //
 
 
-    if(GS.SceneCurrent == SCENE_ENDDOOR)
+    if(GS.SceneCurrent == SCENE_ENDDOOR || GS.SceneCurrent == SCENE_ENDROOM)
     {
         for(int i = 0; i < GS.curStory; i++)
         {
