@@ -1171,7 +1171,7 @@ void LoadAction(GameState *GS, string action, int spriteCol)
                 100,
                 26); 
 
-        actionSheet.mUpdateInterval = 500;
+        actionSheet.mUpdateInterval = 300;
     }
 
     if(spriteCol != -1)
@@ -1365,7 +1365,7 @@ void LoadScene(GameState *GS, string sceneName)
         SpriteSheet titleSheet = InitSpriteSheet(titleTex,
                 GAMEWIDTH,
                 GAMEHEIGHT,
-                7); 
+                15); 
 
         titleSheet.mUpdateInterval = 200;
 
@@ -1376,8 +1376,8 @@ void LoadScene(GameState *GS, string sceneName)
                 MAIN_TEXT_H,
                 GS->mainBoxTexture,
                 "Start",
-                300,
-                400,
+                226,
+                351,
                 5,
                 200);
 
