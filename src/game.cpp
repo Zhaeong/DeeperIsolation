@@ -925,7 +925,7 @@ TextLine InitTextLine(SDL_Texture *fontTex,
     outTextLine.mX = x;
     outTextLine.mY = y;
 
-    outTextLine.mAlpha = 0;
+    outTextLine.mAlpha = 255;
 
     return outTextLine;
 }
@@ -985,11 +985,17 @@ void RenderTextLine(SDL_Renderer *renderer, TextLine tLine)
         dstRect.x = tLine.mX + tLine.mFontW * curXPos;
         dstRect.y = tLine.mY + tLine.mFontH * curYPos;
 
+        Uint8 originalAlpha;
+        SDL_GetTextureAlphaMod(tLine.mFontTex, &originalAlpha);
+
         SDL_SetTextureBlendMode(tLine.mFontTex, SDL_BLENDMODE_BLEND);
 
         SDL_SetTextureAlphaMod(tLine.mFontTex, tLine.mAlpha);
         SDL_RenderCopyEx(renderer, tLine.mFontTex, &srcRect, &dstRect, 0, NULL, SDL_FLIP_NONE);
 
+        //Revert back to original alpha
+
+        SDL_SetTextureAlphaMod(tLine.mFontTex, originalAlpha);
         curXPos += 1;
     }
 
@@ -1306,7 +1312,7 @@ void AddStoryLine(GameState *GS, string line)
             line,
             0,
             GS->curStory * 20);
-    GS->sStory[GS->curStory].mAlpha = 100;
+    //GS->sStory[GS->curStory].mAlpha = 100;
     GS->sStory[GS->curStory].mDelay = GS->curStory * 1000;
 
     string audioPath = "";
@@ -1360,6 +1366,7 @@ void LoadScene(GameState *GS, string sceneName)
 
     if(sceneName == SCENE_INTRO)
     {
+
         //So unused array members are not worked upon
         SDL_Texture *titleTex = GetSDLTexture(GS->renderer, GS->window, "./res/png/title.png");
         SpriteSheet titleSheet = InitSpriteSheet(titleTex,

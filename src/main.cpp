@@ -258,7 +258,7 @@ void gameloop()
                                 GS.SceneCurrent = SCENE_TRAN;
                                 GS.SceneNext = GS.ssArray[spriteCol].mName;
 
-                                if(GS.SceneNext == SCENE_BEDROOM && GS.curStory > 1)
+                                if(GS.SceneNext == SCENE_BEDROOM && GS.curStory > 2)
                                 {
                                     GS.SceneNext = SCENE_ENDROOM;
                                 }
@@ -507,8 +507,6 @@ int main(int argv, char **args)
     GS.mainBoxTexture = GetSDLTexture(GS.renderer, GS.window, "./res/png/textBox.png");
     RemoveTextureWhiteSpace(GS.mainBoxTexture);
 
-
-
     //GS.blackTex.mAlpha = 0;
 
     GS.acArray[0] = InitAudio(AUDIO_Walk);
@@ -523,7 +521,6 @@ int main(int argv, char **args)
     {
         printf("Failed to open audio: %s", SDL_GetError());
     } 
-
 
     SDL_PauseAudioDevice(GS.audioDevice, 0);
 
