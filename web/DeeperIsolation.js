@@ -281,31 +281,36 @@ Module.expectedDataFileDownloads++;
   }, {
    "filename": "/res/png/textBox.png",
    "start": 7224993,
-   "end": 7226375,
+   "end": 7226330,
    "audio": 0
   }, {
    "filename": "/res/png/textBoxOri.png",
-   "start": 7226375,
-   "end": 7227760,
+   "start": 7226330,
+   "end": 7227715,
+   "audio": 0
+  }, {
+   "filename": "/res/png/textBoxWindowsStyle.png",
+   "start": 7227715,
+   "end": 7229220,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 7227760,
-   "end": 7382049,
+   "start": 7229220,
+   "end": 7383509,
    "audio": 0
   }, {
    "filename": "/res/png/toilet.png",
-   "start": 7382049,
-   "end": 7385176,
+   "start": 7383509,
+   "end": 7386636,
    "audio": 0
   }, {
    "filename": "/res/png/window.png",
-   "start": 7385176,
-   "end": 7392447,
+   "start": 7386636,
+   "end": 7393907,
    "audio": 0
   } ],
-  "remote_package_size": 7392447,
-  "package_uuid": "37b1b2a0-cb54-411f-9b66-937d1da9bd5a"
+  "remote_package_size": 7393907,
+  "package_uuid": "bb71d6a2-09fc-4351-8990-4a89d464f888"
  });
 })();
 
