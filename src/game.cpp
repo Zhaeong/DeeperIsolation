@@ -1496,10 +1496,10 @@ void LoadScene(GameState *GS, string sceneName)
         door.mButtonText = "Enter Bedroom";
         GS->ssArray[0] = door;
 
-
+        //Enddoor
         SpriteSheet endDoor = InitSpriteSheet(doorTex, 0, 0 , 1);
 
-        endDoor.mX = GS->lInfo.mLevelTex.mX;
+        endDoor.mX = GS->lInfo.mLevelTex.mX + 5;
         endDoor.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - endDoor.mDstRect.h;
 
         endDoor.mType = TTYPE_TRANSIT;
@@ -1532,8 +1532,8 @@ void LoadScene(GameState *GS, string sceneName)
         fridge.mName = PLAYER_WEAT; 
         fridge.mButtonText = "Eat";
         fridge.mNarration = LINE_3;
-        fridge.mColBoxOffset.x = 49;
-        fridge.mColBoxOffset.w = 5;
+        fridge.mColBoxOffset.x = 43;
+        fridge.mColBoxOffset.w = 14;
         GS->ssArray[3] = fridge;
 
         //toilet
