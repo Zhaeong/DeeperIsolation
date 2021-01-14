@@ -1083,9 +1083,21 @@ LevelInfo InitLevelInfo(GameState *GS, string texturePath)
     return outLevel;
 }
 
-void LoadNarration(GameState *GS, string sNarration)
+void LoadNarration(GameState *GS, string sNarration, int spriteCol)
 {
+    if(spriteCol != -1)
+    {
+        if(GS->ssArray[spriteCol].mInteract)
+        {
+            GS->ssArray[spriteCol].mInteract = false;
+        }
+        else
+        {
+            return;
+        }
+    }
 
+    cout << "loaded narration: " << sNarration << " spritecol: " << spriteCol << "\n";
     //2 is the margin of text box, really should change it so that the box begins
     //at left instead of marging going past
     int y = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH + 10;
@@ -1117,16 +1129,22 @@ void LoadNarration(GameState *GS, string sNarration)
 }
 void LoadAction(GameState *GS, string action, int spriteCol)
 {
+    if(spriteCol != -1 && !GS->ssArray[spriteCol].mInteract)
+    {
+        return;
+    }
+
+    if(GS->ssArray[spriteCol].mNarration != "" && GS->ssArray[spriteCol].mNarration != "NONE")
+    {
+        LoadNarration(GS, GS->ssArray[spriteCol].mNarration, spriteCol);
+    }
 
     //make player sprite invisible
     GS->ssPlayer.mActive = false;
     GS->ssArray[spriteCol].mActive = false;
     GS->actionCol = spriteCol;
 
-    if(spriteCol != -1 && !GS->ssArray[spriteCol].mInteract)
-    {
-        return;
-    }
+
     cout << "loaded action: " << action << " spritecol: " << spriteCol << "\n";
 
     SDL_Texture *actionTex = GetSDLTexture(GS->renderer, GS->window, action);
@@ -1198,38 +1216,18 @@ void LoadAction(GameState *GS, string action, int spriteCol)
 
     GS->ssPlayerAction = actionSheet;
 
-    if(GS->ssArray[spriteCol].mNarration != "" && GS->ssArray[spriteCol].mNarration != "NONE")
-    {
-        LoadNarration(GS, GS->ssArray[spriteCol].mNarration);
-        GS->ssArray[spriteCol].mInteract = false;
-
-    }
-
     GS->PlayerState = STATE_ACTION;
 
 }
 
 void ChangePlayerState(GameState *GS, string newState)
 {
-    bool stateChange = true;
-
     if(GS->PlayerState == STATE_ACTION || GS->PlayerState == STATE_NARRATION)
     {
         return;
     }
-    if(newState == STATE_IDLE)
-    {
-        GS->PlayerState = newState;
-    }
-    else
-    {
-        GS->PlayerState = newState;
-    }
 
-    if(!stateChange)
-    {
-        cout << "ERROR, PlayerState Change from: " << GS->PlayerState << "  to: " << newState << "\n";
-    }
+    GS->PlayerState = newState;
 }
 void RefreshState(GameState *GS)
 {
@@ -1468,7 +1466,7 @@ void LoadScene(GameState *GS, string sceneName)
         //Special case for start spawn of the level where the player is in bed instead of door.
         if(GS->curStory == 0)
         {
-            LoadNarration(GS, LINE_0);
+            LoadNarration(GS, LINE_0, -1);
 
             GS->ssPlayer.mX = 400;
 

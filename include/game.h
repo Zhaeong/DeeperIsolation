@@ -76,7 +76,7 @@ bool MouseTextBoxCol(int mouseX, int mouseY, TextBox tb);
 
 LevelInfo InitLevelInfo(GameState *GS, string texturePath);
 
-void LoadNarration(GameState *GS, string sNarration);
+void LoadNarration(GameState *GS, string sNarration, int spriteCol);
 
 void LoadAction(GameState *GS, string action, int spriteCol);
 

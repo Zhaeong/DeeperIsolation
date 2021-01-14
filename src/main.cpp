@@ -52,8 +52,9 @@ void gameloop()
     }
 
 
-    if(spriteCol != -1)
+    if(spriteCol != -1 && GS.ssArray[spriteCol].mInteract)
     {
+
         TextBox textureTB;
         string buttonText;
         string type;
@@ -251,7 +252,7 @@ void gameloop()
                             if(GS.ssArray[spriteCol].mType == TTYPE_NARRATION)
                             {
                                 cout << "narration\n";
-                                LoadNarration(&GS, GS.ssArray[spriteCol].mNarration);
+                                LoadNarration(&GS, GS.ssArray[spriteCol].mNarration, spriteCol);
                             }
                             else if(GS.ssArray[spriteCol].mType == TTYPE_TRANSIT)
                             {
@@ -265,7 +266,6 @@ void gameloop()
                             }
                             else if(GS.ssArray[spriteCol].mType == TTYPE_ACTION)
                             {
-                                cout << "actionnnn\n";
                                 LoadAction(&GS, GS.ssArray[spriteCol].mName, spriteCol);
                             }
                         }
