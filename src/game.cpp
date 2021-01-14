@@ -1359,6 +1359,8 @@ void LoadScene(GameState *GS, string sceneName)
 
     cout << "Loading Scene: " << sceneName << "\n";
 
+    //kind of an issue because the action take doesnt persist after
+    //transitioning back to each room, all variables gets reset
     RefreshState(GS);
     GS->SceneCurrent = sceneName;
 
