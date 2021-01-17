@@ -201,116 +201,116 @@ Module.expectedDataFileDownloads++;
   }, {
    "filename": "/res/png/childwake.png",
    "start": 6878891,
-   "end": 6902844,
+   "end": 6903166,
    "audio": 0
   }, {
    "filename": "/res/png/door.png",
-   "start": 6902844,
-   "end": 6904299,
+   "start": 6903166,
+   "end": 6904621,
    "audio": 0
   }, {
    "filename": "/res/png/fridge.png",
-   "start": 6904299,
-   "end": 6906966,
+   "start": 6904621,
+   "end": 6907288,
    "audio": 0
   }, {
    "filename": "/res/png/livingroom.png",
-   "start": 6906966,
-   "end": 6908715,
+   "start": 6907288,
+   "end": 6909037,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png",
-   "start": 6908715,
-   "end": 6914872,
+   "start": 6909037,
+   "end": 6915194,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png~",
-   "start": 6914872,
-   "end": 6917995,
+   "start": 6915194,
+   "end": 6918317,
    "audio": 0
   }, {
    "filename": "/res/png/mainText50.png",
-   "start": 6917995,
-   "end": 6927054,
+   "start": 6918317,
+   "end": 6927376,
    "audio": 0
   }, {
    "filename": "/res/png/manbed.png",
-   "start": 6927054,
-   "end": 6929416,
+   "start": 6927376,
+   "end": 6929738,
    "audio": 0
   }, {
    "filename": "/res/png/mansleep.png",
-   "start": 6929416,
-   "end": 6982473,
+   "start": 6929738,
+   "end": 6982795,
    "audio": 0
   }, {
    "filename": "/res/png/manwake.png",
-   "start": 6982473,
-   "end": 7010165,
+   "start": 6982795,
+   "end": 7010487,
    "audio": 0
   }, {
    "filename": "/res/png/manwake2.png",
-   "start": 7010165,
-   "end": 7038398,
+   "start": 7010487,
+   "end": 7038720,
    "audio": 0
   }, {
    "filename": "/res/png/manwalk.png",
-   "start": 7038398,
-   "end": 7075175,
+   "start": 7038720,
+   "end": 7075497,
    "audio": 0
   }, {
    "filename": "/res/png/manwalkOriginal.png",
-   "start": 7075175,
-   "end": 7118725,
+   "start": 7075497,
+   "end": 7119047,
    "audio": 0
   }, {
    "filename": "/res/png/manwash.png",
-   "start": 7118725,
-   "end": 7149861,
+   "start": 7119047,
+   "end": 7150183,
    "audio": 0
   }, {
    "filename": "/res/png/manweat.png",
-   "start": 7149861,
-   "end": 7222983,
+   "start": 7150183,
+   "end": 7223305,
    "audio": 0
   }, {
    "filename": "/res/png/sink.png",
-   "start": 7222983,
-   "end": 7224993,
+   "start": 7223305,
+   "end": 7225315,
    "audio": 0
   }, {
    "filename": "/res/png/textBox.png",
-   "start": 7224993,
-   "end": 7226330,
+   "start": 7225315,
+   "end": 7226652,
    "audio": 0
   }, {
    "filename": "/res/png/textBoxOri.png",
-   "start": 7226330,
-   "end": 7227715,
+   "start": 7226652,
+   "end": 7228037,
    "audio": 0
   }, {
    "filename": "/res/png/textBoxWindowsStyle.png",
-   "start": 7227715,
-   "end": 7229220,
+   "start": 7228037,
+   "end": 7229542,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 7229220,
-   "end": 7383509,
+   "start": 7229542,
+   "end": 7383831,
    "audio": 0
   }, {
    "filename": "/res/png/toilet.png",
-   "start": 7383509,
-   "end": 7386636,
+   "start": 7383831,
+   "end": 7386958,
    "audio": 0
   }, {
    "filename": "/res/png/window.png",
-   "start": 7386636,
-   "end": 7393907,
+   "start": 7386958,
+   "end": 7394229,
    "audio": 0
   } ],
-  "remote_package_size": 7393907,
-  "package_uuid": "7c594f13-738f-43bc-a6e7-33331951c72f"
+  "remote_package_size": 7394229,
+  "package_uuid": "91390596-15b1-4c97-8335-d15ad25b366b"
  });
 })();
 
@@ -711,8 +711,8 @@ function setValue(ptr, value, type, noSafe) {
 var wasmMemory;
 
 var wasmTable = new WebAssembly.Table({
- "initial": 1100,
- "maximum": 1100 + 0,
+ "initial": 1098,
+ "maximum": 1098 + 0,
  "element": "anyfunc"
 });
 
@@ -931,7 +931,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5351104, STACK_MAX = 108224, DYNAMIC_BASE = 5351104, DYNAMICTOP_PTR = 108064;
+var STACK_BASE = 5351072, STACK_MAX = 108192, DYNAMIC_BASE = 5351072, DYNAMICTOP_PTR = 108032;
 
 assert(STACK_BASE % 16 === 0, "stack must start aligned");
 

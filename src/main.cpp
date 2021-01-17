@@ -21,7 +21,7 @@ void gameloop()
     GS.curTime = frameStart - GS.startTime;
 
     //The color at which the screen will be if alpha = 0 on all textures
-    if(GS.SceneCurrent == SCENE_ENDDOOR)
+    if(GS.SceneCurrent == SCENE_ENDDOOR || GS.SceneCurrent == SCENE_ENDROOM)
     {
         SDL_SetRenderDrawColor(GS.renderer, 255, 255, 255, GS.screenColor.a);
     }
@@ -235,8 +235,8 @@ void gameloop()
                 {
                     if(GS.tbArray[0].mState == 2)
                     {
-                        GS.SceneCurrent = SCENE_TRAN;
                         GS.SceneNext = SCENE_BEDROOM;
+                        GS.darken = true;
                         cout << "changestate\n";
                     }
                 }
@@ -256,7 +256,7 @@ void gameloop()
                             }
                             else if(GS.ssArray[spriteCol].mType == TTYPE_TRANSIT)
                             {
-                                GS.SceneCurrent = SCENE_TRAN;
+                                GS.darken = true;
                                 GS.SceneNext = GS.ssArray[spriteCol].mName;
 
                                 if(GS.SceneNext == SCENE_BEDROOM && GS.curStory > 2)
@@ -290,11 +290,12 @@ void gameloop()
         }
     }
 
-    if(GS.SceneCurrent == SCENE_TRAN)
+    if(GS.darken)
     {
         if(DarkenTexture(&GS))
         {
             LoadScene(&GS, GS.SceneNext); 
+            GS.darken = false;
         }
     }
     else
@@ -405,7 +406,6 @@ void gameloop()
     //Render Area
     //
 
-
     if(GS.SceneCurrent == SCENE_ENDDOOR || GS.SceneCurrent == SCENE_ENDROOM)
     {
         for(int i = 0; i < GS.curStory; i++)
@@ -419,12 +419,13 @@ void gameloop()
         //hardcoded time left until back to start scene
         if(GS.curTime > GS.sStory[GS.curStory - 1].mStartTime + GS.sStory[GS.curStory - 1].mDelay + 10000)
         {
-            LoadScene(&GS, SCENE_INTRO);
+            //LoadScene(&GS, SCENE_INTRO);
+            GS.darken = true;
+            GS.SceneNext = SCENE_INTRO; 
         }
     }
     else
     {
-
         RenderTexture(GS.renderer, GS.lInfo.mLevelTex);
         SDL_SetRenderDrawColor(GS.renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 
@@ -525,6 +526,7 @@ int main(int argv, char **args)
 
     SDL_PauseAudioDevice(GS.audioDevice, 0);
 
+    GS.darken = false;
     LoadScene(&GS, SCENE_INTRO);
 
 

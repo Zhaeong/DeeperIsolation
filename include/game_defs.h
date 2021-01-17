@@ -60,7 +60,6 @@ const int NUM_LINES = 10;
 
 //Game Scenes
 const string SCENE_INTRO = "INTRO";
-const string SCENE_TRAN  = "TRAN";
 const string SCENE_LIGHTEN = "LIGHT";
 const string SCENE_BEDROOM = "./res/png/bedroom.png";
 const string SCENE_LIVINGROOM = "./res/png/livingroom.png";
@@ -259,6 +258,8 @@ struct GameState
 {
     string SceneCurrent;
     string SceneNext;
+
+    bool darken;
     SDL_Color screenColor;
     SDL_Window *window;
     SDL_Renderer *renderer;
