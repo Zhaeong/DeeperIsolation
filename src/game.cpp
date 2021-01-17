@@ -327,6 +327,8 @@ SpriteSheet InitSpriteSheet(SDL_Texture *sdlTexture,
     sSheet.mNarration = "";
     sSheet.mName = "";
 
+    sSheet.mHideNarration = false;
+
 
     sSheet.mLastUpdate = 0;
     sSheet.mUpdateInterval = 1000;
@@ -1090,6 +1092,10 @@ void LoadNarration(GameState *GS, string sNarration, int spriteCol)
         if(GS->ssArray[spriteCol].mInteract)
         {
             GS->ssArray[spriteCol].mInteract = false;
+
+
+
+
         }
         else
         {
@@ -1097,7 +1103,15 @@ void LoadNarration(GameState *GS, string sNarration, int spriteCol)
         }
     }
 
+    AddStoryLine(GS, sNarration);
     cout << "loaded narration: " << sNarration << " spritecol: " << spriteCol << "\n";
+
+    //Some actions won't need narration, however we'll still want the narration recorded via story
+    if(spriteCol >= 0 && GS->ssArray[spriteCol].mHideNarration)
+    {
+        return;
+    }
+
     //2 is the margin of text box, really should change it so that the box begins
     //at left instead of marging going past
     int y = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH + 10;
@@ -1112,6 +1126,7 @@ void LoadNarration(GameState *GS, string sNarration, int spriteCol)
     //So that the textbox is centered according to the level texture
     int x = (GS->lInfo.mLevelTex.mX + GS->lInfo.mLevelTex.mW/2) - (column * MAIN_TEXT_W)/2;
 
+
     GS->PlayerState = STATE_NARRATION;
     GS->tbArray[TB_NARRATION_BOX] = InitTextBox(GS->fontTexture,
             MAIN_TEXT_W,
@@ -1125,8 +1140,8 @@ void LoadNarration(GameState *GS, string sNarration, int spriteCol)
 
     GS->tbArray[TB_NARRATION_BOX].mDuration = sNarration.size() * 200 + 1000;
 
-    AddStoryLine(GS, sNarration);
 }
+
 void LoadAction(GameState *GS, string action, int spriteCol)
 {
     if(spriteCol != -1 && !GS->ssArray[spriteCol].mInteract)
@@ -1534,6 +1549,8 @@ void LoadScene(GameState *GS, string sceneName)
         fridge.mNarration = LINE_3;
         fridge.mColBoxOffset.x = 43;
         fridge.mColBoxOffset.w = 14;
+
+        fridge.mHideNarration = true;
         GS->ssArray[3] = fridge;
 
         //toilet
@@ -1558,6 +1575,7 @@ void LoadScene(GameState *GS, string sceneName)
         sink.mNarration = LINE_2;
         sink.mColBoxOffset.x = 60;
         sink.mColBoxOffset.w = 40;
+        sink.mHideNarration = true;
         GS->ssArray[5] = sink;
 
     }

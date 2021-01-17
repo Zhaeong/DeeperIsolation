@@ -166,6 +166,8 @@ struct SpriteSheet
     string mButtonText;
     string mNarration;
 
+    bool mHideNarration;
+
     //handling frame updates
     Uint32 mLastUpdate;
     int mUpdateInterval;
