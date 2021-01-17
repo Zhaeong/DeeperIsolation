@@ -349,7 +349,7 @@ void gameloop()
             }
             //Not using function Change Player state here because when its state action only 
             //this part can change it back to idle
-            if(GS.SceneCurrent != SCENE_ENDDOOR)
+            if(GS.SceneCurrent != SCENE_ENDDOOR && GS.SceneCurrent != SCENE_ENDROOM)
             {
                 GS.PlayerState = STATE_IDLE;
                 GS.ssPlayer.mActive = true;
@@ -457,6 +457,7 @@ void gameloop()
     }
 
 
+    //cout << "curacton: " << GS.ssPlayerAction.mCurFrame << "trieity:" << GS.ssPlayerAction.mActive << "\n";
     RenderSpriteSheet(GS.renderer, GS.ssPlayerAction);
     //Render the fadeout textures
     RenderTexture(GS.renderer, GS.blackTex);
