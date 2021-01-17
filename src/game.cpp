@@ -1433,7 +1433,7 @@ void LoadScene(GameState *GS, string sceneName)
         GS->lInfo = InitLevelInfo(GS, SCENE_BEDROOM);
 
 
-        GS->lInfo.mInitPlayerPos.x = 240;
+        GS->lInfo.mInitPlayerPos.x = 180;
         GS->lInfo.mInitPlayerPos.y = 280;
 
         SpawnPlayer(GS, GS->lInfo.mInitPlayerPos.x, GS->lInfo.mInitPlayerPos.y);
@@ -1444,7 +1444,7 @@ void LoadScene(GameState *GS, string sceneName)
         SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, TEX_DOOR);
 
         SpriteSheet door = InitSpriteSheet(doorTex, 0, 0, 1); 
-        door.mX = 210;
+        door.mX = GS->lInfo.mInitPlayerPos.x + 25;
         door.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - door.mDstRect.h;
         door.mType = TTYPE_TRANSIT;
         door.mName = SCENE_LIVINGROOM;
@@ -1485,7 +1485,7 @@ void LoadScene(GameState *GS, string sceneName)
         {
             LoadNarration(GS, LINE_0, -1);
 
-            GS->ssPlayer.mX = 400;
+            GS->ssPlayer.mX = 420;
 
             GS->curStory = 1;
             LoadAction(GS, PLAYER_WAKE, -1);
@@ -1497,14 +1497,15 @@ void LoadScene(GameState *GS, string sceneName)
     {
         GS->lInfo = InitLevelInfo(GS, SCENE_LIVINGROOM);
 
-        GS->lInfo.mInitPlayerPos.x = 400;
+        GS->lInfo.mInitPlayerPos.x = 380;
         GS->lInfo.mInitPlayerPos.y = 300;
         SpawnPlayer(GS, GS->lInfo.mInitPlayerPos.x, GS->lInfo.mInitPlayerPos.y);
         SpawnControls(GS);
         SDL_Texture *doorTex = GetSDLTexture(GS->renderer, GS->window, TEX_DOOR);
 
+        //bedroom door
         SpriteSheet door = InitSpriteSheet(doorTex, 0, 0 ,1);
-        door.mX = GS->lInfo.mInitPlayerPos.x;
+        door.mX = GS->lInfo.mInitPlayerPos.x + 25;
         door.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - door.mDstRect.h;
         door.mType = TTYPE_TRANSIT;
         door.mName = SCENE_BEDROOM;
