@@ -928,6 +928,8 @@ TextLine InitTextLine(SDL_Texture *fontTex,
     outTextLine.mY = y;
 
     outTextLine.mAlpha = 255;
+    outTextLine.mAudioPath = "";
+    outTextLine.mPlayedAudio = false;
 
     return outTextLine;
 }
@@ -1326,7 +1328,9 @@ void AddStoryLine(GameState *GS, string line)
             0,
             GS->curStory * 20);
     //GS->sStory[GS->curStory].mAlpha = 100;
-    GS->sStory[GS->curStory].mDelay = GS->curStory * 1000;
+
+    //Adds a delay of X ms by each line
+    GS->sStory[GS->curStory].mDelay = GS->curStory * 3000;
 
     string audioPath = "";
     //Handle adding audio here
@@ -1364,9 +1368,15 @@ void AddStoryLine(GameState *GS, string line)
     }
 
     GS->sStory[GS->curStory].mAudioPath = audioPath;
-    PlayAudioFromPath(GS, audioPath);
 
     GS->curStory += 1;
+    
+    //Dont play the audio from last two because they are the endings
+    if(audioPath != "" && line != LINE_5 && line != LINE_6)
+    {
+        PlayAudioFromPath(GS, audioPath);
+
+    }
 }
 
 void LoadScene(GameState *GS, string sceneName)
@@ -1611,7 +1621,7 @@ void LoadScene(GameState *GS, string sceneName)
     else if(sceneName == SCENE_ENDROOM)
     {
         GS->lInfo = InitLevelInfo(GS, SCENE_BEDROOM);
-        AddStoryLine(GS, LINE_6);
+        AddStoryLine(GS, LINE_5);
 
         GS->ssPlayer.mX = GAMEWIDTH/2 - 50;
         GS->ssPlayer.mY = GAMEHEIGHT/2 - 50;

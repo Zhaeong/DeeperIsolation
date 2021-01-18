@@ -413,6 +413,12 @@ void gameloop()
             if(GS.curTime > GS.sStory[i].mStartTime + GS.sStory[i].mDelay)
             {
                 RenderTextLine(GS.renderer, GS.sStory[i]);
+
+                if(!GS.sStory[i].mPlayedAudio)
+                {
+                    PlayAudioFromPath(&GS, GS.sStory[i].mAudioPath);
+                    GS.sStory[i].mPlayedAudio = true;
+                }
             }
         }
 

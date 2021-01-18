@@ -98,7 +98,7 @@ const string LINE_1 = "His child still sleeps";
 const string LINE_2 = "It is necessary to be presentable";
 const string LINE_3 = "Breakfast is the most important part of the day";
 const string LINE_4 = "The weather is nice outside";
-const string LINE_5 = "He goes back to check on his child, work can wait for now";
+const string LINE_5 = "He goes to bed not thinking of work";
 const string LINE_6 = "As he leaves for work his child wakes in an empty home";
 
 //AudioClips
@@ -242,6 +242,7 @@ struct TextLine
     int mAlpha;
 
     string mAudioPath;
+    bool mPlayedAudio;
 
     Uint32 mStartTime;
     Uint32 mDelay;
