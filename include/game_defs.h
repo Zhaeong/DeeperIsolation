@@ -24,7 +24,7 @@ A man wakes up for work
 */
 const Uint32 TEXTUREFORMAT = SDL_PIXELFORMAT_RGBA8888;
 
-const int NUM_SPRITESHEET = 6;
+const int NUM_SPRITESHEET = 7;
 const int SS_CHILD = 3;
 
 //Actions in the form of sprite sheets
@@ -55,7 +55,7 @@ const int MAIN_TEXT_H = 15;
 const int TB_NARRATION_BOX = 2;
 const int TB_ACTION_BUTTON = 4;
 
-const int NUM_TEXTURE = 5;
+//const int NUM_TEXTURE = 6;
 const int NUM_LINES = 10;
 
 //Game Scenes
@@ -75,6 +75,7 @@ const string TEX_WINDOW = "./res/png/basementwindow.png";
 const string TEX_FRIDGE = "./res/png/fridge.png";
 const string TEX_MANBED = "./res/png/manbed.png";
 const string TEX_TOILET = "./res/png/toilet.png";
+const string TEX_TABLE = "./res/png/table.png";
 
 
 //Texture Types

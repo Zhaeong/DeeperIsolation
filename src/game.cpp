@@ -1533,10 +1533,19 @@ void LoadScene(GameState *GS, string sceneName)
         windowSS.mButtonText = "Look";
         windowSS.mNarration = LINE_4;
 
-        windowSS.mX = 300;
+        windowSS.mX = 290;
         windowSS.mY = 195; 
         windowSS.mUpdateInterval = 1500;
         GS->ssArray[2] = windowSS;
+
+        //Table
+        SDL_Texture *tableTex = GetSDLTexture(GS->renderer, GS->window, TEX_TABLE);
+        RemoveTextureWhiteSpace(tableTex);
+        SpriteSheet table = InitSpriteSheet(tableTex, 0, 0, 1); //action same height player
+        table.mX = 280; 
+        table.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - table.mDstRect.h;;
+        table.mType = TTYPE_NORMAL;
+        GS->ssArray[3] = table;
 
         //fridge
         SDL_Texture *fridgeTex = GetSDLTexture(GS->renderer, GS->window, TEX_FRIDGE);
@@ -1552,7 +1561,7 @@ void LoadScene(GameState *GS, string sceneName)
         fridge.mColBoxOffset.w = 14;
 
         fridge.mHideNarration = true;
-        GS->ssArray[3] = fridge;
+        GS->ssArray[4] = fridge;
 
         //toilet
         SDL_Texture *toiletTex = GetSDLTexture(GS->renderer, GS->window, TEX_TOILET);
@@ -1561,7 +1570,7 @@ void LoadScene(GameState *GS, string sceneName)
         toilet.mX = GS->lInfo.mLevelTex.mX + GS->lInfo.mLevelTex.mW - toilet.mDstRect.w;
         toilet.mY = GS->lInfo.mLevelTex.mY + GS->lInfo.mLevelTex.mH - toilet.mDstRect.h;;
         toilet.mType = TTYPE_NORMAL;
-        GS->ssArray[4] = toilet;
+        GS->ssArray[5] = toilet;
 
 
         //Sink
@@ -1577,7 +1586,7 @@ void LoadScene(GameState *GS, string sceneName)
         sink.mColBoxOffset.x = 60;
         sink.mColBoxOffset.w = 40;
         sink.mHideNarration = true;
-        GS->ssArray[5] = sink;
+        GS->ssArray[6] = sink;
 
     }
     else if(sceneName == SCENE_ENDDOOR)
