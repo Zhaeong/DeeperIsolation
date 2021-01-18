@@ -184,133 +184,138 @@ Module.expectedDataFileDownloads++;
    "end": 6869968,
    "audio": 1
   }, {
-   "filename": "/res/png/bedroom.png",
+   "filename": "/res/png/basementwindow.png",
    "start": 6869968,
-   "end": 6871634,
+   "end": 6877865,
+   "audio": 0
+  }, {
+   "filename": "/res/png/bedroom.png",
+   "start": 6877865,
+   "end": 6879531,
    "audio": 0
   }, {
    "filename": "/res/png/black.png",
-   "start": 6871634,
-   "end": 6872857,
+   "start": 6879531,
+   "end": 6880754,
    "audio": 0
   }, {
    "filename": "/res/png/childsleep.png",
-   "start": 6872857,
-   "end": 6878891,
+   "start": 6880754,
+   "end": 6886788,
    "audio": 0
   }, {
    "filename": "/res/png/childwake.png",
-   "start": 6878891,
-   "end": 6903166,
+   "start": 6886788,
+   "end": 6911063,
    "audio": 0
   }, {
    "filename": "/res/png/door.png",
-   "start": 6903166,
-   "end": 6904621,
+   "start": 6911063,
+   "end": 6912518,
    "audio": 0
   }, {
    "filename": "/res/png/fridge.png",
-   "start": 6904621,
-   "end": 6907288,
+   "start": 6912518,
+   "end": 6915185,
    "audio": 0
   }, {
    "filename": "/res/png/livingroom.png",
-   "start": 6907288,
-   "end": 6909037,
+   "start": 6915185,
+   "end": 6916934,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png",
-   "start": 6909037,
-   "end": 6915194,
+   "start": 6916934,
+   "end": 6923091,
    "audio": 0
   }, {
    "filename": "/res/png/mainText.png~",
-   "start": 6915194,
-   "end": 6918317,
+   "start": 6923091,
+   "end": 6926214,
    "audio": 0
   }, {
    "filename": "/res/png/mainText50.png",
-   "start": 6918317,
-   "end": 6927376,
+   "start": 6926214,
+   "end": 6935273,
    "audio": 0
   }, {
    "filename": "/res/png/manbed.png",
-   "start": 6927376,
-   "end": 6929738,
+   "start": 6935273,
+   "end": 6937635,
    "audio": 0
   }, {
    "filename": "/res/png/mansleep.png",
-   "start": 6929738,
-   "end": 6982795,
+   "start": 6937635,
+   "end": 6990692,
    "audio": 0
   }, {
    "filename": "/res/png/manwake.png",
-   "start": 6982795,
-   "end": 7010487,
+   "start": 6990692,
+   "end": 7018384,
    "audio": 0
   }, {
    "filename": "/res/png/manwake2.png",
-   "start": 7010487,
-   "end": 7038720,
+   "start": 7018384,
+   "end": 7046617,
    "audio": 0
   }, {
    "filename": "/res/png/manwalk.png",
-   "start": 7038720,
-   "end": 7075497,
+   "start": 7046617,
+   "end": 7083394,
    "audio": 0
   }, {
    "filename": "/res/png/manwalkOriginal.png",
-   "start": 7075497,
-   "end": 7119047,
+   "start": 7083394,
+   "end": 7126944,
    "audio": 0
   }, {
    "filename": "/res/png/manwash.png",
-   "start": 7119047,
-   "end": 7150183,
+   "start": 7126944,
+   "end": 7158080,
    "audio": 0
   }, {
    "filename": "/res/png/manweat.png",
-   "start": 7150183,
-   "end": 7223305,
+   "start": 7158080,
+   "end": 7231202,
    "audio": 0
   }, {
    "filename": "/res/png/sink.png",
-   "start": 7223305,
-   "end": 7225315,
+   "start": 7231202,
+   "end": 7233212,
    "audio": 0
   }, {
    "filename": "/res/png/textBox.png",
-   "start": 7225315,
-   "end": 7226652,
+   "start": 7233212,
+   "end": 7234549,
    "audio": 0
   }, {
    "filename": "/res/png/textBoxOri.png",
-   "start": 7226652,
-   "end": 7228037,
+   "start": 7234549,
+   "end": 7235934,
    "audio": 0
   }, {
    "filename": "/res/png/textBoxWindowsStyle.png",
-   "start": 7228037,
-   "end": 7229542,
+   "start": 7235934,
+   "end": 7237439,
    "audio": 0
   }, {
    "filename": "/res/png/title.png",
-   "start": 7229542,
-   "end": 7383831,
+   "start": 7237439,
+   "end": 7391728,
    "audio": 0
   }, {
    "filename": "/res/png/toilet.png",
-   "start": 7383831,
-   "end": 7386958,
+   "start": 7391728,
+   "end": 7394855,
    "audio": 0
   }, {
    "filename": "/res/png/window.png",
-   "start": 7386958,
-   "end": 7394229,
+   "start": 7394855,
+   "end": 7402126,
    "audio": 0
   } ],
-  "remote_package_size": 7394229,
-  "package_uuid": "d0b8ddb4-9b82-49b3-b893-243986a03231"
+  "remote_package_size": 7402126,
+  "package_uuid": "cde07947-5cd4-4e16-9f7b-23fd90306316"
  });
 })();
 
@@ -931,7 +936,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STACK_BASE = 5351072, STACK_MAX = 108192, DYNAMIC_BASE = 5351072, DYNAMICTOP_PTR = 108032;
+var STACK_BASE = 5351088, STACK_MAX = 108208, DYNAMIC_BASE = 5351088, DYNAMICTOP_PTR = 108048;
 
 assert(STACK_BASE % 16 === 0, "stack must start aligned");
 
@@ -1296,7 +1301,7 @@ var tempDouble;
 var tempI64;
 
 var ASM_CONSTS = {
- 38932: function($0, $1, $2) {
+ 38948: function($0, $1, $2) {
   var w = $0;
   var h = $1;
   var pixels = $2;
@@ -1367,7 +1372,7 @@ var ASM_CONSTS = {
   SDL2.ctx.putImageData(SDL2.image, 0, 0);
   return 0;
  },
- 40387: function($0, $1, $2, $3, $4) {
+ 40403: function($0, $1, $2, $3, $4) {
   var w = $0;
   var h = $1;
   var hot_x = $2;
@@ -1404,30 +1409,30 @@ var ASM_CONSTS = {
   stringToUTF8(url, urlBuf, url.length + 1);
   return urlBuf;
  },
- 41376: function($0) {
+ 41392: function($0) {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = UTF8ToString($0);
   }
   return 0;
  },
- 41469: function() {
+ 41485: function() {
   if (Module["canvas"]) {
    Module["canvas"].style["cursor"] = "none";
   }
  },
- 42694: function() {
+ 42710: function() {
   return screen.width;
  },
- 42721: function() {
+ 42737: function() {
   return screen.height;
  },
- 42794: function($0) {
+ 42810: function($0) {
   if (typeof Module["setWindowTitle"] !== "undefined") {
    Module["setWindowTitle"](UTF8ToString($0));
   }
   return 0;
  },
- 42948: function() {
+ 42964: function() {
   if (typeof AudioContext !== "undefined") {
    return 1;
   } else if (typeof webkitAudioContext !== "undefined") {
@@ -1435,7 +1440,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 43114: function() {
+ 43130: function() {
   if (typeof navigator.mediaDevices !== "undefined" && typeof navigator.mediaDevices.getUserMedia !== "undefined") {
    return 1;
   } else if (typeof navigator.webkitGetUserMedia !== "undefined") {
@@ -1443,7 +1448,7 @@ var ASM_CONSTS = {
   }
   return 0;
  },
- 43340: function($0) {
+ 43356: function($0) {
   if (typeof Module["SDL2"] === "undefined") {
    Module["SDL2"] = {};
   }
@@ -1462,11 +1467,11 @@ var ASM_CONSTS = {
   }
   return SDL2.audioContext === undefined ? -1 : 0;
  },
- 43823: function() {
+ 43839: function() {
   var SDL2 = Module["SDL2"];
   return SDL2.audioContext.sampleRate;
  },
- 43893: function($0, $1, $2, $3) {
+ 43909: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   var have_microphone = function(stream) {
    if (SDL2.capture.silenceTimer !== undefined) {
@@ -1507,7 +1512,7 @@ var ASM_CONSTS = {
    }, have_microphone, no_microphone);
   }
  },
- 45545: function($0, $1, $2, $3) {
+ 45561: function($0, $1, $2, $3) {
   var SDL2 = Module["SDL2"];
   SDL2.audio.scriptProcessorNode = SDL2.audioContext["createScriptProcessor"]($1, 0, $0);
   SDL2.audio.scriptProcessorNode["onaudioprocess"] = function(e) {
@@ -1519,7 +1524,7 @@ var ASM_CONSTS = {
   };
   SDL2.audio.scriptProcessorNode["connect"](SDL2.audioContext["destination"]);
  },
- 45955: function($0, $1) {
+ 45971: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.capture.currentCaptureBuffer.numberOfChannels;
   for (var c = 0; c < numChannels; ++c) {
@@ -1538,7 +1543,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 46560: function($0, $1) {
+ 46576: function($0, $1) {
   var SDL2 = Module["SDL2"];
   var numChannels = SDL2.audio.currentOutputBuffer["numberOfChannels"];
   for (var c = 0; c < numChannels; ++c) {
@@ -1551,7 +1556,7 @@ var ASM_CONSTS = {
    }
   }
  },
- 47040: function($0) {
+ 47056: function($0) {
   var SDL2 = Module["SDL2"];
   if ($0) {
    if (SDL2.capture.silenceTimer !== undefined) {

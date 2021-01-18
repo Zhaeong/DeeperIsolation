@@ -1527,14 +1527,14 @@ void LoadScene(GameState *GS, string sceneName)
         //window
         SDL_Texture *windowTex= GetSDLTexture(GS->renderer, GS->window, TEX_WINDOW);
 
-        SpriteSheet windowSS = InitSpriteSheet(windowTex, 50, 50, 6);
+        SpriteSheet windowSS = InitSpriteSheet(windowTex, 60, 29, 6);
 
         windowSS.mType = TTYPE_NARRATION;
         windowSS.mButtonText = "Look";
         windowSS.mNarration = LINE_4;
 
         windowSS.mX = 300;
-        windowSS.mY = GS->ssPlayer.mY;
+        windowSS.mY = 195; 
         windowSS.mUpdateInterval = 1500;
         GS->ssArray[2] = windowSS;
 
