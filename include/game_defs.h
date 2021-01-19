@@ -286,6 +286,7 @@ struct GameState
     //SpriteSheet manSheet;
 
 
+    string startButtonText;
     string PlayerState;
     float playerSpeed;
     

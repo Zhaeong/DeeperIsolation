@@ -1407,10 +1407,10 @@ void LoadScene(GameState *GS, string sceneName)
                 MAIN_TEXT_W,
                 MAIN_TEXT_H,
                 GS->mainBoxTexture,
-                "Start",
+                GS->startButtonText,
                 226,
                 351,
-                5,
+                GS->startButtonText.size(),
                 200);
 
         GS->curStory = 0;
@@ -1612,6 +1612,8 @@ void LoadScene(GameState *GS, string sceneName)
         //init text start renderings
         LoadAction(GS, CHILD_WAKE, -1);
 
+        GS->startButtonText = "Try Again";
+
         for(int i = 0; i < GS->curStory; i++)
         {
             cout << GS->sStory[i].mText << "\n";
@@ -1625,6 +1627,8 @@ void LoadScene(GameState *GS, string sceneName)
 
         GS->ssPlayer.mX = GAMEWIDTH/2 - 50;
         GS->ssPlayer.mY = GAMEHEIGHT/2 - 50;
+
+        GS->startButtonText = "Again";
         //init text start renderings
         LoadAction(GS, MAN_SLEEP, -1);
         for(int i = 0; i < GS->curStory; i++)

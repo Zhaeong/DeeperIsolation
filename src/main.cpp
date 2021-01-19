@@ -536,6 +536,7 @@ int main(int argv, char **args)
     SDL_PauseAudioDevice(GS.audioDevice, 0);
 
     GS.darken = false;
+    GS.startButtonText = "Try";
     LoadScene(&GS, SCENE_INTRO);
 
 
