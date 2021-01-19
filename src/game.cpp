@@ -1336,27 +1336,27 @@ void AddStoryLine(GameState *GS, string line)
     //Handle adding audio here
     if(line == LINE_0)
     {
-        audioPath = AUDIO_Dm;
+        audioPath = AUDIO_G;
     }
     else if(line == LINE_1)
     {
-        audioPath = AUDIO_G;
+        audioPath = AUDIO_Em;
     }
     else if(line == LINE_2)
     {
-        audioPath = AUDIO_D;
+        audioPath = AUDIO_Am;
     }
     else if(line == LINE_3)
     {
-        audioPath = AUDIO_Dm;
+        audioPath = AUDIO_F;
     }
     else if(line == LINE_4)
     {
-        audioPath = AUDIO_Dm;
+        audioPath = AUDIO_C;
     }
     else if(line == LINE_5)
     {
-        audioPath = AUDIO_Dm;
+        audioPath = AUDIO_D;
     }
     else if(line == LINE_6)
     {

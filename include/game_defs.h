@@ -102,10 +102,13 @@ const string LINE_5 = "He goes to bed not thinking of work";
 const string LINE_6 = "As he leaves for work his child wakes in an empty home";
 
 //AudioClips
-const int NUM_AUDIO_CLIPS = 4;
-const string AUDIO_Walk = "./res/music/walk.wav";
-const string AUDIO_Dm = "./res/music/dminor.wav";
+const int NUM_AUDIO_CLIPS = 7;
+const string AUDIO_Am = "./res/music/am.wav";
+const string AUDIO_C = "./res/music/c.wav";
 const string AUDIO_D = "./res/music/d.wav";
+const string AUDIO_Dm = "./res/music/dm.wav";
+const string AUDIO_Em = "./res/music/em.wav";
+const string AUDIO_F = "./res/music/f.wav";
 const string AUDIO_G = "./res/music/g.wav";
 
 //Declared as extern so that it's shared between files

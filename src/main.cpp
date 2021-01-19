@@ -517,10 +517,13 @@ int main(int argv, char **args)
 
     //GS.blackTex.mAlpha = 0;
 
-    GS.acArray[0] = InitAudio(AUDIO_Walk);
-    GS.acArray[1] = InitAudio(AUDIO_Dm);
+    GS.acArray[0] = InitAudio(AUDIO_Am);
+    GS.acArray[1] = InitAudio(AUDIO_C);
     GS.acArray[2] = InitAudio(AUDIO_D);
-    GS.acArray[3] = InitAudio(AUDIO_G);
+    GS.acArray[3] = InitAudio(AUDIO_Dm);
+    GS.acArray[4] = InitAudio(AUDIO_Em);
+    GS.acArray[5] = InitAudio(AUDIO_F);
+    GS.acArray[6] = InitAudio(AUDIO_G);
 
     GS.curSound.mActive = false;
 
