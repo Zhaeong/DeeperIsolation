@@ -10,7 +10,8 @@ const int FPS = 60;
 const int FrameDelay = 1000 / FPS;
 #endif 
 
-bool ShowDebug = true;
+//bool ShowDebug = true;
+bool ShowDebug = false;
 
 void gameloop() 
 {
@@ -120,14 +121,16 @@ void gameloop()
                 {
                     case SDLK_0:
                         {
-                            if(ShowDebug)
-                            {
-                                ShowDebug = false;
-                            }
-                            else
-                            {
-                                ShowDebug = true;
-                            }
+                            /*
+                               if(ShowDebug)
+                               {
+                               ShowDebug = false;
+                               }
+                               else
+                               {
+                               ShowDebug = true;
+                               }
+                             */
                             break;
                         }
                     case SDLK_d:
@@ -147,27 +150,40 @@ void gameloop()
                         }
                     case SDLK_i:
                         {
-                            GS.playerSpeed += 0.1;
-                            cout << "playerSpeed: " << GS.playerSpeed << "\n";
+                            if(ShowDebug)
+                            {
+                                GS.playerSpeed += 0.1;
+                                cout << "playerSpeed: " << GS.playerSpeed << "\n";
+                            }
                             break;
                         }
                         //Debug keysym
                     case SDLK_o:
                         {
-                            GS.playerSpeed -= 0.1;
-                            cout << "playerSpeed: " << GS.playerSpeed << "\n";
+                            if(ShowDebug)
+                            {
+                                GS.playerSpeed -= 0.1;
+                                cout << "playerSpeed: " << GS.playerSpeed << "\n";
+                            }
                             break;
                         }
                     case SDLK_j:
                         {
-                            GS.ssPlayer.mUpdateInterval += 1;
-                            cout << "playerSpeed: " << GS.ssPlayer.mUpdateInterval << "\n";
+                            if(ShowDebug)
+                            {
+                                GS.ssPlayer.mUpdateInterval += 1;
+
+                                cout << "playerSpeed: " << GS.ssPlayer.mUpdateInterval << "\n";
+                            }
                             break;
                         }
                         //Debug keysym
                     case SDLK_k:
                         {
-                            GS.ssPlayer.mUpdateInterval -= 1;
+                            if(ShowDebug)
+                            {
+                                GS.ssPlayer.mUpdateInterval -= 1;
+                            }
                             break;
                         }
                     case SDLK_n:
@@ -177,14 +193,20 @@ void gameloop()
                         }
                     case SDLK_m:
                         {
-                            //PlayAudio(&GS, GS.chordDm);
-                            cout << "playerAudio: " << GS.chordDm.wavPath << "\n";
+                            if(ShowDebug)
+                            {
+                                //PlayAudio(&GS, GS.chordDm);
+                                cout << "playerAudio: " << GS.chordDm.wavPath << "\n";
+                            }
                             break;
                         }
                     case SDLK_1:
 
                         {
-                            LoadScene(&GS, SCENE_INTRO); 
+                            if(ShowDebug)
+                            {
+                                LoadScene(&GS, SCENE_INTRO); 
+                            }
                             break;
                         }
                     case SDLK_2:
@@ -194,8 +216,11 @@ void gameloop()
                         }
                     case SDLK_3:
                         {
-                            GS.tbArray[0].mLastUpdate = GS.curTime;
-                            GS.tbArray[0].mNumRendered = 0;
+                            if(ShowDebug)
+                            {
+                                GS.tbArray[0].mLastUpdate = GS.curTime;
+                                GS.tbArray[0].mNumRendered = 0;
+                            }
                             break;
                         }
                     case SDLK_4:
@@ -205,7 +230,6 @@ void gameloop()
                 }
                 break;
             case SDL_KEYUP:
-                //cout << "pressed\n"; 
                 {
                     ChangePlayerState(&GS, STATE_IDLE);
                     break;
@@ -226,10 +250,12 @@ void gameloop()
                     }
                 }
 
-                cout << "X: " << mouseX << " Y: " << mouseY << "\n";
+                if(ShowDebug)
+                {
+                    cout << "X: " << mouseX << " Y: " << mouseY << "\n";
+                }
                 break;
             case SDL_MOUSEBUTTONUP:
-                //cout <<  "MOUSE_UP\n";
 
                 if(GS.SceneCurrent == SCENE_INTRO)
                 {
@@ -237,7 +263,6 @@ void gameloop()
                     {
                         GS.SceneNext = SCENE_BEDROOM;
                         GS.darken = true;
-                        cout << "changestate\n";
                     }
                 }
                 else
@@ -251,7 +276,6 @@ void gameloop()
                         {
                             if(GS.ssArray[spriteCol].mType == TTYPE_NARRATION)
                             {
-                                cout << "narration\n";
                                 LoadNarration(&GS, GS.ssArray[spriteCol].mNarration, spriteCol);
                             }
                             else if(GS.ssArray[spriteCol].mType == TTYPE_TRANSIT)
@@ -346,7 +370,6 @@ void gameloop()
             if(GS.actionCol> 0)
             {
                 GS.ssArray[GS.actionCol].mActive = true;
-                cout << "finiACtion : " << GS.actionCol << "\n";
             }
             //Not using function Change Player state here because when its state action only 
             //this part can change it back to idle
@@ -395,7 +418,10 @@ void gameloop()
     {
         if(SDL_GetQueuedAudioSize(GS.audioDevice) == 0)
         {
-            cout << "audio finished\n";
+            if(ShowDebug)
+            {
+                cout << "audio finished\n";
+            }
             GS.curSound.mActive = false;
         }
     }
@@ -421,6 +447,10 @@ void gameloop()
                 }
             }
         }
+        for(int i = 0; i < NUM_SPRITESHEET; i++)
+        {
+            RenderSpriteSheet(GS.renderer, GS.ssArray[i]);
+        }
 
         //hardcoded time left until back to start scene
         if(GS.curTime > GS.sStory[GS.curStory - 1].mStartTime + GS.sStory[GS.curStory - 1].mDelay + 10000)
@@ -434,7 +464,6 @@ void gameloop()
     {
         RenderTexture(GS.renderer, GS.lInfo.mLevelTex);
         SDL_SetRenderDrawColor(GS.renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-
 
 
         for(int i = 0; i < NUM_SPRITESHEET; i++)

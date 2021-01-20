@@ -474,7 +474,10 @@ void PlayAudio(GameState *GS, AudioClip clip)
 
     int success = -1;
 
-    cout << "playerAudio: " << clip.wavPath << "\n";
+    if(ShowDebug)
+    {
+        cout << "playerAudio: " << clip.wavPath << "\n";
+    }
     //Layering sounds 
     if(GS->curSound.mActive)
     {
@@ -528,7 +531,6 @@ void PlayAudio(GameState *GS, AudioClip clip)
     }
 
     free(clipBuffer);
-    cout << "audioret: " << success << "\n";
     if(success < 0)
     {
         printf("SDL_QueueAudio failed %s, err: %s", clip.wavPath.c_str(), SDL_GetError()); 
@@ -1008,7 +1010,6 @@ void RenderTextLine(SDL_Renderer *renderer, TextLine tLine)
 bool DarkenTexture(GameState *GS)
 {
     int updateIncrement = 5;
-    //cout << "texalpha : " << GS->blackTex.mAlpha << "\n";
     if(GS->blackTex.mAlpha < 255)
     {
         if(GS->blackTex.mAlpha + updateIncrement >= 255)
@@ -1106,7 +1107,10 @@ void LoadNarration(GameState *GS, string sNarration, int spriteCol)
     }
 
     AddStoryLine(GS, sNarration);
-    cout << "loaded narration: " << sNarration << " spritecol: " << spriteCol << "\n";
+    if(ShowDebug)
+    {
+        cout << "loaded narration: " << sNarration << " spritecol: " << spriteCol << "\n";
+    }
 
     //Some actions won't need narration, however we'll still want the narration recorded via story
     if(spriteCol >= 0 && GS->ssArray[spriteCol].mHideNarration)
@@ -1162,7 +1166,10 @@ void LoadAction(GameState *GS, string action, int spriteCol)
     GS->actionCol = spriteCol;
 
 
-    cout << "loaded action: " << action << " spritecol: " << spriteCol << "\n";
+    if(ShowDebug)
+    {
+        cout << "loaded action: " << action << " spritecol: " << spriteCol << "\n";
+    }
 
     SDL_Texture *actionTex = GetSDLTexture(GS->renderer, GS->window, action);
     RemoveTextureWhiteSpace(actionTex);
@@ -1280,7 +1287,6 @@ void SpawnPlayer(GameState *GS, float x, float y)
     manSheet.mColBoxOffset.x = 30;
     manSheet.mColBoxOffset.w = 40;
 
-    cout << "spawnY: " << manSheet.mY << "\n";
     GS->ssPlayer = manSheet;
     GS->ssPlayer.mCurFrame = PLAYER_IDLE_FRAME;
     GS->ssPlayer.mUpdate = false;
@@ -1364,13 +1370,16 @@ void AddStoryLine(GameState *GS, string line)
     }
     else 
     {
-        cout << "Warning, No Audio set:" << line << "\n";
+        if(ShowDebug)
+        {
+            cout << "Warning, No Audio set:" << line << "\n";
+        }
     }
 
     GS->sStory[GS->curStory].mAudioPath = audioPath;
 
     GS->curStory += 1;
-    
+
     //Dont play the audio from last two because they are the endings
     if(audioPath != "" && line != LINE_5 && line != LINE_6)
     {
@@ -1382,7 +1391,10 @@ void AddStoryLine(GameState *GS, string line)
 void LoadScene(GameState *GS, string sceneName)
 {
 
-    cout << "Loading Scene: " << sceneName << "\n";
+    if(ShowDebug)
+    {
+        cout << "Loading Scene: " << sceneName << "\n";
+    }
 
     //kind of an issue because the action take doesnt persist after
     //transitioning back to each room, all variables gets reset
@@ -1459,7 +1471,6 @@ void LoadScene(GameState *GS, string sceneName)
         door.mType = TTYPE_TRANSIT;
         door.mName = SCENE_LIVINGROOM;
         door.mButtonText = "Enter Living room";
-        cout << "door w: " << door.mDstRect.w << " h: " << door.mDstRect.h << "\n";
         GS->ssArray[0] = door;
 
         //ChildSleep
@@ -1612,11 +1623,25 @@ void LoadScene(GameState *GS, string sceneName)
         //init text start renderings
         LoadAction(GS, CHILD_WAKE, -1);
 
+
+        SDL_Texture *manbedTex = GetSDLTexture(GS->renderer, GS->window, TEX_MANBED);
+
+        SpriteSheet manbedSS = InitSpriteSheet(manbedTex, 106, 100, 1);
+
+        manbedSS.mType = TTYPE_NORMAL;
+
+        manbedSS.mX = 410;
+        manbedSS.mY = GS->ssPlayer.mY;
+        GS->ssArray[4] = manbedSS;
+
         GS->startButtonText = "Try Again";
 
         for(int i = 0; i < GS->curStory; i++)
         {
-            cout << GS->sStory[i].mText << "\n";
+            if(ShowDebug)
+            {
+                cout << GS->sStory[i].mText << "\n";
+            }
             GS->sStory[i].mStartTime = GS->curTime;
         }
     }
@@ -1625,15 +1650,47 @@ void LoadScene(GameState *GS, string sceneName)
         GS->lInfo = InitLevelInfo(GS, SCENE_BEDROOM);
         AddStoryLine(GS, LINE_5);
 
-        GS->ssPlayer.mX = GAMEWIDTH/2 - 50;
+        GS->ssPlayer.mX = 415;
         GS->ssPlayer.mY = GAMEHEIGHT/2 - 50;
+
+
+        //ChildSleep
+
+        SDL_Texture *childsleepTex = GetSDLTexture(GS->renderer, GS->window, TEX_CHILDSLEEP);
+
+        SpriteSheet childSleepSS = InitSpriteSheet(childsleepTex, 100, 100, 4);
+
+        childSleepSS.mType = TTYPE_NARRATION;
+        childSleepSS.mButtonText = "Look";
+        childSleepSS.mNarration = LINE_1 ;
+
+        childSleepSS.mX = 300;
+        childSleepSS.mY = GS->ssPlayer.mY;
+        childSleepSS.mUpdateInterval = 1500;
+        GS->ssArray[SS_CHILD] = childSleepSS;
+
+
+        //manbed
+
+        SDL_Texture *manbedTex = GetSDLTexture(GS->renderer, GS->window, TEX_MANBED);
+
+        SpriteSheet manbedSS = InitSpriteSheet(manbedTex, 106, 100, 1);
+
+        manbedSS.mType = TTYPE_NORMAL;
+
+        manbedSS.mX = 410;
+        manbedSS.mY = GS->ssPlayer.mY;
+        GS->ssArray[4] = manbedSS;
 
         GS->startButtonText = "Again";
         //init text start renderings
         LoadAction(GS, MAN_SLEEP, -1);
         for(int i = 0; i < GS->curStory; i++)
         {
-            cout << GS->sStory[i].mText << "\n";
+            if(ShowDebug)
+            {
+                cout << GS->sStory[i].mText << "\n";
+            }
             GS->sStory[i].mStartTime = GS->curTime;
         }
     }

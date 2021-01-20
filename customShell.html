@@ -11,6 +11,9 @@
       /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
       canvas.emscripten { border: 0px none; background-color: black; }
 
+      body {
+        background-color: black;
+      }
       .spinner {
         height: 50px;
         width: 50px;
@@ -53,8 +56,10 @@
     </div>
     <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
     <div class="emscripten">
+        <!--
         <input type="button" value="Large" onclick="setSize(800)">
         <input type="button" value="Small" onclick="setSize(500)">
+        -->
     </div>
     
     <script type='text/javascript'>
