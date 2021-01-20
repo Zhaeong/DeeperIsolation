@@ -61,7 +61,6 @@ SDL_Texture *GetSDLTexture(SDL_Renderer *renderer, SDL_Window *window, string te
         //                                                          SDL_GetWindowPixelFormat( window ),
         //                                                          0 );
 
-        //cout << "Loading Texture: " << textureLocation << "\n";
         SDL_Surface *formattedSurface = SDL_ConvertSurfaceFormat(loadedSurface,
                 TEXTUREFORMAT,
                 0);
@@ -1331,8 +1330,8 @@ void AddStoryLine(GameState *GS, string line)
             MAIN_TEXT_W,
             MAIN_TEXT_H,
             line,
-            0,
-            GS->curStory * 20);
+            20,
+            20 + (GS->curStory * 20));
     //GS->sStory[GS->curStory].mAlpha = 100;
 
     //Adds a delay of X ms by each line
